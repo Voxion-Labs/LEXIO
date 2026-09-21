@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2024-03-19
 
-### 🚀 Initial Release
+###  Initial Release
 
 #### Added
 - **Authentication System**
@@ -107,4 +107,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-For more information, visit [LEXIO on GitHub](https://github.com/liambrooks-lab/LEXIO)
+For more information, visit [LEXIO on GitHub](https://github.com/Voxion-Labs/LEXIO)
