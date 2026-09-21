@@ -6,9 +6,9 @@
   A browser-native multilingual document narration engine featuring synchronized highlighting and AI-assisted execution controls.
 </p>
 <p align="center">
-  <a href="[https://voxion-labs.github.io/LEXIO/](https://voxion-labs.github.io/LEXIO/)">Live Environment</a>
+  <a href="https://voxion-labs.github.io/LEXIO">Live Environment</a>
   |
-  <a href="[https://github.com/liambrooks-lab/LEXIO](https://github.com/liambrooks-lab/LEXIO)">Repository</a>
+  <a href="https://github.com/liambrooks-lab/LEXIO">Repository</a>
 </p>
 
 ---
@@ -370,7 +370,7 @@ LEXIO is **not** an open-source project and is not distributed under MIT, Apache
   <img src="docs/readme/author-rudranarayan-jena.jpg" alt="Rudranarayan Jena" width="180" />
 </p>
 <p align="center">
-  <strong>Maintained by <a href="[https://github.com/liambrooks-lab](https://github.com/liambrooks-lab)">Rudranarayan Jena</a></strong>
+  <strong>Maintained by <a href="https://github.com/liambrooks-lab">Rudranarayan Jena</a></strong>
 </p>
 <p align="center">
   <strong>Founder of Voxion Labs</strong>
