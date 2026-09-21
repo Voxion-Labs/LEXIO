@@ -3,167 +3,167 @@
 </p>
 <h1 align="center">LEXIO</h1>
 <p align="center">
-  A premium multilingual reading workspace for document narration, synchronized highlighting, and AI-assisted reading control.
+  A browser-native multilingual document narration engine featuring synchronized highlighting and AI-assisted execution controls.
 </p>
 <p align="center">
-  <a href="https://voxion-labs.github.io/LEXIO/">Live Product</a>
+  <a href="[https://voxion-labs.github.io/LEXIO/](https://voxion-labs.github.io/LEXIO/)">Live Environment</a>
   |
-  <a href="https://github.com/liambrooks-lab/LEXIO">Repository</a>
+  <a href="[https://github.com/liambrooks-lab/LEXIO](https://github.com/liambrooks-lab/LEXIO)">Repository</a>
 </p>
 
 ---
 
-## ✨ Overview
-LEXIO is a browser-based AI reading workspace built to turn real documents into a polished multilingual narration experience. It combines document import, live text highlighting, voice filtering by language and accent, guided playback controls, structured reading modes, and AI-style document assistance inside one clean product interface.
+## Overview
+LEXIO operates as a browser-native execution environment for document narration and text processing. It integrates multi-format document ingestion, real-time text synchronization, language/accent filtering, deterministic playback controls, and AI-generated structural metadata within a single isolated workspace.
 
 ---
 
-## 🧭 What Is LEXIO?
-LEXIO is a front-end narration studio for users who want one workspace for reading, listening, reviewing, and understanding documents more efficiently.
+## System Definition
+LEXIO functions as a frontend narration architecture for users requiring a centralized environment for document processing, auditory review, and content extraction.
 
-At the product level, LEXIO acts as:
-- a multilingual document reader
-- a browser-based AI-assisted text-to-speech workspace
-- a structured office-file narration interface
-- a document review tool with summaries, glossary, topics, and Q&A support
-
----
-
-## 🩺 Problem It Solves
-Most text-to-speech tools fail in the places that matter during actual document work:
-
-- they only handle plain text comfortably
-- imported files lose structure or readability
-- playback feels robotic and hard to follow
-- users cannot stay visually synced with spoken output
-- there is no integrated space for summaries, notes, or document review help
-
-LEXIO solves that by giving users a cleaner end-to-end reading flow:
-- import or paste content
-- rebuild it into readable sections
-- choose better voice settings by language, accent, and persona
-- listen with live word highlighting and progress tracking
-- use AI-style outputs for briefing, studying, presenting, and reviewing
+At the technical level, LEXIO acts as:
+- a multilingual document parsing engine
+- a browser-native AI-assisted text-to-speech (TTS) interface
+- a structured office-file narration environment
+- a document analysis tool integrating summaries, glossaries, and data extraction
 
 ---
 
-## 🔗 Links
+## Architectural Objective
+Standard text-to-speech implementations exhibit severe deficits during actual document processing:
+
+- limited support beyond raw plaintext
+- structural degradation of imported files
+- non-deterministic and robotic playback latency
+- lack of visual synchronization with auditory output
+- absence of integrated metadata extraction
+
+LEXIO mitigates these deficits by providing a structured end-to-end processing pipeline:
+- ingest raw content or supported file formats
+- normalize data into sequentially readable blocks
+- apply voice filtering via language, accent, and persona parameters
+- execute playback with real-time active-word synchronization
+- generate AI-structured outputs for executive briefing and content review
+
+---
+
+## Links
 - **[View LEXIO Live](https://voxion-labs.github.io/LEXIO/)**
 - **[GitHub Repository](https://github.com/liambrooks-lab/LEXIO)**
-- **[Issues](https://github.com/voxion-labs/LEXIO/issues)**
+- **[Telemetry & Issues](https://github.com/voxion-labs/LEXIO/issues)**
 
 ---
 
-## 🚀 Latest Product State
+## Current Project State
 LEXIO currently ships with:
 
-- a branded login and workspace identity flow
-- `Dashboard`, `Reader`, and `AI Studio` workspace views
-- browser speech synthesis with multilingual voice filtering
-- live document rendering with clickable word playback
-- AI reading modes such as `Executive`, `Study`, `Presentation`, and `Accessibility`
-- smart cleanup and natural chunking for smoother narration
-- side panels for `User Manual`, `Notes`, and `AI Assistant`
-- document analytics including words, sections, characters, and estimated read time
-- support for office, text, markup, and ebook formats
+- an authenticated workspace initialization sequence
+- distinct `Dashboard`, `Reader`, and `AI Studio` execution views
+- browser speech synthesis integrating multilingual voice parameters
+- live document rendering with interactive word-level playback mapping
+- AI execution modes including `Executive`, `Study`, `Presentation`, and `Accessibility`
+- algorithmic text normalization and natural chunking protocols
+- auxiliary panels for `User Manual`, `Notes`, and `AI Assistant`
+- document telemetry tracking words, sections, characters, and estimated completion time
+- parsing engines for office, text, markup, and ebook format types
 
 ---
 
-## 🌌 Core Highlights
-- polished workspace onboarding and product-style UI
-- synchronized live highlighting during narration
-- language, accent, and persona-based voice selection
-- drag-and-drop import for real document formats
-- AI-style outputs for executive brief, study notes, presentation flow, and review prompts
-- local notes and document-aware assistant support
-- responsive layout for desktop and presentation use
-- modular JavaScript structure across import, speech, AI, auth, and utilities
+## Core Specifications
+- structured workspace initialization and isolated UI
+- real-time active-word synchronization during audio playback
+- dynamic voice allocation based on language and accent parameters
+- drag-and-drop ingestion for standard document formats
+- AI-generated executive briefs, structural outlines, and review matrices
+- isolated local data storage for user notes and assistant context
+- responsive UI rendering for variable display environments
+- modular JavaScript architecture separating auth, speech, AI, and parsing utilities
 
 ---
 
-## 🧩 Product Surface
-### Workspace experience
-- premium login screen with profile photo upload
-- workspace navigation across `Dashboard`, `Reader`, and `AI Studio`
-- identity, voice pack, and AI confidence chips in the top bar
-- keyboard shortcuts for faster control across views and tools
+## Execution Surfaces
+### Workspace Experience
+- initialization sequence featuring profile configuration
+- environment routing across `Dashboard`, `Reader`, and `AI Studio`
+- global telemetry chips displaying identity, voice state, and AI confidence
+- keyboard command bindings for rapid environment navigation
 
-### Reading experience
-- source editor for pasted or typed content
-- document viewer that rebuilds imported content into synchronized sections
-- playback controls for start, pause, resume, and stop
-- focus mode and progress tracking for long reading sessions
+### Reading Experience
+- source input buffer for manual text entry
+- document normalization engine that renders synchronized reading sections
+- playback state controls (start, pause, resume, stop)
+- focus execution modes with real-time progress telemetry
 
-### AI assist experience
-- executive brief generation
-- study note generation
-- presentation flow guidance
-- glossary extraction
-- topic extraction
-- Q&A and review prompt generation
+### AI Assist Experience
+- executive brief extraction
+- structural study note generation
+- presentation flow mapping
+- automated glossary compilation
+- entity and topic extraction
+- review prompt and Q&A matrix generation
 
 ---
 
-## 🖼️ Demo Gallery
+## Telemetry & UI State Gallery
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/lexio-login.png" alt="LEXIO login experience" />
+      <img src="docs/readme/lexio-login.png" alt="LEXIO initialization experience" />
       <br />
-      <strong>1. Workspace entry and branding</strong>
+      <strong>1. Environment Initialization</strong>
       <br />
-      LEXIO opens with a polished product-style login flow where users can add a display photo and enter a document narration workspace that feels structured and premium.
+      LEXIO initiates with a secure workspace configuration sequence, establishing user identity before loading the primary reading environment.
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/lexio-dashboard.png" alt="LEXIO dashboard view" />
       <br />
-      <strong>2. Dashboard and AI reading assist</strong>
+      <strong>2. Dashboard & System Overview</strong>
       <br />
-      The dashboard focuses on AI reading outputs, quick commands, live document metrics, and a strong overview of the current reading workspace.
+      The dashboard aggregates AI-generated metadata, system commands, and live document telemetry to provide a centralized view of the current workspace state.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
       <img src="docs/readme/lexio-reader.png" alt="LEXIO reader view" />
       <br />
-      <strong>3. Reader and voice lab</strong>
+      <strong>3. Reader & Narration Engine</strong>
       <br />
-      The reader view combines content import, document rendering, voice filtering, narration controls, and synchronized reading flow in one focused layout.
+      The primary execution view isolates content ingestion, document rendering, voice parameter tuning, and synchronized playback within a strict layout.
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/lexio-ai-studio.png" alt="LEXIO AI Studio view" />
       <br />
-      <strong>4. AI Studio and document inspection</strong>
+      <strong>4. AI Studio & Metadata Inspection</strong>
       <br />
-      AI Studio helps users inspect glossary terms, structure outline, review prompts, and supported import scope without cluttering the main reading view.
+      An isolated environment for inspecting generated glossaries, structural outlines, and review prompts without obstructing the primary narration pipeline.
     </td>
   </tr>
 </table>
 
 ---
 
-## 💡 Why LEXIO
-LEXIO is built around a simple product promise:
-- bring in a real document
-- make it easier to follow
-- make it easier to listen to
-- make it easier to understand
+## Operating Directives
+LEXIO is engineered to execute the following directives:
+- ingest complex document structures
+- normalize content for sequential processing
+- optimize auditory playback latency and natural pacing
+- extract and structure underlying metadata
 
-That promise shapes the UI, the narration flow, the document viewer, and the AI assist layer across the project.
+These directives govern the UI layout, the speech synchronization loop, the parsing engine, and the AI integration layer.
 
 ---
 
-## 🌍 Language Support
-LEXIO supports multilingual narration controls and multi-format document reading for real-world content workflows.
+## Linguistic & Format Specifications
+LEXIO enforces multilingual narration mapping and multi-format parsing for real-world document ingestion.
 
-### Narration languages
+### Narration Languages
 - English
 - Hindi
 - Arabic
 - Italian
 - Spanish
 
-### Supported import formats
+### Supported Ingestion Formats
 - PDF
 - DOCX
 - DOC
@@ -184,35 +184,33 @@ LEXIO supports multilingual narration controls and multi-format document reading
 
 ---
 
-## 🛠️ Tech Stack
-### Core frontend
+## Tech Stack
+### Core Frontend
 - HTML5
 - CSS3
 - JavaScript (ES6+)
 
-### Browser capabilities
+### Browser APIs
 - Web Speech API
 - DOM APIs
 - Local Storage
 
-### Document parsing
+### Parsing Engines
 - PDF.js
 - Mammoth.js
 - JSZip
 - SheetJS
 
-### UI resources
+### UI Resources
 - Font Awesome
 - Google Fonts
 
 ---
 
-## 🧱 Project Structure
+## Project Structure
 ```text
 LEXIO/
 |- assets/
-|  |- favicon.ico.ico
-|  `- logo.svg
 |- css/
 |  `- components.css
 |- docs/
@@ -220,11 +218,8 @@ LEXIO/
 |  |- CHANGELOG.md
 |  |- CONTRIBUTING.md
 |  `- readme/
-|     |- author-rudranarayan-jena.jpg
-|     |- lexio-ai-studio.png
-|     |- lexio-dashboard.png
-|     |- lexio-login.png
-|     `- lexio-reader.png
+|       
+|     
 |- js/
 |  |- ai.js
 |  |- auth.js
@@ -241,150 +236,143 @@ LEXIO/
 
 ---
 
-## 🏗️ Architecture
-### Frontend responsibilities
-- workspace onboarding and identity flow
-- document rendering and analytics
-- playback control and active-word synchronization
-- notes, manual, and assistant side panels
-- dashboard and AI studio presentation
+## Architecture
+### System Responsibilities
+- workspace initialization and state management
+- document normalization and active telemetry
+- playback execution and active-word synchronization
+- auxiliary panel management (notes, manual, AI)
+- dashboard and AI studio state rendering
 
-### Import and reading flow
-1. User pastes content or imports a supported file.
-2. LEXIO parses the file based on its format.
-3. The content is normalized into readable sections.
-4. The document viewer renders clickable word-level reading blocks.
-5. The speech layer generates narration with synced highlighting.
-6. The AI layer refreshes summaries, topics, glossary, and prompts.
+### Ingestion and Execution Flow
+1. User supplies raw text or supported file binaries.
+2. LEXIO routes the file to the appropriate parsing engine.
+3. Content is normalized into a sequential array of readable blocks.
+4. The document viewer maps text elements to clickable DOM nodes.
+5. The speech engine executes playback while triggering real-time highlighting callbacks.
+6. The AI module processes the text payload to generate metadata, glossaries, and structural prompts.
 
-### Speech behavior
-- voice selection is filtered by language, accent, and persona
-- reading is chunked naturally for smoother playback
-- progress and active-word state stay aligned with narration
-- supported voices depend on browser and operating system voice packs
-
----
-
-## ✅ Validation Snapshot
-The current repo state includes:
-- modular JavaScript split into `auth`, `speech`, `fileHandler`, `ai`, and `utils`
-- local run scripts through `live-server`
-- real document import handling for multiple formats
-- no dedicated automated test suite yet beyond the placeholder npm script
+### Speech Subsystem
+- voice allocation is strictly filtered by designated language, accent, and persona variables
+- sequential text is algorithmically chunked to optimize pacing and prevent synthesis timeouts
+- playback state and active DOM nodes maintain strict synchronization
+- output relies on native browser and OS-level TTS synthesizer capabilities
 
 ---
 
-## 📦 Key Capabilities
-- branded reading workspace
-- multilingual document narration
-- live highlighted playback
-- office-file and ebook import support
-- AI reading modes and summary-style outputs
-- notes, assistant, and manual panels
-- keyboard shortcuts for faster navigation
-- responsive static deployment suitable for demos and portfolio presentation
+## Validation Snapshot
+The current repository state includes:
+- modular JavaScript architecture isolated by concern (`auth`, `speech`, `fileHandler`, `ai`, `utils`)
+- executable via local static server (`live-server`)
+- functional binary parsing across multiple document formats
+- initial testing infrastructure placeholder via npm scripts
 
 ---
 
-## 🎯 Current Scope
-LEXIO is currently positioned as a polished front-end MVP with:
-- real document import
-- multilingual speech playback
-- structured dashboard and reader flows
-- AI-assisted reading outputs
-- local identity and notes support
-- a live static deployment link
+## Key Capabilities
+- structured execution workspace
+- multilingual document synthesis
+- active-word synchronized playback
+- multi-format binary ingestion (Office, EPUB, PDF)
+- AI-generated structural metadata and review modes
+- isolated local data storage for notes and contextual processing
+- keyboard-driven command navigation
+- deployable as a static client-side application
 
 ---
 
-## 🧪 Local Setup
+## Current Deployment Scope
+LEXIO is currently deployed as a functional frontend architecture featuring:
+- multi-format document ingestion
+- multilingual TTS integration
+- distinct execution environments (Dashboard, Reader, AI Studio)
+- AI-driven structural metadata extraction
+- localized state management for identity and note-taking
+- static web deployment
+
+---
+
+## Local Setup
 ### Prerequisites
 - Node.js `14+`
 - npm `6+`
-- a modern browser with Web Speech API support
+- A modern browser with Web Speech API support
 
-### Install dependencies
+### Install Dependencies
 ```bash
 npm install
 ```
 
-### Run local development server
+### Run Local Execution Server
 ```bash
 npm run dev
 ```
 
-### Alternate start command
+### Alternate Initialization
 ```bash
 npm start
 ```
 
-### Local URL
+### Local Endpoint
 - `http://localhost:3000`
 
 ---
 
-## 🏁 Build Commands
-### Start development
+## Build Directives
+### Start Development Environment
 ```bash
 npm run dev
 ```
 
-### Start local preview
+### Start Local Preview
 ```bash
 npm start
 ```
 
-### Test placeholder
+### Execute Test Suite
 ```bash
 npm test
 ```
 
 ---
 
-## 🌐 Deployment
-### Live deployment
-- Hosted as a static web experience
-- Public product URL: [https://voxion-labs.github.io/LEXIO/]
+## Deployment
+### Live Deployment
+- Hosted as a static client-side application
+- Public deployment URL: [[https://voxion-labs.github.io/LEXIO/](https://voxion-labs.github.io/LEXIO/)]
 
-### Deployment profile
-- lightweight browser-first frontend
-- no separate backend service required
-- speech output depends on the client browser environment
+### Deployment Profile
+- lightweight browser-native frontend
+- operates completely client-side without backend dependencies
+- speech synthesis execution relies on local client capabilities
 
 ---
 
-## 📄 License
+## License
 
-LEXIO is protected under a custom restricted license.
+LEXIO operates under a custom restricted proprietary license.
 
-The full license text is available in [LICENSE](LICENSE).
+The full license text is available in the [LICENSE](LICENSE) directive.
 
 License summary:
 
 - copyright © 2026 Rudranarayan Jena
 - all rights reserved
-- no copying, modification, distribution, hosting, reuse, or derivative work without prior written permission
-- no commercial or non-commercial use is allowed unless explicitly approved by the author
+- unauthorized copying, modification, distribution, hosting, reuse, or derivative work creation is strictly prohibited
+- commercial or non-commercial exploitation is forbidden unless explicitly authorized in writing by the architect
 
-LEXIO is not released as an open-source project under MIT, Apache, GPL, or any other permissive/public license.
+LEXIO is **not** an open-source project and is not distributed under MIT, Apache, GPL, or any other permissive license.
 
 ---
 
-## 👨‍💻 Author
+## Architecture & Infrastructure
 <p align="center">
   <img src="docs/readme/author-rudranarayan-jena.jpg" alt="Rudranarayan Jena" width="180" />
 </p>
 <p align="center">
-  <strong>Crafted by Rudranarayan Jena</strong>
+  <strong>Maintained by <a href="[https://github.com/liambrooks-lab](https://github.com/liambrooks-lab)">Rudranarayan Jena</a></strong>
 </p>
 <p align="center">
-  <strong>Founder @ Voxion Labs</strong>
-</p>
-<p align="center">
-  Focused on building polished browser products, multilingual reading experiences, and AI-assisted interfaces that feel like complete software products.
-</p>
-<p align="center">
-  <a href="https://github.com/liambrooks-lab">GitHub: @liambrooks-lab</a>
-</p>
+  <strong>Founder of Voxion Labs</strong>
 
 ---
