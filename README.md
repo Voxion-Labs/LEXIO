@@ -360,19 +360,16 @@ License summary:
 - all rights reserved
 - unauthorized copying, modification, distribution, hosting, reuse, or derivative work creation is strictly prohibited
 - commercial or non-commercial exploitation is forbidden unless explicitly authorized in writing by the architect
-
-LEXIO is **not** an open-source project and is not distributed under MIT, Apache, GPL, or any other permissive license.
-
+- LEXIO is **not** an open-source project and is not distributed under MIT, Apache, GPL, or any other permissive license.
 ---
 
-## Architecture & Infrastructure
-<p align="center">
-  <img src="docs/readme/author-rudranarayan-jena.jpg" alt="Rudranarayan Jena" width="180" />
-</p>
-<p align="center">
-  <strong>Maintained by <a href="https://github.com/liambrooks-lab">Rudranarayan Jena</a></strong>
-</p>
-<p align="center">
-  <strong>Founder of Voxion Labs</strong>
+<br>
+<div align="right">
+  <b>Rudranarayan Jena</b><br>
+  <i>Founder @ Voxion Labs</i>
+</div>
 
 ---
+<div align="center">
+  (c) 2026 Voxion Labs & Rudranarayan Jena
+</div>
