@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="LEXIO - Client-side multilingual document speech studio with synchronized phrase highlighting. Works on every device.">
-    <title>LEXIO - Multilingual Document Speech Studio</title>
+    <meta name="description" content="LEXIO - Client-side multilingual document speech studio powered by Go WebAssembly with synchronized phrase tracking.">
+    <title>LEXIO - Document Speech Studio</title>
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     
     <!-- Google Fonts: Plus Jakarta Sans & Inter (Modern Flutter/Material 3 typography) -->
@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Flutter Material 3 Component & Layout Stylesheets -->
-    <link rel="stylesheet" href="css/components.css?v=2.0.1">
-    <link rel="stylesheet" href="styles.css?v=2.0.1">
+    <link rel="stylesheet" href="css/components.css?v=2.2.0">
+    <link rel="stylesheet" href="styles.css?v=2.2.0">
 </head>
 <body>
     <!-- Loading Screen (Flutter style ring loader) -->
@@ -28,7 +28,7 @@
                 <img src="assets/logo.svg" alt="LEXIO logo" class="loading-logo">
                 <span>LEXIO</span>
             </div>
-            <p>Initializing client-side document speech studio...</p>
+            <p>Initializing Go WebAssembly speech engine...</p>
         </div>
     </div>
 
@@ -36,8 +36,8 @@
     <div id="loginPage" class="login-page">
         <!-- Top Announcement Banner (Flutter 3 style gradient banner) -->
         <aside class="flutter-announcement-bar">
-            <span class="banner-badge">CLIENT-SIDE</span>
-            <span>LEXIO 2.0 is live! 100% Client-side multilingual speech workspace • Zero server telemetry</span>
+            <span class="banner-badge">GO WEBASSEMBLY</span>
+            <span>LEXIO 2.2 is live! High-performance client-side speech engine in Go • Zero server telemetry</span>
             <a href="#features">Learn more <i class="fas fa-arrow-right"></i></a>
         </aside>
 
@@ -71,14 +71,14 @@
                     <!-- Left: Hero Headline & Capabilities -->
                     <div class="hero-copy-column">
                         <div class="eyebrow-pill">
-                            <i class="fas fa-sparkles"></i> Native Web Speech Synthesis
+                            <i class="fas fa-microchip"></i> Powered by Go WebAssembly
                         </div>
                         <h1>Reach users and documents on <span class="gradient-text">every screen</span>.</h1>
                         <p class="hero-lead">
-                            Import PDF, Word, PowerPoint, Excel, and eBooks directly into your browser. Listen with hardware-accelerated speech synthesis and phrase-synchronized visual tracking across English, Hindi, Spanish, Italian, and Arabic.
+                            Import PDF, Word, PowerPoint, Excel, and eBooks directly into your browser. Listen with hardware-accelerated speech synthesis and phrase-synchronized visual tracking across English, Hindi, Spanish, Italian, and Arabic with true regional accents.
                         </p>
                         <div class="hero-trust-chips">
-                            <div class="trust-chip"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
+                            <div class="trust-chip"><i class="fas fa-shield-halved"></i> 100% Client-Side Go WASM</div>
                             <div class="trust-chip"><i class="fas fa-file-waveform"></i> 17+ Document Formats</div>
                             <div class="trust-chip"><i class="fas fa-bolt"></i> Zero Server Telemetry</div>
                         </div>
@@ -140,7 +140,7 @@
                                 </div>
 
                                 <div class="auth-privacy-guarantee">
-                                    <i class="fas fa-lock"></i> Client-side local storage only. No cloud tracking.
+                                    <i class="fas fa-lock"></i> Client-side Go WASM storage only. No cloud tracking.
                                 </div>
                             </form>
                         </div>
@@ -152,9 +152,9 @@
             <section id="features" class="landing-section landing-section-alt">
                 <div class="landing-section-inner">
                     <div class="section-header-center">
-                        <div class="eyebrow-pill"><i class="fas fa-microchip"></i> Pure Client-Side Architecture</div>
+                        <div class="eyebrow-pill"><i class="fas fa-microchip"></i> Pure Go WebAssembly Engine</div>
                         <h2>Engineered for reliable, high-fidelity document speech</h2>
-                        <p>No backend servers, no cloud fees, and no third-party telemetry. LEXIO executes all file parsing and speech synthesis inside your device's browser thread.</p>
+                        <p>No backend servers, no cloud fees, and no third-party telemetry. LEXIO executes all file parsing, speech coordination, and text formatting inside your device's browser using Go compiled to WebAssembly.</p>
                     </div>
 
                     <div class="features-grid">
@@ -171,9 +171,9 @@
                         </article>
 
                         <article class="feature-card">
-                            <div class="feature-icon-bubble"><i class="fas fa-language"></i></div>
-                            <h3>Multilingual & Accent Filtering</h3>
-                            <p>Filters available voices by language (English, Hindi, Spanish, Italian, Arabic), regional accent, and persona with speed and pitch fine-tuning.</p>
+                            <div class="feature-icon-bubble"><i class="fas fa-earth-americas"></i></div>
+                            <h3>Region-Wise Accent Selection</h3>
+                            <p>Select exact regional accents for each language: US, UK, India, Australia, Canada for English; Spain, Mexico, Argentina for Spanish; Saudi Arabia, UAE, Egypt for Arabic; Italy, Switzerland for Italian.</p>
                         </article>
 
                         <article class="feature-card">
@@ -259,8 +259,8 @@
 
                     <div class="step-card">
                         <div class="step-number-pill">2</div>
-                        <h3>Select Voice &amp; Pacing</h3>
-                        <p>Choose your preferred language, accent, and persona. Adjust reading speed and pitch to match your natural listening cadence.</p>
+                        <h3>Select Voice &amp; Regional Accent</h3>
+                        <p>Choose your preferred language, region-specific accent, and gender (Male or Female). Adjust reading speed and pitch to match your natural listening cadence.</p>
                     </div>
 
                     <div class="step-card">
@@ -279,7 +279,7 @@
                     </div>
                     <div class="privacy-banner-content">
                         <h3>Private by Design: Zero Server Drama</h3>
-                        <p>LEXIO is a 100% pure client web application. It requires no Node.js runtime in production, connects to no backend analytics, and transmits no document contents to remote servers. All your notes, accounts, and audio settings reside entirely in your browser's private local storage.</p>
+                        <p>LEXIO is a 100% pure client web application executed via Go WebAssembly. It requires no Node.js runtime, connects to no backend analytics, and transmits no document contents to remote servers. All your notes, accounts, and audio settings reside entirely in your browser's private local storage.</p>
                     </div>
                 </div>
             </section>
@@ -299,7 +299,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom-row">
-                    <span>&copy; Voxion Labs. Crafted with Flutter &amp; Material 3 Design Principles.</span>
+                    <span>&copy; Voxion Labs. Built with Go WebAssembly &amp; Flutter Design Principles.</span>
                     <span>100% Client-Side Web Application • No External Backend</span>
                 </div>
             </div>
@@ -326,13 +326,28 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="optDefaultAccent">Default Regional Accent</label>
+                    <select id="optDefaultAccent" class="form-input">
+                        <option value="all">All Regional Accents</option>
+                        <option value="US">United States (en-US)</option>
+                        <option value="GB">United Kingdom (en-GB)</option>
+                        <option value="IN">India (en-IN / hi-IN)</option>
+                        <option value="AU">Australia (en-AU)</option>
+                        <option value="CA">Canada (en-CA)</option>
+                        <option value="ES">Spain (es-ES)</option>
+                        <option value="MX">Mexico (es-MX)</option>
+                        <option value="SA">Saudi Arabia (ar-SA)</option>
+                        <option value="IT">Italy (it-IT)</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="optDefaultPace">Default Reading Cadence</label>
                     <select id="optDefaultPace" class="form-input">
-                        <option value="adaptive">Adaptive Mode (Balanced)</option>
-                        <option value="executive">Executive Brief (Steady 1.05x)</option>
-                        <option value="study">Study Coach (Retention 0.92x)</option>
-                        <option value="presentation">Presentation Mode (Stage 1.0x)</option>
-                        <option value="accessibility">Accessibility Mode (Clear 0.85x)</option>
+                        <option value="1.0">Standard Pace (1.0x)</option>
+                        <option value="1.05">Steady Reading (1.05x)</option>
+                        <option value="0.92">Study Focus (0.92x)</option>
+                        <option value="1.15">Quick Skim (1.15x)</option>
+                        <option value="0.85">Deliberate &amp; Clear (0.85x)</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -356,14 +371,13 @@
             <div class="nav-brand">
                 <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo brand-logo-nav">
                 <div>
-                    <h1 class="brand-text">LEXIO <span class="badge badge-primary">STUDIO</span></h1>
+                    <h1 class="brand-text">LEXIO <span class="badge badge-primary">WASM</span></h1>
                 </div>
             </div>
             
             <div class="nav-actions">
                 <button id="openManualBtn" class="utility-btn" type="button"><i class="fas fa-book-open"></i> User Manual</button>
                 <button id="openNotesBtn" class="utility-btn" type="button"><i class="fas fa-note-sticky"></i> Notes</button>
-                <button id="openAssistantBtn" class="utility-btn utility-btn-primary" type="button"><i class="fas fa-sparkles"></i> AI Assistant</button>
                 <div class="nav-user">
                     <div class="user-info">
                         <span class="user-greeting"><span id="userName">User</span></span>
@@ -380,12 +394,12 @@
             <div class="workspace-tabs" role="tablist" aria-label="Workspace Views">
                 <button class="workspace-tab active" type="button" data-view="dashboardView"><i class="fas fa-table-cells-large"></i> Dashboard</button>
                 <button class="workspace-tab" type="button" data-view="readerView"><i class="fas fa-file-waveform"></i> Reader</button>
-                <button class="workspace-tab" type="button" data-view="analysisView"><i class="fas fa-brain"></i> AI Studio</button>
+                <button class="workspace-tab" type="button" data-view="inspectorView"><i class="fas fa-sitemap"></i> Document Inspector</button>
             </div>
             <div class="workspace-toolbar-meta">
-                <span class="meta-chip">Profile: <strong id="activeDocumentType">Manual text</strong></span>
+                <span class="meta-chip">Engine: <strong>Go WebAssembly</strong></span>
                 <span class="meta-chip">Voice Pack: <strong id="voiceCoverage">Checking</strong></span>
-                <span class="meta-chip">AI Confidence: <strong id="aiConfidence">Standby</strong></span>
+                <span class="meta-chip">Status: <strong>Ready</strong></span>
             </div>
         </section>
 
@@ -395,9 +409,9 @@
             <section id="dashboardView" class="workspace-view active">
                 <section class="hero-panel card">
                     <div>
-                        <div class="eyebrow-pill"><i class="fas fa-sparkles"></i> Multilingual Reading Assist</div>
+                        <div class="eyebrow-pill"><i class="fas fa-headphones"></i> Document Speech &amp; Narration</div>
                         <h2>Natural speech for real documents.</h2>
-                        <p>LEXIO reads by phrase instead of one word at a time, filters voices by language, accent, and persona, and keeps the document viewer synchronized while speaking.</p>
+                        <p>LEXIO reads by natural phrases instead of robotic word-by-word steps, filters voices by language, regional accent, and gender (Male/Female), and keeps the document viewer synchronized while speaking.</p>
                     </div>
                     <div class="hero-metrics">
                         <div class="metric-tile">
@@ -423,72 +437,59 @@
                     <article class="card dashboard-card command-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-primary">Smart Outputs</span>
-                                <h3 style="margin-top: 6px;">Generate reading perspectives</h3>
+                                <span class="badge badge-primary">Reading Analytics</span>
+                                <h3 style="margin-top: 6px;">Document Structure &amp; Stats</h3>
                             </div>
                         </div>
-                        <div class="command-actions">
-                            <button id="briefModeBtn" class="command-chip" type="button"><i class="fas fa-briefcase"></i> Executive brief</button>
-                            <button id="studyModeBtn" class="command-chip" type="button"><i class="fas fa-user-graduate"></i> Study notes</button>
-                            <button id="presentationModeBtn" class="command-chip" type="button"><i class="fas fa-person-chalkboard"></i> Presentation flow</button>
-                            <button id="qaModeBtn" class="command-chip" type="button"><i class="fas fa-circle-question"></i> Q&amp;A prompts</button>
-                        </div>
-                        <div id="aiResponse" class="ai-response">
-                            <p>Ask the command center to generate a brief, study pack, presentation flow, or review prompts from your current document.</p>
-                        </div>
-                    </article>
-
-                    <article class="card dashboard-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-info">Document Digest</span>
-                                <h3 style="margin-top: 6px;">Executive summary</h3>
-                            </div>
-                        </div>
-                        <div id="aiSummary" class="content-list empty-copy">Summary appears when your document is ready.</div>
-                    </article>
-
-                    <article class="card dashboard-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-info">Key Topics</span>
-                                <h3 style="margin-top: 6px;">Theme extraction</h3>
-                            </div>
-                        </div>
-                        <div id="aiTopics" class="tag-cloud empty-copy">Key topics will appear here.</div>
-                    </article>
-
-                    <article class="card dashboard-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-info">Action Cues</span>
-                                <h3 style="margin-top: 6px;">Priority guidance</h3>
-                            </div>
-                        </div>
-                        <div id="aiActions" class="content-list empty-copy">Important action lines and recommendations will appear here.</div>
-                    </article>
-
-                    <article class="card dashboard-card compact-insights">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-info">Workspace Pulse</span>
-                                <h3 style="margin-top: 6px;">Live stats</h3>
-                            </div>
-                        </div>
-                        <div class="insight-grid">
+                        <div class="insight-grid" style="grid-template-columns: repeat(3, 1fr); gap: 16px;">
                             <div class="insight-tile">
-                                <span class="insight-label">Characters</span>
+                                <span class="insight-label">Total Characters</span>
                                 <strong id="charCount">0</strong>
                             </div>
                             <div class="insight-tile">
-                                <span class="insight-label">Quality</span>
-                                <strong id="qualityPulse">Ready</strong>
+                                <span class="insight-label">Document Sections</span>
+                                <strong id="docSectionsStat">0</strong>
+                            </div>
+                            <div class="insight-tile">
+                                <span class="insight-label">Speaking Cadence</span>
+                                <strong id="docPaceStat">150 wpm</strong>
                             </div>
                         </div>
-                        <div class="insight-note">
-                            <i class="fas fa-circle-info" style="color: var(--flutter-blue-light);"></i>
-                            <span id="qualityHint">LEXIO will adapt recommendations once content is available.</span>
+                        <div class="command-actions" style="margin-top: 14px;">
+                            <button class="command-chip workspace-tab" type="button" data-view="readerView"><i class="fas fa-file-waveform"></i> Open in Reader</button>
+                            <button class="command-chip workspace-tab" type="button" data-view="inspectorView"><i class="fas fa-sitemap"></i> View Document Outline</button>
+                            <button id="dashDemoBtn" class="command-chip" type="button" onclick="document.getElementById('demoBtn').click()"><i class="fas fa-wand-magic-sparkles"></i> Load Sample Content</button>
                         </div>
+                    </article>
+
+                    <article class="card dashboard-card">
+                        <div class="section-header">
+                            <div>
+                                <span class="badge badge-info">Document Outline</span>
+                                <h3 style="margin-top: 6px;">Quick Section Navigation</h3>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); margin: 0 0 12px;">
+                            Access structured headings and jump directly into reading any paragraph.
+                        </p>
+                        <button class="btn btn-secondary btn-block workspace-tab" type="button" data-view="inspectorView">
+                            <i class="fas fa-list-ol"></i> Open Section Inspector
+                        </button>
+                    </article>
+
+                    <article class="card dashboard-card">
+                        <div class="section-header">
+                            <div>
+                                <span class="badge badge-info">Regional Accents</span>
+                                <h3 style="margin-top: 6px;">Native Dialects</h3>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.92rem; color: var(--text-secondary); margin: 0 0 12px;">
+                            Voices dynamically filtered across US, UK, India, Australia, Canada, Spain, Mexico, Saudi Arabia, Italy, and more.
+                        </p>
+                        <button class="btn btn-secondary btn-block workspace-tab" type="button" data-view="readerView">
+                            <i class="fas fa-sliders"></i> Configure in Voice Lab
+                        </button>
                     </article>
                 </section>
             </section>
@@ -515,7 +516,7 @@
                             <div class="editor-grid">
                                 <div class="editor-pane">
                                     <label for="inputText" class="field-title">Editable source</label>
-                                    <textarea id="inputText" class="source-input" placeholder="Paste text here or import PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB, TXT, MD, CSV, JSON, RTF, ODT, ODP, HTML, XML files..."></textarea>
+                                    <textarea id="inputText" class="source-input" placeholder="Paste text here or import PDF, DOCX, PPTX, XLSX, EPUB, TXT, MD, CSV, JSON, HTML files..."></textarea>
                                     <div class="editor-hints">
                                         <span id="charCounter" class="badge badge-primary">0 chars</span>
                                         <span id="wordCountChip" class="badge badge-success">0 words</span>
@@ -552,12 +553,12 @@
                             <div class="section-header">
                                 <div>
                                     <span class="badge badge-primary">Voice Lab</span>
-                                    <h3 style="margin: 4px 0 0;">Language, accent &amp; persona</h3>
+                                    <h3 style="margin: 4px 0 0;">Language, Regional Accent &amp; Voice</h3>
                                 </div>
                             </div>
                             <div class="control-stack">
                                 <div class="setting-item">
-                                    <label for="languageSelect">Narration language</label>
+                                    <label for="languageSelect">Narration Language</label>
                                     <select id="languageSelect" class="form-input">
                                         <option value="auto">Auto-detect from document</option>
                                         <option value="en">English</option>
@@ -569,27 +570,26 @@
                                 </div>
                                 <div class="setting-grid">
                                     <div class="setting-item">
-                                        <label for="accentSelect">Accent</label>
+                                        <label for="accentSelect">Regional Accent</label>
                                         <select id="accentSelect" class="form-input">
-                                            <option value="auto">Best available accent</option>
+                                            <option value="all">All Regional Accents</option>
                                         </select>
                                     </div>
                                     <div class="setting-item">
-                                        <label for="voicePersonaSelect">Voice persona</label>
+                                        <label for="voicePersonaSelect">Voice Gender</label>
                                         <select id="voicePersonaSelect" class="form-input">
-                                            <option value="any">Any</option>
+                                            <option value="any">All Genders</option>
                                             <option value="female">Female</option>
                                             <option value="male">Male</option>
-                                            <option value="neutral">Neutral</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="setting-item">
-                                    <label for="voiceSelect">Voice engine</label>
+                                    <label for="voiceSelect">Voice Engine</label>
                                     <select id="voiceSelect" class="form-input">
-                                        <option value="">Loading browser voices...</option>
+                                        <option value="">Loading system voices...</option>
                                     </select>
-                                    <p id="voiceMeta" class="form-help">Filtered by language, accent, and persona.</p>
+                                    <p id="voiceMeta" class="form-help">Filtered by language, regional accent, and gender.</p>
                                 </div>
                             </div>
                         </article>
@@ -599,34 +599,10 @@
                             <div class="section-header">
                                 <div>
                                     <span class="badge badge-primary">Reading Behavior</span>
-                                    <h3 style="margin: 4px 0 0;">Cadence and alignment</h3>
+                                    <h3 style="margin: 4px 0 0;">Cadence &amp; Visual Sync</h3>
                                 </div>
                             </div>
                             <div class="control-stack">
-                                <div class="setting-item">
-                                    <label for="readingModeSelect">Reading mode</label>
-                                    <select id="readingModeSelect" class="form-input">
-                                        <option value="adaptive">Adaptive mode</option>
-                                        <option value="executive">Executive briefing</option>
-                                        <option value="study">Study coach</option>
-                                        <option value="presentation">Presentation mode</option>
-                                        <option value="accessibility">Accessibility mode</option>
-                                    </select>
-                                </div>
-                                <label class="toggle-row">
-                                    <span>
-                                        <strong>Smart cleanup</strong>
-                                        <small>Fix OCR noise and broken line wraps.</small>
-                                    </span>
-                                    <input id="smartCleanup" type="checkbox" checked>
-                                </label>
-                                <label class="toggle-row">
-                                    <span>
-                                        <strong>Natural chunking</strong>
-                                        <small>Read by sentence and clause for human pacing.</small>
-                                    </span>
-                                    <input id="smartChunking" type="checkbox" checked>
-                                </label>
                                 <label class="toggle-row">
                                     <span>
                                         <strong>Follow document focus</strong>
@@ -656,7 +632,7 @@
                             <div class="section-header">
                                 <div>
                                     <span class="badge badge-primary">Playback</span>
-                                    <h3 style="margin: 4px 0 0;">Audio player controls</h3>
+                                    <h3 style="margin: 4px 0 0;">Audio Player Controls</h3>
                                 </div>
                             </div>
                             <div class="button-grid">
@@ -679,41 +655,33 @@
                 </section>
             </section>
 
-            <!-- 3. AI STUDIO / ANALYSIS VIEW -->
-            <section id="analysisView" class="workspace-view">
+            <!-- 3. DOCUMENT INSPECTOR VIEW (Structure & Outline) -->
+            <section id="inspectorView" class="workspace-view">
                 <section class="analysis-grid">
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-primary">Glossary</span>
-                                <h3 style="margin: 4px 0 0;">Entities and key terms</h3>
+                                <span class="badge badge-primary">Interactive Outline</span>
+                                <h3 style="margin: 4px 0 0;">Document Structure</h3>
                             </div>
                         </div>
-                        <div id="aiGlossary" class="content-list empty-copy">Entities and terminology will appear here.</div>
+                        <div id="outlinePanel" class="outline-panel">
+                            <p class="empty-copy">Document outline appears here once text is loaded.</p>
+                        </div>
                     </article>
 
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-primary">Outline</span>
-                                <h3 style="margin: 4px 0 0;">Document structure</h3>
-                            </div>
-                        </div>
-                        <div id="outlinePanel" class="outline-panel empty-copy">The outline becomes interactive once the document is parsed.</div>
-                    </article>
-
-                    <article class="card analysis-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-primary">Review Prompts</span>
-                                <h3 style="margin: 4px 0 0;">Workspace QA</h3>
+                                <span class="badge badge-primary">Quick Navigation</span>
+                                <h3 style="margin: 4px 0 0;">Reading Tips</h3>
                             </div>
                         </div>
                         <div class="content-list">
                             <ul>
-                                <li>Inspect AI extraction and navigate the document structure effortlessly.</li>
-                                <li>Keep the reader view focused on playback and natural speech pacing.</li>
-                                <li>Access Notes and the User Manual anytime from the top bar.</li>
+                                <li>Click on any section title in the outline above to jump straight to that part of the document.</li>
+                                <li>In the Reader view, click any word directly to start audio narration from that exact word.</li>
+                                <li>Use Focus mode to eliminate distractions and center only the reading surface.</li>
                             </ul>
                         </div>
                     </article>
@@ -721,15 +689,15 @@
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-primary">Import Scope</span>
-                                <h3 style="margin: 4px 0 0;">Supported formats</h3>
+                                <span class="badge badge-primary">Supported Formats</span>
+                                <h3 style="margin: 4px 0 0;">In-Browser Parsers</h3>
                             </div>
                         </div>
                         <div class="content-list">
                             <ul>
-                                <li>PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB</li>
-                                <li>TXT, Markdown, CSV, JSON, RTF</li>
-                                <li>HTML, HTM, XML, ODT, ODP</li>
+                                <li>PDF, Word (DOCX/DOC), PowerPoint (PPTX/PPT), Excel (XLSX)</li>
+                                <li>eBooks (EPUB), Markdown (MD), Plain Text (TXT)</li>
+                                <li>CSV, JSON, RTF, HTML, XML, ODT, ODP</li>
                             </ul>
                         </div>
                     </article>
@@ -747,13 +715,13 @@
                 <i class="fas fa-file-waveform"></i>
                 <span>Reader</span>
             </button>
-            <button type="button" class="mobile-nav-btn workspace-tab" data-view="analysisView">
-                <i class="fas fa-brain"></i>
-                <span>AI Studio</span>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="inspectorView">
+                <i class="fas fa-sitemap"></i>
+                <span>Inspector</span>
             </button>
-            <button type="button" class="mobile-nav-btn" onclick="document.getElementById('openAssistantBtn').click()">
-                <i class="fas fa-sparkles"></i>
-                <span>Assistant</span>
+            <button type="button" class="mobile-nav-btn" onclick="document.getElementById('openNotesBtn').click()">
+                <i class="fas fa-note-sticky"></i>
+                <span>Notes</span>
             </button>
         </nav>
 
@@ -777,23 +745,19 @@
         <div class="side-panel-body manual-content">
             <div class="manual-block">
                 <h4>1. Choose a Workspace View</h4>
-                <p>Use Dashboard for executive summaries, Reader for synchronized playback, and AI Studio for glossary and structure review.</p>
+                <p>Use Dashboard for reading statistics, Reader for synchronized playback, and Document Inspector for outline and structure review.</p>
             </div>
             <div class="manual-block">
                 <h4>2. Import or Paste Content</h4>
                 <p>Open Reader, upload a supported document or paste raw text. LEXIO will parse it into a clean, phrase-tracked reading surface.</p>
             </div>
             <div class="manual-block">
-                <h4>3. Tune Your Voice</h4>
-                <p>Select your language, accent, and persona. You can adjust speed and pitch using the smooth range sliders.</p>
+                <h4>3. Tune Your Voice &amp; Regional Accent</h4>
+                <p>Select your language, regional accent (US, UK, India, Australia, Spain, Mexico, Saudi Arabia, Italy, etc.), and gender (Male or Female). Adjust speed and pitch using the smooth range sliders.</p>
             </div>
             <div class="manual-block">
-                <h4>4. Intelligent Output Commands</h4>
-                <p>Switch reading modes anytime between Executive Brief, Study Notes, Presentation Flow, and Accessibility mode.</p>
-            </div>
-            <div class="manual-block">
-                <h4>5. Synchronized Audio Playback</h4>
-                <p>Click Start. Visual highlights follow the spoken sentence and automatically center the reading surface.</p>
+                <h4>4. Synchronized Audio Playback</h4>
+                <p>Click Start. Visual highlights follow the spoken sentence and automatically center the reading surface. You can also click any individual word to start reading from there.</p>
             </div>
         </div>
     </aside>
@@ -817,31 +781,6 @@
         </div>
     </aside>
 
-    <!-- 3. AI Assistant Chat Drawer -->
-    <aside id="assistantPanel" class="side-panel assistant-panel">
-        <div class="side-panel-header">
-            <div>
-                <span class="badge badge-primary">AI Chat</span>
-                <h3>Document Assistant</h3>
-            </div>
-            <button class="panel-close" type="button" data-close-panel="assistantPanel"><i class="fas fa-xmark"></i></button>
-        </div>
-        <div class="side-panel-body assistant-body">
-            <div id="assistantMessages" class="assistant-messages">
-                <div class="assistant-message assistant-message-bot">
-                    <strong>LEXIO Assistant</strong>
-                    <p>Ask me about the current document, request key highlights, or ask questions about specific sections.</p>
-                </div>
-            </div>
-            <div class="assistant-input-wrap">
-                <textarea id="assistantInput" class="assistant-input" placeholder="Ask about this document, for example: What are the key takeaways?"></textarea>
-                <div style="display: flex; justify-content: flex-end;">
-                    <button id="assistantSendBtn" class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i> Send</button>
-                </div>
-            </div>
-        </div>
-    </aside>
-
     <!-- Client-side Document Parsing Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
@@ -849,12 +788,35 @@
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-    <!-- LEXIO Core Orchestration Scripts -->
-    <script src="js/utils.js?v=2.0.1"></script>
-    <script src="script.js?v=2.0.1"></script>
-    <script src="js/auth.js?v=2.0.1"></script>
-    <script src="js/speech.js?v=2.0.1"></script>
-    <script src="js/fileHandler.js?v=2.0.1"></script>
-    <script src="js/ai.js?v=2.0.1"></script>
+    <!-- Go WebAssembly Runtime & Loader -->
+    <script src="wasm/wasm_exec.js?v=2.2.0"></script>
+    <script>
+        (function() {
+            const go = new Go();
+            const wasmUrl = "wasm/app.wasm?v=2.2.0";
+
+            if (WebAssembly.instantiateStreaming) {
+                WebAssembly.instantiateStreaming(fetch(wasmUrl), go.importObject)
+                    .then((result) => go.run(result.instance))
+                    .catch((err) => fallbackLoad(wasmUrl, go));
+            } else {
+                fallbackLoad(wasmUrl, go);
+            }
+
+            function fallbackLoad(url, goInstance) {
+                fetch(url)
+                    .then(resp => resp.arrayBuffer())
+                    .then(bytes => WebAssembly.instantiate(bytes, goInstance.importObject))
+                    .then(result => goInstance.run(result.instance))
+                    .catch(err => {
+                        console.error("Failed to load Go WebAssembly:", err);
+                        const loading = document.getElementById("loadingScreen");
+                        if (loading) {
+                            loading.innerHTML = "<div class='loading-core'><p style='color:#DC2626;font-weight:700;'>Failed to load WebAssembly binary. Please refresh or check console.</p></div>";
+                        }
+                    });
+            }
+        })();
+    </script>
 </body>
 </html>
