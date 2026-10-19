@@ -2,106 +2,380 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="google-site-verification" content="jnk-KYm4qZsYiaBSGIW0NuwbGqu0i4GLbDOk0Ln16O0" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEXIO </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="LEXIO - Client-side multilingual document speech studio with synchronized phrase highlighting. Works on every device.">
+    <title>LEXIO - Multilingual Document Speech Studio</title>
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Inter (Modern Flutter/Material 3 typography) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Flutter Material 3 Component & Layout Stylesheets -->
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Loading Screen (Flutter style ring loader) -->
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-core">
             <div class="loading-spinner"></div>
-            <div class="loading-text"><img src="assets/logo.svg" alt="LEXIO logo" class="loading-logo"><span>LEXIO</span></div>
-            <p>Booting multilingual reading workspace...</p>
+            <div class="loading-text">
+                <img src="assets/logo.svg" alt="LEXIO logo" class="loading-logo">
+                <span>LEXIO</span>
+            </div>
+            <p>Initializing client-side document speech studio...</p>
         </div>
     </div>
 
+    <!-- Scrollable Landing & Authentication Page -->
     <div id="loginPage" class="login-page">
-        <div class="login-shell">
-            <div class="login-hero">
-                <span class="eyebrow">Enterprise Reading Intelligence</span>
-                <h1>Turn documents into a live multilingual AI narration experience.</h1>
-                <p>Import office files, inspect them in a polished viewer, and listen with natural speech pacing across English, Hindi, Arabic, Italian, and Spanish.</p>
-                <div class="hero-pills">
-                    <span><i class="fas fa-language"></i> Voice filtering by language and accent</span>
-                    <span><i class="fas fa-file-import"></i> DOCX, PDF, PPTX, XLSX, EPUB and more</span>
-                    <span><i class="fas fa-highlighter"></i> Live document highlighting</span>
+        <!-- Top Announcement Banner (Flutter 3 style gradient banner) -->
+        <aside class="flutter-announcement-bar">
+            <span class="banner-badge">CLIENT-SIDE</span>
+            <span>LEXIO 2.0 is live! 100% Client-side multilingual speech workspace • Zero server telemetry</span>
+            <a href="#features">Learn more <i class="fas fa-arrow-right"></i></a>
+        </aside>
+
+        <!-- Sticky Header / Navbar -->
+        <header class="landing-navbar">
+            <div class="landing-nav-container">
+                <a href="#" class="brand-lockup">
+                    <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo">
+                    <span class="brand-title">LEXIO<span class="brand-title-accent">.</span></span>
+                </a>
+                <nav>
+                    <ul class="landing-nav-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#devices">Device Reach</a></li>
+                        <li><a href="#formats">Supported Formats</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </nav>
+                <div class="landing-nav-actions">
+                    <button type="button" id="openOptionsBtn" class="btn btn-secondary btn-sm"><i class="fas fa-sliders"></i> Options Page</button>
+                    <button type="button" id="navGetStartedBtn" class="btn btn-primary btn-sm">Get Started</button>
                 </div>
             </div>
-            <div class="login-panel">
-                <div class="logo-block">
+        </header>
+
+        <!-- Hero Section with Copy & Authentication Card -->
+        <main>
+            <section class="landing-hero-section">
+                <div class="landing-hero-grid">
+                    <!-- Left: Hero Headline & Capabilities -->
+                    <div class="hero-copy-column">
+                        <div class="eyebrow-pill">
+                            <i class="fas fa-sparkles"></i> Native Web Speech Synthesis
+                        </div>
+                        <h1>Reach users and documents on <span class="gradient-text">every screen</span>.</h1>
+                        <p class="hero-lead">
+                            Import PDF, Word, PowerPoint, Excel, and eBooks directly into your browser. Listen with hardware-accelerated speech synthesis and phrase-synchronized visual tracking across English, Hindi, Spanish, Italian, and Arabic.
+                        </p>
+                        <div class="hero-trust-chips">
+                            <div class="trust-chip"><i class="fas fa-shield-halved"></i> 100% Client-Side</div>
+                            <div class="trust-chip"><i class="fas fa-file-waveform"></i> 17+ Document Formats</div>
+                            <div class="trust-chip"><i class="fas fa-bolt"></i> Zero Server Telemetry</div>
+                        </div>
+                        <div class="hero-actions-row">
+                            <button type="button" id="quickDemoBtn" class="btn btn-primary btn-lg"><i class="fas fa-wand-magic-sparkles"></i> Try Demo Workspace</button>
+                            <a href="#features" class="btn btn-secondary btn-lg">Explore Features <i class="fas fa-arrow-down"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Authentication Card (Create Account / Sign In) -->
+                    <div class="auth-panel-column">
+                        <div class="auth-card">
+                            <div class="auth-card-header">
+                                <div class="auth-mode-toggle" role="tablist">
+                                    <button type="button" id="tabCreateAcc" class="auth-tab-btn active" role="tab" aria-selected="true">Create Account</button>
+                                    <button type="button" id="tabSignIn" class="auth-tab-btn" role="tab" aria-selected="false">Sign In</button>
+                                </div>
+                            </div>
+                            
+                            <form id="loginForm" class="auth-form" novalidate>
+                                <div id="avatarRow" class="avatar-upload-row">
+                                    <div id="loginAvatarPreview" class="login-avatar-preview">LB</div>
+                                    <div class="avatar-upload-copy">
+                                        <label>Workspace Profile Photo</label>
+                                        <p>Personalize your local reading profile.</p>
+                                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                        <button id="avatarPickerBtn" class="avatar-picker-btn" type="button"><i class="fas fa-camera"></i> Choose photo</button>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form-fields">
+                                    <div class="input-container" id="nameContainer">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" placeholder="Liam Brooks" autocomplete="name">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" required placeholder="liam_brooks" autocomplete="username">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="email">Work / Personal Email</label>
+                                        <input type="email" id="email" required placeholder="liam@example.com" autocomplete="email">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+                                    </div>
+                                    <!-- Hidden phone for backward compatibility -->
+                                    <input type="tel" id="phone" value="+1 415 555 0188" style="display: none;">
+                                </div>
+
+                                <button type="submit" id="authSubmitBtn" class="auth-submit-btn">
+                                    <span>Create Account &amp; Enter</span> <i class="fas fa-arrow-right"></i>
+                                </button>
+
+                                <div class="auth-secondary-actions">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('openOptionsBtn').click()"><i class="fas fa-sliders"></i> Options Page</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('quickDemoBtn').click()"><i class="fas fa-wand-magic-sparkles"></i> Instant Guest</button>
+                                </div>
+
+                                <div class="auth-privacy-guarantee">
+                                    <i class="fas fa-lock"></i> Client-side local storage only. No cloud tracking.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Core Capabilities (Truthful, high-utility, no hype) -->
+            <section id="features" class="landing-section landing-section-alt">
+                <div class="landing-section-inner">
+                    <div class="section-header-center">
+                        <div class="eyebrow-pill"><i class="fas fa-microchip"></i> Pure Client-Side Architecture</div>
+                        <h2>Engineered for reliable, high-fidelity document speech</h2>
+                        <p>No backend servers, no cloud fees, and no third-party telemetry. LEXIO executes all file parsing and speech synthesis inside your device's browser thread.</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-headphones"></i></div>
+                            <h3>Native Web Speech Synthesis</h3>
+                            <p>Utilizes your operating system's built-in voice synthesizer (macOS, Windows, iOS, Android, Linux) with zero API costs, zero network lag, and full offline capability.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-highlighter"></i></div>
+                            <h3>Synchronized Visual Tracking</h3>
+                            <p>Reads by sentence and clause rather than robotic single-word steps. The document viewer tracks active phrases in real-time with adjustable automatic centering.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-language"></i></div>
+                            <h3>Multilingual & Accent Filtering</h3>
+                            <p>Filters available voices by language (English, Hindi, Spanish, Italian, Arabic), regional accent, and persona with speed and pitch fine-tuning.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-file-shield"></i></div>
+                            <h3>In-Browser Document Extraction</h3>
+                            <p>Extracts text from complex PDFs, Word documents, PowerPoint presentations, Excel spreadsheets, and EPUB books locally without sending a byte over the internet.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Multi-Device Reach -->
+            <section id="devices" class="landing-section">
+                <div class="section-header-center">
+                    <div class="eyebrow-pill"><i class="fas fa-mobile-screen-button"></i> Multi-Screen Design</div>
+                    <h2>Works seamlessly on every type of device</h2>
+                    <p>Designed with Flutter-inspired responsive ergonomics: responsive sidebars on desktop, split panes on tablet, and thumb-friendly controls on smartphones.</p>
+                </div>
+
+                <div class="devices-showcase-grid">
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-desktop"></i></div>
+                        <h4>Desktop &amp; Ultra-Wide</h4>
+                        <p>Dual-column workspace with editable source text on the left and synchronized document viewer on the right with side-by-side voice tuning.</p>
+                    </div>
+
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-tablet-screen-button"></i></div>
+                        <h4>Tablets &amp; Foldables</h4>
+                        <p>Adaptive layout with collapsible controls drawer, gesture-friendly sliders, and high-readability typography for comfortable tablet reading.</p>
+                    </div>
+
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-mobile-screen"></i></div>
+                        <h4>Mobile Phones</h4>
+                        <p>Thumb-accessible bottom navigation bar, floating audio playback dock, and clean vertical stacking so you can listen anywhere on the go.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Supported Formats -->
+            <section id="formats" class="landing-section landing-section-alt">
+                <div class="landing-section-inner">
+                    <div class="section-header-center">
+                        <div class="eyebrow-pill"><i class="fas fa-folder-open"></i> Universal Formats</div>
+                        <h2>17+ Supported Document Formats</h2>
+                        <p>Drag, drop, or import virtually any reading material. LEXIO parses and structures content instantly on the client side.</p>
+                    </div>
+
+                    <div class="formats-chip-grid">
+                        <div class="format-chip-card"><span class="format-ext">PDF</span><span class="format-desc">Adobe Acrobat</span></div>
+                        <div class="format-chip-card"><span class="format-ext">DOCX</span><span class="format-desc">Microsoft Word</span></div>
+                        <div class="format-chip-card"><span class="format-ext">PPTX</span><span class="format-desc">PowerPoint</span></div>
+                        <div class="format-chip-card"><span class="format-ext">XLSX</span><span class="format-desc">Excel Sheet</span></div>
+                        <div class="format-chip-card"><span class="format-ext">EPUB</span><span class="format-desc">eBook Format</span></div>
+                        <div class="format-chip-card"><span class="format-ext">TXT</span><span class="format-desc">Plain Text</span></div>
+                        <div class="format-chip-card"><span class="format-ext">MD</span><span class="format-desc">Markdown</span></div>
+                        <div class="format-chip-card"><span class="format-ext">CSV</span><span class="format-desc">Data Tables</span></div>
+                        <div class="format-chip-card"><span class="format-ext">JSON</span><span class="format-desc">Structured Data</span></div>
+                        <div class="format-chip-card"><span class="format-ext">RTF</span><span class="format-desc">Rich Text</span></div>
+                        <div class="format-chip-card"><span class="format-ext">ODT</span><span class="format-desc">OpenDocument</span></div>
+                        <div class="format-chip-card"><span class="format-ext">ODP</span><span class="format-desc">Open Presentation</span></div>
+                        <div class="format-chip-card"><span class="format-ext">HTML</span><span class="format-desc">Web Pages</span></div>
+                        <div class="format-chip-card"><span class="format-ext">XML</span><span class="format-desc">Markup Data</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: How It Works -->
+            <section id="how-it-works" class="landing-section">
+                <div class="section-header-center">
+                    <div class="eyebrow-pill"><i class="fas fa-route"></i> Simple Workflow</div>
+                    <h2>How LEXIO Works in 3 Clear Steps</h2>
+                    <p>No account verification emails, no complex configuration. Get to reading in seconds.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number-pill">1</div>
+                        <h3>Import or Paste Content</h3>
+                        <p>Drop any supported document onto the workspace or paste text directly into the editable source panel.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-pill">2</div>
+                        <h3>Select Voice &amp; Pacing</h3>
+                        <p>Choose your preferred language, accent, and persona. Adjust reading speed and pitch to match your natural listening cadence.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-pill">3</div>
+                        <h3>Listen with Synchronized Focus</h3>
+                        <p>Press start. The reader highlights sentences and clauses in sync with audio and automatically keeps the document centered.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Privacy & Local Architecture -->
+            <section id="privacy" class="landing-section">
+                <div class="privacy-banner-card">
+                    <div class="privacy-banner-icon">
+                        <i class="fas fa-shield-cat"></i>
+                    </div>
+                    <div class="privacy-banner-content">
+                        <h3>Private by Design: Zero Server Drama</h3>
+                        <p>LEXIO is a 100% pure client web application. It requires no Node.js runtime in production, connects to no backend analytics, and transmits no document contents to remote servers. All your notes, accounts, and audio settings reside entirely in your browser's private local storage.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Landing Page Footer -->
+        <footer class="landing-footer">
+            <div class="landing-footer-container">
+                <div class="footer-top-row">
                     <div class="brand-lockup">
-                        <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo brand-logo-login">
-                        <div>
-                            <h2 class="logo-text">LEXIO<span class="cursor">_</span></h2>
-                            <p class="tagline">AI-assisted speech, document intelligence, and reading control</p>
-                        </div>
+                        <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo">
+                        <span class="brand-title">LEXIO<span class="brand-title-accent">.</span></span>
+                    </div>
+                    <div class="hero-actions-row">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fas fa-arrow-up"></i> Back to Top</button>
+                        <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('navGetStartedBtn').click()">Launch Workspace</button>
                     </div>
                 </div>
-                <form id="loginForm" class="login-form">
-                    <div class="avatar-upload-row">
-                        <div id="loginAvatarPreview" class="login-avatar-preview">LB</div>
-                        <div class="avatar-upload-copy">
-                            <label for="avatarInput">Profile photo</label>
-                            <p>Add a display photo for your workspace identity.</p>
-                            <input type="file" id="avatarInput" accept="image/*" hidden>
-                            <button id="avatarPickerBtn" class="secondary-action" type="button"><i class="fas fa-camera"></i> Add display photo</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" required placeholder="Liam Brooks">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Work Email</label>
-                        <input type="email" id="email" required placeholder="liam.brooks@company.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required placeholder="+1 415 555 0188">
-                    </div>
-                    <button type="submit" class="login-btn">
-                        Enter Workspace <i class="fas fa-arrow-right"></i>
+                <div class="footer-bottom-row">
+                    <span>&copy; Voxion Labs. Crafted with Flutter &amp; Material 3 Design Principles.</span>
+                    <span>100% Client-Side Web Application • No External Backend</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Workspace Options Modal (Flutter Material 3 Dialog) -->
+    <div id="optionsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-sliders" style="color: var(--flutter-blue-light); margin-right: 8px;"></i> Workspace Options</h3>
+                <button type="button" id="closeOptionsBtn" class="modal-close-btn" title="Close options"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="optDefaultLang">Default Narration Language</label>
+                    <select id="optDefaultLang" class="form-input">
+                        <option value="auto">Auto-detect from document</option>
+                        <option value="en">English (Default)</option>
+                        <option value="hi">Hindi</option>
+                        <option value="es">Spanish</option>
+                        <option value="it">Italian</option>
+                        <option value="ar">Arabic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="optDefaultPace">Default Reading Cadence</label>
+                    <select id="optDefaultPace" class="form-input">
+                        <option value="adaptive">Adaptive Mode (Balanced)</option>
+                        <option value="executive">Executive Brief (Steady 1.05x)</option>
+                        <option value="study">Study Coach (Retention 0.92x)</option>
+                        <option value="presentation">Presentation Mode (Stage 1.0x)</option>
+                        <option value="accessibility">Accessibility Mode (Clear 0.85x)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quick Access</label>
+                    <button type="button" id="modalQuickDemoBtn" class="btn btn-secondary btn-block">
+                        <i class="fas fa-wand-magic-sparkles"></i> Launch Instant Demo Workspace
                     </button>
-                </form>
-                <div class="login-footer">
-                    <span><i class="fas fa-shield-alt"></i> Secure local processing</span>
-                    <span><i class="fas fa-volume-up"></i> Natural browser speech engine</span>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('closeOptionsBtn').click()">Cancel</button>
+                <button type="button" id="saveOptionsBtn" class="btn btn-primary">Save Preferences</button>
             </div>
         </div>
     </div>
 
+    <!-- Main Workspace Application (After Login) -->
     <div id="mainApp" class="main-app" style="display: none;">
+        <!-- Top App Bar -->
         <nav class="navbar">
             <div class="nav-brand">
                 <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo brand-logo-nav">
                 <div>
-                    <span class="eyebrow">LEXIO Workspace</span>
-                    <h1 class="brand-text">Narration Studio <span class="badge badge-premium">PRO</span></h1>
+                    <h1 class="brand-text">LEXIO <span class="badge badge-primary">STUDIO</span></h1>
                 </div>
             </div>
+            
             <div class="nav-actions">
                 <button id="openManualBtn" class="utility-btn" type="button"><i class="fas fa-book-open"></i> User Manual</button>
                 <button id="openNotesBtn" class="utility-btn" type="button"><i class="fas fa-note-sticky"></i> Notes</button>
                 <button id="openAssistantBtn" class="utility-btn utility-btn-primary" type="button"><i class="fas fa-sparkles"></i> AI Assistant</button>
                 <div class="nav-user">
                     <div class="user-info">
-                        <span class="user-greeting">Welcome, <span id="userName">User</span></span>
-                        <span class="user-role">Document speech operator</span>
+                        <span class="user-greeting"><span id="userName">User</span></span>
+                        <span class="user-role">Document operator</span>
                     </div>
                     <div id="userAvatar" class="user-avatar"><span id="userInitials">U</span></div>
-                    <button id="logoutBtn" class="logout-btn" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+                    <button id="logoutBtn" class="logout-btn" title="Logout"><i class="fas fa-arrow-right-from-bracket"></i></button>
                 </div>
             </div>
         </nav>
 
+        <!-- Sub-Toolbar with Segmented View Switcher -->
         <section class="workspace-toolbar">
             <div class="workspace-tabs" role="tablist" aria-label="Workspace Views">
                 <button class="workspace-tab active" type="button" data-view="dashboardView"><i class="fas fa-table-cells-large"></i> Dashboard</button>
@@ -115,13 +389,15 @@
             </div>
         </section>
 
-        <main class="workspace-shell workspace-shell-tabs">
+        <!-- Main Workspace Shell -->
+        <main class="workspace-shell">
+            <!-- 1. DASHBOARD VIEW -->
             <section id="dashboardView" class="workspace-view active">
                 <section class="hero-panel card">
                     <div>
-                        <span class="eyebrow">AI Reading Assist</span>
-                        <h2>Natural multilingual narration for real documents.</h2>
-                        <p>LEXIO reads by phrase instead of one word at a time, filters voices by language, accent, and persona, and keeps the live document viewer in sync while speaking.</p>
+                        <div class="eyebrow-pill"><i class="fas fa-sparkles"></i> Multilingual Reading Assist</div>
+                        <h2>Natural speech for real documents.</h2>
+                        <p>LEXIO reads by phrase instead of one word at a time, filters voices by language, accent, and persona, and keeps the document viewer synchronized while speaking.</p>
                     </div>
                     <div class="hero-metrics">
                         <div class="metric-tile">
@@ -147,15 +423,15 @@
                     <article class="card dashboard-card command-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">AI Command Center</span>
-                                <h3>Generate smart reading outputs</h3>
+                                <span class="badge badge-primary">Smart Outputs</span>
+                                <h3 style="margin-top: 6px;">Generate reading perspectives</h3>
                             </div>
                         </div>
                         <div class="command-actions">
                             <button id="briefModeBtn" class="command-chip" type="button"><i class="fas fa-briefcase"></i> Executive brief</button>
                             <button id="studyModeBtn" class="command-chip" type="button"><i class="fas fa-user-graduate"></i> Study notes</button>
                             <button id="presentationModeBtn" class="command-chip" type="button"><i class="fas fa-person-chalkboard"></i> Presentation flow</button>
-                            <button id="qaModeBtn" class="command-chip" type="button"><i class="fas fa-circle-question"></i> Q&A prompts</button>
+                            <button id="qaModeBtn" class="command-chip" type="button"><i class="fas fa-circle-question"></i> Q&amp;A prompts</button>
                         </div>
                         <div id="aiResponse" class="ai-response">
                             <p>Ask the command center to generate a brief, study pack, presentation flow, or review prompts from your current document.</p>
@@ -165,8 +441,8 @@
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">AI Summary</span>
-                                <h3>Executive summary</h3>
+                                <span class="badge badge-info">Document Digest</span>
+                                <h3 style="margin-top: 6px;">Executive summary</h3>
                             </div>
                         </div>
                         <div id="aiSummary" class="content-list empty-copy">Summary appears when your document is ready.</div>
@@ -175,8 +451,8 @@
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Key Topics</span>
-                                <h3>Theme extraction</h3>
+                                <span class="badge badge-info">Key Topics</span>
+                                <h3 style="margin-top: 6px;">Theme extraction</h3>
                             </div>
                         </div>
                         <div id="aiTopics" class="tag-cloud empty-copy">Key topics will appear here.</div>
@@ -185,8 +461,8 @@
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Action Cues</span>
-                                <h3>Priority guidance</h3>
+                                <span class="badge badge-info">Action Cues</span>
+                                <h3 style="margin-top: 6px;">Priority guidance</h3>
                             </div>
                         </div>
                         <div id="aiActions" class="content-list empty-copy">Important action lines and recommendations will appear here.</div>
@@ -195,8 +471,8 @@
                     <article class="card dashboard-card compact-insights">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Workspace Pulse</span>
-                                <h3>Live stats</h3>
+                                <span class="badge badge-info">Workspace Pulse</span>
+                                <h3 style="margin-top: 6px;">Live stats</h3>
                             </div>
                         </div>
                         <div class="insight-grid">
@@ -210,44 +486,48 @@
                             </div>
                         </div>
                         <div class="insight-note">
-                            <i class="fas fa-circle-info"></i>
-                            <span id="qualityHint">LEXIO will adapt its recommendations once content is available.</span>
+                            <i class="fas fa-circle-info" style="color: var(--flutter-blue-light);"></i>
+                            <span id="qualityHint">LEXIO will adapt recommendations once content is available.</span>
                         </div>
                     </article>
                 </section>
             </section>
 
+            <!-- 2. READER VIEW -->
             <section id="readerView" class="workspace-view">
                 <section class="reader-layout">
+                    <!-- Source Studio Column -->
                     <div class="studio-column">
                         <article class="card studio-card">
                             <div class="section-header section-header-spread">
                                 <div>
-                                    <span class="eyebrow">Source Studio</span>
-                                    <h3>Bring in text or import a document</h3>
+                                    <span class="badge badge-primary">Source Studio</span>
+                                    <h3 style="margin: 4px 0 0;">Document Content &amp; Synchronized View</h3>
                                 </div>
                                 <div class="file-actions">
                                     <span id="fileBadge" class="badge badge-info">No file loaded</span>
                                     <button id="uploadBtn" class="btn-icon" title="Import document"><i class="fas fa-upload"></i></button>
-                                    <button id="demoBtn" class="btn-icon" title="Load sample"><i class="fas fa-wand-magic-sparkles"></i></button>
+                                    <button id="demoBtn" class="btn-icon" title="Load sample document"><i class="fas fa-wand-magic-sparkles"></i></button>
                                     <button id="clearBtn" class="btn-icon" title="Clear content"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
+
                             <div class="editor-grid">
                                 <div class="editor-pane">
                                     <label for="inputText" class="field-title">Editable source</label>
-                                    <textarea id="inputText" class="form-input source-input" placeholder="Paste text here or import PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB, TXT, MD, CSV, JSON, RTF, ODT, ODP, HTML, XML and supported office files..."></textarea>
+                                    <textarea id="inputText" class="source-input" placeholder="Paste text here or import PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB, TXT, MD, CSV, JSON, RTF, ODT, ODP, HTML, XML files..."></textarea>
                                     <div class="editor-hints">
                                         <span id="charCounter" class="badge badge-primary">0 chars</span>
                                         <span id="wordCountChip" class="badge badge-success">0 words</span>
-                                        <span class="hint-text">Drag and drop documents onto this card.</span>
+                                        <span class="hint-text">Drag and drop files onto this card.</span>
                                     </div>
                                 </div>
+
                                 <div class="viewer-pane">
                                     <div class="viewer-header">
                                         <div>
                                             <span class="field-title">Document viewer</span>
-                                            <p id="documentSummary" class="viewer-subtitle">Your document structure and live highlights appear here.</p>
+                                            <p id="documentSummary" class="viewer-subtitle">Synchronized highlights appear here as LEXIO reads.</p>
                                         </div>
                                         <div class="viewer-actions">
                                             <button id="toggleFocusModeBtn" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-expand"></i> Focus mode</button>
@@ -257,7 +537,7 @@
                                         <div class="empty-state">
                                             <i class="fas fa-file-lines"></i>
                                             <h4>Import a file or paste content</h4>
-                                            <p>LEXIO will render your pages, slides, sheets, or sections here and track the spoken text in real time.</p>
+                                            <p>LEXIO will render your sections here and highlight spoken words in real time.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -265,12 +545,14 @@
                         </article>
                     </div>
 
+                    <!-- Controls Column -->
                     <aside class="controls-column">
+                        <!-- Voice Lab -->
                         <article class="card control-card">
                             <div class="section-header">
                                 <div>
-                                    <span class="eyebrow">Voice Lab</span>
-                                    <h3>Language, accent, and persona</h3>
+                                    <span class="badge badge-primary">Voice Lab</span>
+                                    <h3 style="margin: 4px 0 0;">Language, accent &amp; persona</h3>
                                 </div>
                             </div>
                             <div class="control-stack">
@@ -307,16 +589,17 @@
                                     <select id="voiceSelect" class="form-input">
                                         <option value="">Loading browser voices...</option>
                                     </select>
-                                    <p id="voiceMeta" class="form-help">LEXIO filters available system voices by your language, accent, and persona choices.</p>
+                                    <p id="voiceMeta" class="form-help">Filtered by language, accent, and persona.</p>
                                 </div>
                             </div>
                         </article>
 
+                        <!-- Narration Behavior -->
                         <article class="card control-card">
                             <div class="section-header">
                                 <div>
-                                    <span class="eyebrow">AI Narration</span>
-                                    <h3>Reading behavior</h3>
+                                    <span class="badge badge-primary">Reading Behavior</span>
+                                    <h3 style="margin: 4px 0 0;">Cadence and alignment</h3>
                                 </div>
                             </div>
                             <div class="control-stack">
@@ -333,7 +616,7 @@
                                 <label class="toggle-row">
                                     <span>
                                         <strong>Smart cleanup</strong>
-                                        <small>Fix OCR noise, repeated spaces, and broken line wrapping.</small>
+                                        <small>Fix OCR noise and broken line wraps.</small>
                                     </span>
                                     <input id="smartCleanup" type="checkbox" checked>
                                 </label>
@@ -347,7 +630,7 @@
                                 <label class="toggle-row">
                                     <span>
                                         <strong>Follow document focus</strong>
-                                        <small>Keep the highlighted text centered while reading.</small>
+                                        <small>Keep the highlighted sentence centered.</small>
                                     </span>
                                     <input id="autoScrollHighlight" type="checkbox" checked>
                                 </label>
@@ -368,11 +651,12 @@
                             </div>
                         </article>
 
+                        <!-- Playback Controls -->
                         <article class="card control-card">
                             <div class="section-header">
                                 <div>
-                                    <span class="eyebrow">Playback</span>
-                                    <h3>Document reader controls</h3>
+                                    <span class="badge badge-primary">Playback</span>
+                                    <h3 style="margin: 4px 0 0;">Audio player controls</h3>
                                 </div>
                             </div>
                             <div class="button-grid">
@@ -395,13 +679,14 @@
                 </section>
             </section>
 
+            <!-- 3. AI STUDIO / ANALYSIS VIEW -->
             <section id="analysisView" class="workspace-view">
-                <section class="analysis-grid analysis-grid-wide">
+                <section class="analysis-grid">
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Glossary</span>
-                                <h3>Entities and terms</h3>
+                                <span class="badge badge-primary">Glossary</span>
+                                <h3 style="margin: 4px 0 0;">Entities and key terms</h3>
                             </div>
                         </div>
                         <div id="aiGlossary" class="content-list empty-copy">Entities and terminology will appear here.</div>
@@ -410,8 +695,8 @@
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Outline</span>
-                                <h3>Document structure</h3>
+                                <span class="badge badge-primary">Outline</span>
+                                <h3 style="margin: 4px 0 0;">Document structure</h3>
                             </div>
                         </div>
                         <div id="outlinePanel" class="outline-panel empty-copy">The outline becomes interactive once the document is parsed.</div>
@@ -420,15 +705,15 @@
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Workspace QA</span>
-                                <h3>Review prompts</h3>
+                                <span class="badge badge-primary">Review Prompts</span>
+                                <h3 style="margin: 4px 0 0;">Workspace QA</h3>
                             </div>
                         </div>
                         <div class="content-list">
                             <ul>
-                                <li>Use this page to inspect AI extraction and jump across document structure.</li>
-                                <li>Keep the reader view focused on playback and document work, not utility clutter.</li>
-                                <li>Use Notes and User Manual from the top bar whenever you need them.</li>
+                                <li>Inspect AI extraction and navigate the document structure effortlessly.</li>
+                                <li>Keep the reader view focused on playback and natural speech pacing.</li>
+                                <li>Access Notes and the User Manual anytime from the top bar.</li>
                             </ul>
                         </div>
                     </article>
@@ -436,8 +721,8 @@
                     <article class="card analysis-card">
                         <div class="section-header">
                             <div>
-                                <span class="eyebrow">Import Scope</span>
-                                <h3>Supported content</h3>
+                                <span class="badge badge-primary">Import Scope</span>
+                                <h3 style="margin: 4px 0 0;">Supported formats</h3>
                             </div>
                         </div>
                         <div class="content-list">
@@ -452,68 +737,92 @@
             </section>
         </main>
 
+        <!-- Mobile Bottom Navigation Bar (Flutter style bottom app bar) -->
+        <nav class="mobile-bottom-nav">
+            <button type="button" class="mobile-nav-btn workspace-tab active" data-view="dashboardView">
+                <i class="fas fa-table-cells-large"></i>
+                <span>Dashboard</span>
+            </button>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="readerView">
+                <i class="fas fa-file-waveform"></i>
+                <span>Reader</span>
+            </button>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="analysisView">
+                <i class="fas fa-brain"></i>
+                <span>AI Studio</span>
+            </button>
+            <button type="button" class="mobile-nav-btn" onclick="document.getElementById('openAssistantBtn').click()">
+                <i class="fas fa-sparkles"></i>
+                <span>Assistant</span>
+            </button>
+        </nav>
+
         <footer class="app-footer">
             <div id="status" class="status-indicator" style="display: none;">Ready</div>
         </footer>
     </div>
 
+    <!-- Side Panel Backdrop -->
     <div id="panelBackdrop" class="panel-backdrop"></div>
 
+    <!-- 1. User Manual Side Drawer -->
     <aside id="manualPanel" class="side-panel">
         <div class="side-panel-header">
             <div>
-                <span class="eyebrow">Support</span>
+                <span class="badge badge-primary">Support</span>
                 <h3>User Manual</h3>
             </div>
             <button class="panel-close" type="button" data-close-panel="manualPanel"><i class="fas fa-xmark"></i></button>
         </div>
         <div class="side-panel-body manual-content">
             <div class="manual-block">
-                <h4>1. Choose A Workspace View</h4>
-                <p>Use Dashboard for AI output, Reader for document playback, and AI Studio for glossary and structure review.</p>
+                <h4>1. Choose a Workspace View</h4>
+                <p>Use Dashboard for executive summaries, Reader for synchronized playback, and AI Studio for glossary and structure review.</p>
             </div>
             <div class="manual-block">
-                <h4>2. Import Or Paste Content</h4>
-                <p>Open Reader, upload a supported file or paste content into the source box. LEXIO will rebuild it into a synchronized reading surface.</p>
+                <h4>2. Import or Paste Content</h4>
+                <p>Open Reader, upload a supported document or paste raw text. LEXIO will parse it into a clean, phrase-tracked reading surface.</p>
             </div>
             <div class="manual-block">
-                <h4>3. Tune The Voice</h4>
-                <p>Select language, accent, and persona. The exact available voices depend on your system voice pack.</p>
+                <h4>3. Tune Your Voice</h4>
+                <p>Select your language, accent, and persona. You can adjust speed and pitch using the smooth range sliders.</p>
             </div>
             <div class="manual-block">
-                <h4>4. Let AI Assist</h4>
-                <p>Use Executive Brief, Study Notes, Presentation Flow, and Q&amp;A prompts from Dashboard to switch your working mode quickly.</p>
+                <h4>4. Intelligent Output Commands</h4>
+                <p>Switch reading modes anytime between Executive Brief, Study Notes, Presentation Flow, and Accessibility mode.</p>
             </div>
             <div class="manual-block">
-                <h4>5. Read Naturally</h4>
-                <p>Use Start, Pause, Resume, and Stop in Reader. Highlights will follow the spoken text and keep the document centered if focus tracking is enabled.</p>
+                <h4>5. Synchronized Audio Playback</h4>
+                <p>Click Start. Visual highlights follow the spoken sentence and automatically center the reading surface.</p>
             </div>
         </div>
     </aside>
 
+    <!-- 2. Notes Side Drawer -->
     <aside id="notesPanel" class="side-panel">
         <div class="side-panel-header">
             <div>
-                <span class="eyebrow">Workspace Utility</span>
-                <h3>Notes</h3>
+                <span class="badge badge-primary">Workspace Notes</span>
+                <h3>Private Notes</h3>
             </div>
             <button class="panel-close" type="button" data-close-panel="notesPanel"><i class="fas fa-xmark"></i></button>
         </div>
         <div class="side-panel-body">
-            <label for="notesInput" class="field-title">Private working notes</label>
-            <textarea id="notesInput" class="notes-input" placeholder="Capture your talking points, reminders, or revisions here..."></textarea>
-            <div class="notes-actions">
+            <label for="notesInput" class="field-title">Local Working Notes</label>
+            <textarea id="notesInput" class="notes-input" placeholder="Capture key takeaways, reminders, or talking points..."></textarea>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 14px;">
                 <button id="saveNotesBtn" class="btn btn-primary" type="button"><i class="fas fa-floppy-disk"></i> Save Notes</button>
-                <span id="notesStatus" class="notes-status">Saved locally on this device</span>
+                <span id="notesStatus" style="font-size: 0.8rem; color: var(--text-muted);">Saved locally</span>
             </div>
         </div>
     </aside>
 
+    <!-- 3. AI Assistant Chat Drawer -->
     <aside id="assistantPanel" class="side-panel assistant-panel">
         <div class="side-panel-header">
             <div>
-                <span class="eyebrow">AI Assistant</span>
-                <h3>Document chat</h3>
+                <span class="badge badge-primary">AI Chat</span>
+                <h3>Document Assistant</h3>
             </div>
             <button class="panel-close" type="button" data-close-panel="assistantPanel"><i class="fas fa-xmark"></i></button>
         </div>
@@ -521,24 +830,26 @@
             <div id="assistantMessages" class="assistant-messages">
                 <div class="assistant-message assistant-message-bot">
                     <strong>LEXIO Assistant</strong>
-                    <p>Ask me about the current document, request a summary, or ask for the most important sections.</p>
+                    <p>Ask me about the current document, request key highlights, or ask questions about specific sections.</p>
                 </div>
             </div>
             <div class="assistant-input-wrap">
-                <textarea id="assistantInput" class="assistant-input" placeholder="Ask about this document, for example: What are the main risks?"></textarea>
-                <div class="assistant-actions">
+                <textarea id="assistantInput" class="assistant-input" placeholder="Ask about this document, for example: What are the key takeaways?"></textarea>
+                <div style="display: flex; justify-content: flex-end;">
                     <button id="assistantSendBtn" class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i> Send</button>
                 </div>
             </div>
         </div>
     </aside>
 
+    <!-- Client-side Document Parsing Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
+    <!-- LEXIO Core Orchestration Scripts -->
     <script src="js/utils.js"></script>
     <script src="script.js"></script>
     <script src="js/auth.js"></script>
@@ -547,5 +858,3 @@
     <script src="js/ai.js"></script>
 </body>
 </html>
-
-
