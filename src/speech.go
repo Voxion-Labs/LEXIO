@@ -373,13 +373,14 @@ func StartReading(startWordIndex int) {
 		startWordIndex = 0
 	}
 
-	// Prepare remaining text to speak
+	// Prepare remaining text to speak with pronunciation lexicon substitutions
 	textToSpeak := strings.Join(words[startWordIndex:], " ")
 	if strings.TrimSpace(textToSpeak) == "" {
 		return
 	}
 
-	utterance := js.Global().Get("SpeechSynthesisUtterance").New(textToSpeak)
+	phoneticText := ApplyPronunciationLexicon(textToSpeak)
+	utterance := js.Global().Get("SpeechSynthesisUtterance").New(phoneticText)
 
 	// Configure speed & pitch
 	doc := js.Global().Get("document")
@@ -413,7 +414,7 @@ func StartReading(startWordIndex int) {
 
 	runningWordOffset := startWordIndex
 
-	// Boundary tracking for synchronized highlight
+	// Boundary tracking for synchronized highlight & live teleprompter
 	utterance.Set("onboundary", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		if len(args) > 0 {
 			charIndex := args[0].Get("charIndex").Int()
@@ -427,6 +428,7 @@ func StartReading(startWordIndex int) {
 			if activeIdx < len(words) {
 				currentWordIdx = activeIdx
 				SetActiveWord(activeIdx)
+				UpdateTeleprompter(activeIdx)
 				updateReadingProgress(activeIdx, len(words))
 			}
 		}

@@ -14,6 +14,7 @@ func main() {
 	initDocumentManager()
 	initSpeechEngine()
 	initAuth()
+	initDirectorStudio()
 
 	fmt.Println("LEXIO Go WebAssembly Engine ready.")
 
