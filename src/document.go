@@ -321,6 +321,7 @@ func renderDocumentSurface(sections []DocSection) {
 	sb.WriteString("<div class=\"document-flow\">")
 
 	globalWordOffset := 0
+	var docWords []string
 
 	for _, sec := range sections {
 		sb.WriteString(fmt.Sprintf("<section class=\"doc-section\" data-section-id=\"%s\">", sec.ID))
@@ -331,11 +332,87 @@ func renderDocumentSurface(sections []DocSection) {
 		sb.WriteString("</header>")
 
 		sb.WriteString("<div class=\"doc-section-body\">")
-		// Tokenize section text
-		words := strings.Fields(sec.Text)
-		for _, w := range words {
-			sb.WriteString(fmt.Sprintf("<button type=\"button\" class=\"doc-word\" data-word-index=\"%d\">%s</button> ", globalWordOffset, html.EscapeString(w)))
-			globalWordOffset++
+		// Render formatted markdown lines with clickable word tokens
+		lines := strings.Split(sec.Text, "\n")
+		for _, line := range lines {
+			trimmedLine := strings.TrimSpace(line)
+			if trimmedLine == "" {
+				continue
+			}
+
+			// Heading line
+			if strings.HasPrefix(trimmedLine, "#") {
+				level := 0
+				for _, r := range trimmedLine {
+					if r == '#' {
+						level++
+					} else {
+						break
+					}
+				}
+				cleanHeading := strings.TrimSpace(strings.TrimLeft(trimmedLine, "#"))
+				headingTag := "h3"
+				if level >= 3 {
+					headingTag = "h4"
+				}
+				sb.WriteString(fmt.Sprintf("<%s class=\"preview-heading\" style=\"margin-top:8px;\">", headingTag))
+				hWords := strings.Fields(cleanHeading)
+				for _, w := range hWords {
+					cleanW := strings.Trim(w, "*_`")
+					if cleanW == "" {
+						cleanW = w
+					}
+					docWords = append(docWords, cleanW)
+					sb.WriteString(fmt.Sprintf("<button type=\"button\" class=\"doc-word\" data-word-index=\"%d\">%s</button> ", globalWordOffset, html.EscapeString(cleanW)))
+					globalWordOffset++
+				}
+				sb.WriteString(fmt.Sprintf("</%s>", headingTag))
+				continue
+			}
+
+			// Bullet list item
+			if strings.HasPrefix(trimmedLine, "- ") || strings.HasPrefix(trimmedLine, "* ") {
+				itemText := strings.TrimSpace(trimmedLine[2:])
+				sb.WriteString("<div class=\"preview-list-item\" style=\"display:flex; align-items:baseline; gap:8px; margin-bottom:6px;\">")
+				sb.WriteString("<span style=\"color:var(--flutter-blue-light); font-size:1.1rem; line-height:1;\">&bull;</span>")
+				sb.WriteString("<div>")
+				iWords := strings.Fields(itemText)
+				for _, w := range iWords {
+					cleanW := strings.Trim(w, "*_`")
+					if cleanW == "" {
+						cleanW = w
+					}
+					docWords = append(docWords, cleanW)
+					isBold := strings.HasPrefix(w, "**") && strings.HasSuffix(w, "**")
+					styleAttr := ""
+					if isBold {
+						styleAttr = "style=\"font-weight:700;\""
+					}
+					sb.WriteString(fmt.Sprintf("<button type=\"button\" class=\"doc-word\" %s data-word-index=\"%d\">%s</button> ", styleAttr, globalWordOffset, html.EscapeString(cleanW)))
+					globalWordOffset++
+				}
+				sb.WriteString("</div></div>")
+				continue
+			}
+
+			// Standard paragraph
+			sb.WriteString("<p class=\"preview-paragraph\">")
+			pWords := strings.Fields(trimmedLine)
+			for _, w := range pWords {
+				cleanW := strings.Trim(w, "*_`")
+				if cleanW == "" {
+					cleanW = w
+				}
+				docWords = append(docWords, cleanW)
+				isBold := strings.HasPrefix(w, "**") && strings.HasSuffix(w, "**")
+				styleAttr := ""
+				if isBold {
+					styleAttr = "style=\"font-weight:700;\""
+				}
+				sb.WriteString(fmt.Sprintf("<button type=\"button\" class=\"doc-word\" %s data-word-index=\"%d\">%s</button> ", styleAttr, globalWordOffset, html.EscapeString(cleanW)))
+				globalWordOffset++
+			}
+			sb.WriteString("</p>")
 		}
 		sb.WriteString("</div>")
 		sb.WriteString("</section>")
@@ -343,6 +420,7 @@ func renderDocumentSurface(sections []DocSection) {
 
 	sb.WriteString("</div>")
 	surface.Set("innerHTML", sb.String())
+	currentDocWords = docWords
 
 	// Attach click listeners to all words
 	wordButtons := surface.Call("querySelectorAll", ".doc-word")
@@ -557,6 +635,35 @@ func initFileUploader() {
 		fileInput.Set("value", "")
 		return nil
 	}))
+
+	// Drag & Drop support on Editor and Preview Surface
+	bindDropZone := func(el js.Value) {
+		if el.IsNull() {
+			return
+		}
+		el.Call("addEventListener", "dragover", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			if len(args) > 0 {
+				args[0].Call("preventDefault")
+			}
+			return nil
+		}))
+		el.Call("addEventListener", "drop", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			if len(args) > 0 {
+				args[0].Call("preventDefault")
+				dt := args[0].Get("dataTransfer")
+				if !dt.IsNull() && !dt.IsUndefined() {
+					files := dt.Get("files")
+					if files.Get("length").Int() > 0 {
+						handleImportedFile(files.Index(0))
+					}
+				}
+			}
+			return nil
+		}))
+	}
+
+	bindDropZone(doc.Call("getElementById", "inputText"))
+	bindDropZone(doc.Call("getElementById", "documentSurface"))
 }
 
 func handleImportedFile(file js.Value) {
