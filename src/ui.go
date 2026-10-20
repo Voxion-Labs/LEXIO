@@ -15,6 +15,9 @@ var (
 func initUI() {
 	doc := js.Global().Get("document")
 
+	// Theme initialization (Light / Dark)
+	initTheme()
+
 	// Tab switching for views
 	tabs := doc.Call("querySelectorAll", ".workspace-tab")
 	tabCount := tabs.Get("length").Int()
@@ -226,4 +229,62 @@ func dismissLoadingScreen() {
 			loading.Get("style").Set("display", "none")
 		}
 	}()
+}
+
+func initTheme() {
+	theme := "light"
+	storage := js.Global().Get("localStorage")
+	if !storage.IsNull() && !storage.IsUndefined() {
+		saved := storage.Call("getItem", "lexio_theme")
+		if !saved.IsNull() && !saved.IsUndefined() && saved.String() != "" {
+			theme = saved.String()
+		}
+	}
+
+	SetTheme(theme, false)
+
+	doc := js.Global().Get("document")
+	bindThemeSelect := func(id string) {
+		sel := doc.Call("getElementById", id)
+		if !sel.IsNull() {
+			sel.Set("value", theme)
+			sel.Call("addEventListener", "change", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+				val := sel.Get("value").String()
+				SetTheme(val, true)
+				return nil
+			}))
+		}
+	}
+
+	bindThemeSelect("landingThemeSelect")
+	bindThemeSelect("appThemeSelect")
+}
+
+func SetTheme(theme string, showToast bool) {
+	doc := js.Global().Get("document")
+	root := doc.Get("documentElement")
+	root.Call("setAttribute", "data-theme", theme)
+
+	storage := js.Global().Get("localStorage")
+	if !storage.IsNull() && !storage.IsUndefined() {
+		storage.Call("setItem", "lexio_theme", theme)
+	}
+
+	// Sync selectors
+	landingSel := doc.Call("getElementById", "landingThemeSelect")
+	if !landingSel.IsNull() {
+		landingSel.Set("value", theme)
+	}
+	appSel := doc.Call("getElementById", "appThemeSelect")
+	if !appSel.IsNull() {
+		appSel.Set("value", theme)
+	}
+
+	if showToast {
+		if theme == "dark" {
+			ShowToast("Switched to dark theme", "info")
+		} else {
+			ShowToast("Switched to light theme", "info")
+		}
+	}
 }

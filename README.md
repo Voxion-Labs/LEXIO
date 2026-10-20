@@ -1,10 +1,19 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="LEXIO logo" width="180" style="border-radius: 12px; background: #000000;" />
+  <img src="assets/logo.svg" alt="LEXIO logo" width="130" style="border-radius: 10px; background: #000000;" />
 </p>
 <h1 align="center">LEXIO</h1>
 <p align="center">
   <strong>Client-Side Document Speech Studio powered by Go WebAssembly</strong>
 </p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Engine-Go_WebAssembly-00ADD8?style=flat-square&logo=go&logoColor=white" alt="Go WebAssembly" />
+  <img src="https://img.shields.io/badge/Architecture-100%25_Client--Side-10B981?style=flat-square" alt="100% Client-Side" />
+  <img src="https://img.shields.io/badge/Privacy-Zero_Telemetry-0284C7?style=flat-square" alt="Zero Telemetry" />
+  <img src="https://img.shields.io/badge/Formats-17+_Document_Types-7C3AED?style=flat-square" alt="17+ Formats" />
+  <img src="https://img.shields.io/badge/Themes-Light_%26_MNC_Dark-1E293B?style=flat-square" alt="Light and Dark Theme" />
+</p>
+
 <p align="center">
   <a href="https://voxion-labs.github.io/LEXIO/"><strong>Live Application</strong></a>
   &nbsp;|&nbsp;
@@ -15,24 +24,74 @@
 
 ## Technical Overview
 
-**LEXIO** is a browser-native document speech synthesis and narration workstation built entirely in **Go WebAssembly** and standard Web APIs. It eliminates backend infrastructure and server roundtrips, executing all document ingestion, phrase segmentation, speech synthesis orchestration, and computational cadence telemetry directly on the client machine.
+**LEXIO** is a high-performance, browser-native document narration and speech engineering workstation built with **Go WebAssembly** and web standards. It operates without remote server roundtrips, executing all document ingestion, phrase segmentation, speech synthesis orchestration, and computational cadence telemetry directly on the client machine.
 
-Designed with Flutter and Material 3 design ergonomics, LEXIO operates seamlessly across desktops, tablets, and mobile devices without requiring Node.js runtimes, cloud backend endpoints, or user telemetry collection.
+Designed with Flutter and Material 3 design ergonomics, LEXIO includes a minimalist MNC-grade **Dark Theme**, interactive document creation (`.txt` / `.md`), instant file exports, a visual teleprompter deck, and closed-caption subtitle generation (`.srt` / `.vtt`).
+
+---
+
+## System Architecture & Execution Flow
+
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                              LEXIO Browser-Native Studio                               │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+                                            │
+           ┌────────────────────────────────┴────────────────────────────────┐
+           ▼                                                                 ▼
+┌───────────────────────────────┐                         ┌───────────────────────────────┐
+│     Multi-Format Ingestion    │                         │      Voice Configuration      │
+│  • 17+ Formats: PDF, DOCX,    │                         │  • Web Speech API Synthesis   │
+│    XLSX, PPTX, EPUB, TXT, MD  │                         │  • Regional Dialects: US, UK, │
+│  • Client-Side Parsing (JS)   │                         │    IN, AU, ES, MX, SA, IT     │
+│  • Zero Network Data Leaks    │                         │  • Male & Female Personas     │
+└──────────────┬────────────────┘                         └───────────────┬───────────────┘
+               │                                                          │
+               └────────────────────────────┬─────────────────────────────┘
+                                            │
+                                            ▼
+                        ┌───────────────────────────────────────┐
+                        │       Go WebAssembly Core Engine      │
+                        │             (wasm/app.wasm)           │
+                        │                                       │
+                        │  • Text Normalizer & Section Parser   │
+                        │  • Phonetic Regex Rule Substitution   │
+                        │  • Flesch Reading Ease Formula Math   │
+                        │  • Gunning Fog Grade Level Calculator │
+                        │  • Sentence Timestamping & Duration   │
+                        └───────────────────┬───────────────────┘
+                                            │
+         ┌──────────────────────────────────┼──────────────────────────────────┐
+         ▼                                  ▼                                  ▼
+┌───────────────────────┐        ┌───────────────────────┐          ┌───────────────────────┐
+│     Reader Studio     │        │   Teleprompter Deck   │          │  Telemetry & Captions │
+│ • Word Synchronizer   │        │ • Live Karaoke Sync   │          │ • Readability Scores  │
+│ • In-Place Markdown & │        │ • Contrast & Neon HUD │          │ • Cadence Breakdown   │
+│   Plain Text Editor   │        │ • Font Scaling Slider │          │ • SubRip (.SRT) Export│
+│ • Instant File Export │        │ • Hardware Stage Mode │          │ • WebVTT (.VTT) Export│
+└───────────────────────┘        └───────────────────────┘          └───────────────────────┘
+```
 
 ---
 
 ## Architectural Principles
 
-1. **Go WebAssembly Engine (`GOOS=js GOARCH=wasm`)**  
+1. **Go WebAssembly Runtime (`GOOS=js GOARCH=wasm`)**  
    Core application state, document structure segmentation, phonetic pronunciation substitutions, and linguistic telemetry algorithms are compiled into a standalone WebAssembly binary (`wasm/app.wasm`), running client-side with native execution speed.
 
 2. **100% Client-Side Privacy (Zero Server Telemetry)**  
    No text or binary documents are uploaded over the network. Documents imported from PDF, DOCX, XLSX, PPTX, or EPUB are parsed locally into browser memory. Profiles, pronunciation dictionaries, and workspace notes persist exclusively in the browser's private `localStorage`.
 
-3. **Regional Dialect & Gender Matching**  
+3. **MNC-Grade Minimalist Dark Mode**  
+   Includes a developer-grade high-contrast Dark Theme (`#090D16` canvas, `#0F172A` cards, `#1E293B` borders) alongside the default Flutter Light Theme, switchable from any view and persisted locally.
+
+4. **Document Creation & In-Place Editing**  
+   Directly author new documents in Markdown (`.md`) or Plain Text (`.txt`), edit live with character and word counters, and download edited files immediately.
+
+5. **Regional Dialect & Gender Matching**  
    Interfaces directly with the browser's native **Web Speech API** to filter and allocate synthesized voices across English, Spanish, Italian, Arabic, and Hindi with regional accent specificity (e.g. US, UK, India, Australia, Spain, Mexico, Saudi Arabia, Italy) and explicit gender filtering (Male / Female).
 
-4. **Synchronized Phrase & Word Tracking**  
+6. **Synchronized Phrase & Word Tracking**  
    Audio synthesis triggers real-time boundary events mapped to interactive DOM nodes, automatically highlighting and centering the active phrase as it is spoken.
 
 ---
@@ -62,7 +121,7 @@ Designed with Flutter and Material 3 design ergonomics, LEXIO operates seamlessl
       <br />
       <strong>3. Reader &amp; Synchronized Narration</strong>
       <br />
-      <em>Dual-column workspace featuring editable source ingestion, synchronized reading surface, voice tuning lab, and focus mode.</em>
+      <em>Dual-column workspace featuring editable source ingestion, in-place document creation, voice tuning lab, and focus mode.</em>
     </td>
     <td width="50%" valign="top">
       <img src="docs/readme/lexio-teleprompter-studio.png" alt="LEXIO teleprompter studio view" />
@@ -76,7 +135,7 @@ Designed with Flutter and Material 3 design ergonomics, LEXIO operates seamlessl
 
 ---
 
-## Core Workspaces
+## Core Execution Views
 
 ### 1. Dashboard (`dashboardView`)
 - **Real-Time Document Telemetry**: Displays total character count, word count, structural sections, and estimated listening duration.
@@ -86,6 +145,10 @@ Designed with Flutter and Material 3 design ergonomics, LEXIO operates seamlessl
 
 ### 2. Multi-Format Reader (`readerView`)
 - **Universal Ingestion**: Drag-and-drop or file upload supporting **PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB, TXT, MD, CSV, JSON, RTF, HTML, XML, ODT, and ODP**.
+- **Document Creation & Downloads**:
+  - `+ .MD`: Creates a structured starter markdown document.
+  - `+ .TXT`: Creates an empty plain text buffer.
+  - `Download .MD` &amp; `Download .TXT`: Exports the current buffer directly to disk.
 - **Interactive Word Mapping**: Spoken sentences and individual words are rendered as interactive nodes. Clicking any word immediately re-routes speech playback to begin at that exact position.
 - **Voice Lab**: Dropdown filtering by language, regional dialect, voice gender, playback rate ($0.5\times$ to $2.0\times$), and audio pitch.
 - **Visual Sync**: Smooth auto-centering that keeps the spoken line in the viewport during long document playback.
@@ -122,15 +185,15 @@ LEXIO/
 ├── src/                      # Go WebAssembly source code
 │   ├── main.go               # WASM initialization & runtime loop
 │   ├── auth.go               # Client-side user account & profile state
-│   ├── document.go           # File ingestion, text cleaner & section parser
+│   ├── document.go           # File ingestion, text cleaner, file creation & downloads
 │   ├── speech.go             # Web Speech API bridge & voice filters
 │   ├── director.go           # Teleprompter, pronunciation lexicon, readability & subtitles
-│   └── ui.go                 # Tab router, drawer panels & toast manager
+│   └── ui.go                 # Tab router, dark theme manager & toast alerts
 ├── wasm/
 │   ├── app.wasm              # Compiled WebAssembly binary
 │   └── wasm_exec.js          # Official Go WASM JavaScript bridge
 ├── index.html                # Single-page application entrypoint
-├── styles.css                # Application stylesheets
+├── styles.css                # Global responsive typography & studio styling
 └── README.md
 ```
 

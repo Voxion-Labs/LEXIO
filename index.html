@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Flutter Material 3 Component & Layout Stylesheets -->
-    <link rel="stylesheet" href="css/components.css?v=2.4.0">
-    <link rel="stylesheet" href="styles.css?v=2.4.0">
+    <link rel="stylesheet" href="css/components.css?v=2.5.0">
+    <link rel="stylesheet" href="styles.css?v=2.5.0">
 </head>
 <body>
     <!-- Loading Screen (Flutter style ring loader) -->
@@ -58,6 +58,10 @@
                     </ul>
                 </nav>
                 <div class="landing-nav-actions">
+                    <select id="landingThemeSelect" class="theme-select" title="Toggle Theme" aria-label="Theme Selection">
+                        <option value="light">☀️ Light</option>
+                        <option value="dark">🌙 Dark</option>
+                    </select>
                     <button type="button" id="openOptionsBtn" class="btn btn-secondary btn-sm"><i class="fas fa-sliders"></i> Options Page</button>
                     <button type="button" id="navGetStartedBtn" class="btn btn-primary btn-sm">Get Started</button>
                 </div>
@@ -363,6 +367,10 @@
             </div>
             
             <div class="nav-actions">
+                <select id="appThemeSelect" class="theme-select" title="Toggle Theme" aria-label="Theme Selection">
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
+                </select>
                 <button id="openManualBtn" class="utility-btn" type="button"><i class="fas fa-book-open"></i> User Manual</button>
                 <button id="openNotesBtn" class="utility-btn" type="button"><i class="fas fa-note-sticky"></i> Notes</button>
                 <div class="nav-user">
@@ -376,7 +384,6 @@
             </div>
         </nav>
 
-        <!-- Sub-Toolbar with Segmented View Switcher -->
         <!-- Sub-Toolbar with Segmented View Switcher -->
         <section class="workspace-toolbar">
             <div class="workspace-tabs" role="tablist" aria-label="Workspace Views">
@@ -545,17 +552,26 @@
                                     <span class="badge badge-primary">Source Studio</span>
                                     <h3 style="margin: 4px 0 0;">Document Content &amp; Synchronized View</h3>
                                 </div>
-                                <div class="file-actions">
+                                <div class="file-actions" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                                     <span id="fileBadge" class="badge badge-info">No file loaded</span>
+                                    <button id="newFileBtn" class="btn-icon" title="New Document (Markdown)"><i class="fas fa-file-circle-plus"></i></button>
                                     <button id="uploadBtn" class="btn-icon" title="Import document"><i class="fas fa-upload"></i></button>
                                     <button id="demoBtn" class="btn-icon" title="Load sample document"><i class="fas fa-wand-magic-sparkles"></i></button>
+                                    <button id="downloadTxtBtn" class="btn-icon" title="Download as .TXT"><i class="fas fa-file-arrow-down"></i></button>
+                                    <button id="downloadMdBtn" class="btn-icon" title="Download as .MD"><i class="fas fa-file-code"></i></button>
                                     <button id="clearBtn" class="btn-icon" title="Clear content"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>
 
                             <div class="editor-grid">
                                 <div class="editor-pane">
-                                    <label for="inputText" class="field-title">Editable source</label>
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                        <label for="inputText" class="field-title" style="margin:0;">Editable source</label>
+                                        <div style="display:flex; gap:6px;">
+                                            <button type="button" id="newTxtBtn" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;" title="Create empty .txt file">+ .TXT</button>
+                                            <button type="button" id="newMdBtn" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;" title="Create starter .md file">+ .MD</button>
+                                        </div>
+                                    </div>
                                     <textarea id="inputText" class="source-input" placeholder="Paste text here or import PDF, DOCX, PPTX, XLSX, EPUB, TXT, MD, CSV, JSON, HTML files..."></textarea>
                                     <div class="editor-hints">
                                         <span id="charCounter" class="badge badge-primary">0 chars</span>
@@ -935,11 +951,11 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <!-- Go WebAssembly Runtime & Loader -->
-    <script src="wasm/wasm_exec.js?v=2.4.0"></script>
+    <script src="wasm/wasm_exec.js?v=2.5.0"></script>
     <script>
         (function() {
             const go = new Go();
-            const wasmUrl = "wasm/app.wasm?v=2.4.0";
+            const wasmUrl = "wasm/app.wasm?v=2.5.0";
 
             if (WebAssembly.instantiateStreaming) {
                 WebAssembly.instantiateStreaming(fetch(wasmUrl), go.importObject)

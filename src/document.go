@@ -59,6 +59,48 @@ func initDocumentManager() {
 		}))
 	}
 
+	// New Document buttons
+	newFileBtn := doc.Call("getElementById", "newFileBtn")
+	if !newFileBtn.IsNull() {
+		newFileBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			CreateNewDocument("md")
+			return nil
+		}))
+	}
+
+	newTxtBtn := doc.Call("getElementById", "newTxtBtn")
+	if !newTxtBtn.IsNull() {
+		newTxtBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			CreateNewDocument("txt")
+			return nil
+		}))
+	}
+
+	newMdBtn := doc.Call("getElementById", "newMdBtn")
+	if !newMdBtn.IsNull() {
+		newMdBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			CreateNewDocument("md")
+			return nil
+		}))
+	}
+
+	// Download buttons
+	downloadTxtBtn := doc.Call("getElementById", "downloadTxtBtn")
+	if !downloadTxtBtn.IsNull() {
+		downloadTxtBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			DownloadCurrentDocument("txt")
+			return nil
+		}))
+	}
+
+	downloadMdBtn := doc.Call("getElementById", "downloadMdBtn")
+	if !downloadMdBtn.IsNull() {
+		downloadMdBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			DownloadCurrentDocument("md")
+			return nil
+		}))
+	}
+
 	// Clear button
 	clearBtn := doc.Call("getElementById", "clearBtn")
 	if !clearBtn.IsNull() {
@@ -89,8 +131,64 @@ All file processing, speech synthesis, and document structure analysis happen in
 	if !inputArea.IsNull() {
 		inputArea.Set("value", sample)
 	}
+
+	fileBadge := doc.Call("getElementById", "fileBadge")
+	if !fileBadge.IsNull() {
+		fileBadge.Set("textContent", "sample-document.md")
+	}
+
 	ProcessAndRenderDocument(sample, true)
 	ShowToast("Sample document loaded", "success")
+}
+
+func CreateNewDocument(format string) {
+	StopReading()
+	starter := ""
+	badgeName := "untitled.txt"
+	if format == "md" {
+		starter = `# Untitled Document
+
+## Section 1: Overview
+Write your document notes, speech script, or chapter here...
+
+## Section 2: Details
+Use markdown headers, paragraphs, and lists. LEXIO automatically segments and narrates your text with phrase synchronization.`
+		badgeName = "untitled.md"
+	}
+
+	doc := js.Global().Get("document")
+	inputArea := doc.Call("getElementById", "inputText")
+	if !inputArea.IsNull() {
+		inputArea.Set("value", starter)
+	}
+
+	fileBadge := doc.Call("getElementById", "fileBadge")
+	if !fileBadge.IsNull() {
+		fileBadge.Set("textContent", badgeName)
+	}
+
+	ProcessAndRenderDocument(starter, true)
+	if !inputArea.IsNull() {
+		inputArea.Call("focus")
+	}
+	ShowToast(fmt.Sprintf("Created new %s document", strings.ToUpper(format)), "success")
+}
+
+func DownloadCurrentDocument(format string) {
+	if strings.TrimSpace(currentRawText) == "" {
+		ShowToast("Document is empty. Enter some text first.", "error")
+		return
+	}
+
+	filename := "lexio-document.txt"
+	mime := "text/plain;charset=utf-8"
+	if format == "md" {
+		filename = "lexio-document.md"
+		mime = "text/markdown;charset=utf-8"
+	}
+
+	downloadFile(filename, currentRawText, mime)
+	ShowToast(fmt.Sprintf("Downloaded %s", filename), "success")
 }
 
 func ClearDocument() {
