@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Flutter Material 3 Component & Layout Stylesheets -->
-    <link rel="stylesheet" href="css/components.css?v=2.3.0">
-    <link rel="stylesheet" href="styles.css?v=2.3.0">
+    <link rel="stylesheet" href="css/components.css?v=2.4.0">
+    <link rel="stylesheet" href="styles.css?v=2.4.0">
 </head>
 <body>
     <!-- Loading Screen (Flutter style ring loader) -->
@@ -377,134 +377,158 @@
         </nav>
 
         <!-- Sub-Toolbar with Segmented View Switcher -->
+        <!-- Sub-Toolbar with Segmented View Switcher -->
         <section class="workspace-toolbar">
             <div class="workspace-tabs" role="tablist" aria-label="Workspace Views">
-                <button class="workspace-tab active" type="button" data-view="dashboardView"><i class="fas fa-tower-broadcast"></i> Teleprompter Studio</button>
+                <button class="workspace-tab active" type="button" data-view="dashboardView"><i class="fas fa-table-columns"></i> Dashboard</button>
                 <button class="workspace-tab" type="button" data-view="readerView"><i class="fas fa-file-waveform"></i> Reader</button>
-                <button class="workspace-tab" type="button" data-view="inspectorView"><i class="fas fa-sitemap"></i> Document Inspector</button>
+                <button class="workspace-tab" type="button" data-view="studioView"><i class="fas fa-tower-broadcast"></i> Studio &amp; Telemetry</button>
             </div>
             <div class="workspace-toolbar-meta">
                 <span class="meta-chip">Engine: <strong>Go WebAssembly</strong></span>
-                <span class="meta-chip">Voice Pack: <strong id="voiceCoverage">Checking</strong></span>
+                <span class="meta-chip">Telemetry: <strong>100% Client-Side</strong></span>
                 <span class="meta-chip">Status: <strong>Ready</strong></span>
             </div>
         </section>
 
         <!-- Main Workspace Shell -->
         <main class="workspace-shell">
-            <!-- 1. TELEPROMPTER & DIRECTOR STUDIO VIEW -->
+            <!-- 1. DASHBOARD VIEW (Default post-login view) -->
             <section id="dashboardView" class="workspace-view active">
-                <!-- Live Teleprompter Deck -->
-                <article class="teleprompter-card">
-                    <div class="teleprompter-toolbar">
-                        <div>
-                            <span class="badge badge-primary"><i class="fas fa-broadcast-tower"></i> Live Teleprompter Deck</span>
-                            <h2 style="font-size: 1.45rem; font-weight: 800; margin: 6px 0 0; color: var(--text-primary);">Visual Speech Teleprompter</h2>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <span id="teleprompterMeta" class="badge badge-info">Standby</span>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Font</label>
-                                <input type="range" id="teleprompterFontSlider" min="20" max="52" value="28" style="width: 80px;">
-                            </div>
-                            <div style="display: flex; gap: 4px;">
-                                <button type="button" id="teleprompterThemeDark" class="btn-icon" title="Dark Studio"><i class="fas fa-moon"></i></button>
-                                <button type="button" id="teleprompterThemeLight" class="btn-icon" title="Paper Light"><i class="fas fa-sun"></i></button>
-                                <button type="button" id="teleprompterThemeContrast" class="btn-icon" title="Neon Contrast"><i class="fas fa-circle-half-stroke"></i></button>
-                            </div>
-                        </div>
+                <!-- Hero Banner -->
+                <article class="hero-panel">
+                    <div style="flex: 1; min-width: 300px;">
+                        <span class="badge badge-primary"><i class="fas fa-headphones"></i> Document Speech &amp; Narration</span>
+                        <h2>Natural speech for real documents.</h2>
+                        <p>
+                            LEXIO reads by natural phrases instead of robotic word-by-word steps, filters voices by language, regional accent, and gender (Male/Female), and keeps the document viewer synchronized while speaking.
+                        </p>
                     </div>
-
-                    <!-- Live Teleprompter Stage Screen -->
-                    <div id="teleprompterStage" class="teleprompter-stage theme-dark">
-                        <div id="teleprompterContent" class="teleprompter-content">
-                            <p class="teleprompter-empty">Load a document and press Start to run the Teleprompter Deck.</p>
+                    <div class="hero-metrics">
+                        <div class="metric-tile">
+                            <span class="metric-label">Detected Language</span>
+                            <strong id="detectedLanguage">English</strong>
                         </div>
-                    </div>
-
-                    <!-- Teleprompter Direct Audio Controls -->
-                    <div class="teleprompter-actions">
-                        <button id="teleStartBtn" class="btn btn-primary btn-lg" type="button"><i class="fas fa-play"></i> Start Teleprompter</button>
-                        <button id="telePauseBtn" class="btn btn-secondary btn-lg" type="button"><i class="fas fa-pause"></i> Pause</button>
-                        <button id="teleResumeBtn" class="btn btn-secondary btn-lg" type="button"><i class="fas fa-play-circle"></i> Resume</button>
-                        <button id="teleStopBtn" class="btn btn-danger btn-lg" type="button"><i class="fas fa-stop"></i> Stop</button>
+                        <div class="metric-tile">
+                            <span class="metric-label">Read Time</span>
+                            <strong id="timeEstimate">0s</strong>
+                        </div>
+                        <div class="metric-tile">
+                            <span class="metric-label">Sections</span>
+                            <strong id="sectionCount">0</strong>
+                        </div>
+                        <div class="metric-tile">
+                            <span class="metric-label">Words</span>
+                            <strong id="wordCount">0</strong>
+                        </div>
                     </div>
                 </article>
 
-                <div class="dashboard-grid-plus" style="grid-template-columns: 1.25fr 0.75fr;">
-                    <!-- Custom Pronunciation Lexicon -->
-                    <article class="card lexicon-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-primary"><i class="fas fa-spell-check"></i> Custom Pronunciation Lexicon</span>
-                                <h3 style="margin-top: 6px;">Phonetic Rule Dictionary</h3>
-                                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 0;">
-                                    Override how the speech engine pronounces acronyms, abbreviations, and names.
-                                </p>
-                            </div>
+                <!-- Reading Analytics Card -->
+                <article class="card dashboard-card">
+                    <div class="section-header">
+                        <div>
+                            <span class="badge badge-info"><i class="fas fa-chart-simple"></i> Reading Analytics</span>
+                            <h3 style="margin-top: 6px;">Document Structure &amp; Stats</h3>
                         </div>
-
-                        <!-- Add Rule Form -->
-                        <div class="lexicon-form">
-                            <div class="form-group" style="margin: 0;">
-                                <label for="lexiconTerm">Original Term</label>
-                                <input type="text" id="lexiconTerm" class="form-input" placeholder="e.g. WASM or SQL">
-                            </div>
-                            <div class="form-group" style="margin: 0;">
-                                <label for="lexiconSpoken">Pronounced As</label>
-                                <input type="text" id="lexiconSpoken" class="form-input" placeholder="e.g. Waz-um or Sequel">
-                            </div>
-                            <button type="button" id="addLexiconBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Add Rule</button>
-                            <button type="button" id="loadLexiconPresetsBtn" class="btn btn-secondary" title="Load standard tech presets"><i class="fas fa-bolt"></i> Presets</button>
+                    </div>
+                    <div class="insight-grid" style="grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                        <div class="insight-tile">
+                            <span class="insight-label">Total Characters</span>
+                            <strong id="charCount">0</strong>
                         </div>
-
-                        <!-- Rules Table -->
-                        <div style="max-height: 240px; overflow-y: auto;">
-                            <table class="lexicon-table">
-                                <thead>
-                                    <tr>
-                                        <th>Term</th>
-                                        <th>Phonetic Form</th>
-                                        <th style="text-align: right;">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="lexiconTableBody">
-                                    <tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:14px;">Loading rules...</td></tr>
-                                </tbody>
-                            </table>
+                        <div class="insight-tile">
+                            <span class="insight-label">Document Sections</span>
+                            <strong id="docSectionsStat">0</strong>
                         </div>
-                    </article>
+                        <div class="insight-tile">
+                            <span class="insight-label">Speaking Cadence</span>
+                            <strong id="docPaceStat">150 wpm</strong>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px;">
+                        <button type="button" class="btn btn-primary workspace-tab" data-view="readerView">
+                            <i class="fas fa-file-waveform"></i> Open in Reader
+                        </button>
+                        <button type="button" class="btn btn-secondary workspace-tab" data-view="studioView">
+                            <i class="fas fa-tower-broadcast"></i> Open Studio &amp; Telemetry
+                        </button>
+                        <button type="button" id="dashLoadSampleBtn" class="btn btn-secondary">
+                            <i class="fas fa-wand-magic-sparkles"></i> Load Sample Content
+                        </button>
+                    </div>
+                </article>
 
-                    <!-- Document Real Analytics -->
+                <!-- 3-Column Highlights -->
+                <div class="dashboard-grid-plus" style="grid-template-columns: repeat(3, 1fr); margin-top: 24px;">
+                    <!-- Quick Section Navigation -->
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-info"><i class="fas fa-chart-simple"></i> Real Analytics</span>
-                                <h3 style="margin-top: 6px;">Document Cadence</h3>
+                                <span class="badge badge-primary"><i class="fas fa-sitemap"></i> Document Outline</span>
+                                <h4 style="margin-top: 6px;">Quick Section Navigation</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                                    Access structured headings and jump directly into reading any paragraph.
+                                </p>
                             </div>
                         </div>
-                        <div class="insight-grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div class="insight-tile">
-                                <span class="insight-label">Detected Lang</span>
-                                <strong id="detectedLanguage">English</strong>
-                            </div>
-                            <div class="insight-tile">
-                                <span class="insight-label">Est. Read Time</span>
-                                <strong id="timeEstimate">0s</strong>
-                            </div>
-                            <div class="insight-tile">
-                                <span class="insight-label">Total Words</span>
-                                <strong id="wordCount">0</strong>
-                            </div>
-                            <div class="insight-tile">
-                                <span class="insight-label">Characters</span>
-                                <strong id="charCount">0</strong>
+                        <div id="outlinePanel" class="outline-panel" style="max-height: 200px; overflow-y: auto;">
+                            <p class="empty-copy">Document outline appears here once text is loaded.</p>
+                        </div>
+                    </article>
+
+                    <!-- Native Dialects -->
+                    <article class="card dashboard-card">
+                        <div class="section-header">
+                            <div>
+                                <span class="badge badge-primary"><i class="fas fa-earth-americas"></i> Regional Accents</span>
+                                <h4 style="margin-top: 6px;">Native Dialects</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                                    Voices dynamically filtered across native regional locales:
+                                </p>
                             </div>
                         </div>
-                        <div style="margin-top: 14px;">
-                            <button class="btn btn-secondary btn-block workspace-tab" type="button" data-view="readerView">
-                                <i class="fas fa-file-waveform"></i> Switch to Split Reader View
-                            </button>
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem;">
+                            <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border-light);">
+                                <span><strong>English</strong></span>
+                                <span style="color:var(--text-muted);">US, UK, India, Australia, Canada</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border-light);">
+                                <span><strong>Spanish</strong></span>
+                                <span style="color:var(--text-muted);">Spain, Mexico, Argentina</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid var(--border-light);">
+                                <span><strong>Italian</strong></span>
+                                <span style="color:var(--text-muted);">Italy, Switzerland</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding: 6px 0;">
+                                <span><strong>Arabic &amp; Hindi</strong></span>
+                                <span style="color:var(--text-muted);">Saudi Arabia, UAE, India</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Zero Telemetry Privacy -->
+                    <article class="card dashboard-card">
+                        <div class="section-header">
+                            <div>
+                                <span class="badge badge-primary"><i class="fas fa-shield-halved"></i> Privacy Engine</span>
+                                <h4 style="margin-top: 6px;">Zero Server Telemetry</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                                    100% in-browser WebAssembly execution. Documents never leave your device. Notes, accounts, and speech dictionaries persist in private local storage.
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; margin-top: 6px;">
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--flutter-blue-dark); font-weight: 600;">
+                                <i class="fas fa-check-circle" style="color: #10B981;"></i> Client-Side Go WASM Binary
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--flutter-blue-dark); font-weight: 600;">
+                                <i class="fas fa-check-circle" style="color: #10B981;"></i> 17+ In-Browser File Parsers
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; color: var(--flutter-blue-dark); font-weight: 600;">
+                                <i class="fas fa-check-circle" style="color: #10B981;"></i> Offline-Ready Static Architecture
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -671,69 +695,175 @@
                 </section>
             </section>
 
-            <!-- 3. DOCUMENT INSPECTOR VIEW (Structure & Outline) -->
-            <section id="inspectorView" class="workspace-view">
-                <section class="analysis-grid">
-                    <article class="card analysis-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-primary">Interactive Outline</span>
-                                <h3 style="margin: 4px 0 0;">Document Structure</h3>
+            <!-- 3. STUDIO & TELEMETRY VIEW -->
+            <section id="studioView" class="workspace-view">
+                <!-- Live Teleprompter Deck -->
+                <article class="teleprompter-card">
+                    <div class="teleprompter-toolbar">
+                        <div>
+                            <span class="badge badge-primary"><i class="fas fa-tower-broadcast"></i> Live Teleprompter Deck</span>
+                            <h2 style="font-size: 1.45rem; font-weight: 800; margin: 6px 0 0; color: var(--text-primary);">Visual Speech Teleprompter</h2>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <span id="teleprompterMeta" class="badge badge-info">Standby</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Font</label>
+                                <input type="range" id="teleprompterFontSlider" min="20" max="52" value="28" style="width: 80px;">
+                            </div>
+                            <div style="display: flex; gap: 4px;">
+                                <button type="button" id="teleprompterThemeDark" class="btn-icon" title="Dark Studio"><i class="fas fa-moon"></i></button>
+                                <button type="button" id="teleprompterThemeLight" class="btn-icon" title="Paper Light"><i class="fas fa-sun"></i></button>
+                                <button type="button" id="teleprompterThemeContrast" class="btn-icon" title="Neon Contrast"><i class="fas fa-circle-half-stroke"></i></button>
                             </div>
                         </div>
-                        <div id="outlinePanel" class="outline-panel">
-                            <p class="empty-copy">Document outline appears here once text is loaded.</p>
+                    </div>
+
+                    <!-- Live Teleprompter Stage Screen -->
+                    <div id="teleprompterStage" class="teleprompter-stage theme-dark">
+                        <div id="teleprompterContent" class="teleprompter-content">
+                            <p class="teleprompter-empty">Load a document and press Start to run the Teleprompter Deck.</p>
+                        </div>
+                    </div>
+
+                    <!-- Teleprompter Direct Audio Controls -->
+                    <div class="teleprompter-actions">
+                        <button id="teleStartBtn" class="btn btn-primary btn-lg" type="button"><i class="fas fa-play"></i> Start Teleprompter</button>
+                        <button id="telePauseBtn" class="btn btn-secondary btn-lg" type="button"><i class="fas fa-pause"></i> Pause</button>
+                        <button id="teleResumeBtn" class="btn btn-secondary btn-lg" type="button"><i class="fas fa-play-circle"></i> Resume</button>
+                        <button id="teleStopBtn" class="btn btn-danger btn-lg" type="button"><i class="fas fa-stop"></i> Stop</button>
+                    </div>
+                </article>
+
+                <div class="dashboard-grid-plus" style="grid-template-columns: 1.15fr 0.85fr; margin-top: 24px;">
+                    <!-- Custom Pronunciation Lexicon -->
+                    <article class="card lexicon-card">
+                        <div class="section-header">
+                            <div>
+                                <span class="badge badge-primary"><i class="fas fa-spell-check"></i> Custom Pronunciation Lexicon</span>
+                                <h3 style="margin-top: 6px;">Phonetic Rule Dictionary</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 0;">
+                                    Override how the speech engine pronounces acronyms, abbreviations, and technical terms.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Add Rule Form -->
+                        <div class="lexicon-form">
+                            <div class="form-group" style="margin: 0;">
+                                <label for="lexiconTerm">Original Term</label>
+                                <input type="text" id="lexiconTerm" class="form-input" placeholder="e.g. WASM or SQL">
+                            </div>
+                            <div class="form-group" style="margin: 0;">
+                                <label for="lexiconSpoken">Pronounced As</label>
+                                <input type="text" id="lexiconSpoken" class="form-input" placeholder="e.g. Waz-um or Sequel">
+                            </div>
+                            <button type="button" id="addLexiconBtn" class="btn btn-primary"><i class="fas fa-plus"></i> Add Rule</button>
+                            <button type="button" id="loadLexiconPresetsBtn" class="btn btn-secondary" title="Load standard tech presets"><i class="fas fa-bolt"></i> Presets</button>
+                        </div>
+
+                        <!-- Rules Table -->
+                        <div style="max-height: 240px; overflow-y: auto;">
+                            <table class="lexicon-table">
+                                <thead>
+                                    <tr>
+                                        <th>Term</th>
+                                        <th>Phonetic Form</th>
+                                        <th style="text-align: right;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lexiconTableBody">
+                                    <tr><td colspan="3" style="text-align:center;color:var(--text-muted);padding:14px;">Loading rules...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </article>
 
-                    <article class="card analysis-card">
+                    <!-- Heavy Feature: Linguistic Readability & Subtitle Studio -->
+                    <article class="card telemetry-card">
                         <div class="section-header">
                             <div>
-                                <span class="badge badge-primary">Quick Navigation</span>
-                                <h3 style="margin: 4px 0 0;">Reading Tips</h3>
+                                <span class="badge badge-info"><i class="fas fa-microchip"></i> Computational Telemetry</span>
+                                <h3 style="margin-top: 6px;">Readability &amp; Subtitle Studio</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 0;">
+                                    Real-time algorithmic cadence metrics &amp; subtitle generator for video creators.
+                                </p>
                             </div>
                         </div>
-                        <div class="content-list">
-                            <ul>
-                                <li>Click on any section title in the outline above to jump straight to that part of the document.</li>
-                                <li>In the Reader view, click any word directly to start audio narration from that exact word.</li>
-                                <li>Use Focus mode to eliminate distractions and center only the reading surface.</li>
-                            </ul>
-                        </div>
-                    </article>
 
-                    <article class="card analysis-card">
-                        <div class="section-header">
-                            <div>
-                                <span class="badge badge-primary">Supported Formats</span>
-                                <h3 style="margin: 4px 0 0;">In-Browser Parsers</h3>
+                        <!-- Readability Metrics -->
+                        <div class="insight-grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="insight-tile">
+                                <span class="insight-label">Flesch Reading Ease</span>
+                                <strong id="fleschScore">--</strong>
+                                <span id="fleschBadge" class="badge badge-primary" style="align-self: flex-start; margin-top: 4px;">No Document</span>
+                            </div>
+                            <div class="insight-tile">
+                                <span class="insight-label">Gunning Fog Index</span>
+                                <strong id="gunningFogScore">--</strong>
+                                <span style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Grade Level</span>
+                            </div>
+                            <div class="insight-tile">
+                                <span class="insight-label">Total Syllables</span>
+                                <strong id="syllableCount" style="font-size: 1.15rem;">0 syllables</strong>
+                            </div>
+                            <div class="insight-tile">
+                                <span class="insight-label">Word Complexity</span>
+                                <strong id="complexWordCount" style="font-size: 1.15rem;">0 complex</strong>
                             </div>
                         </div>
-                        <div class="content-list">
-                            <ul>
-                                <li>PDF, Word (DOCX/DOC), PowerPoint (PPTX/PPT), Excel (XLSX)</li>
-                                <li>eBooks (EPUB), Markdown (MD), Plain Text (TXT)</li>
-                                <li>CSV, JSON, RTF, HTML, XML, ODT, ODP</li>
-                            </ul>
+
+                        <!-- Cadence Comparison -->
+                        <div>
+                            <span class="field-title" style="margin-bottom: 8px; display: block;">Speaking Duration by Cadence</span>
+                            <div class="cadence-comparison-grid">
+                                <div class="cadence-pill-card">
+                                    <span>Presentation (125 WPM)</span>
+                                    <strong id="pacePresTime">0s</strong>
+                                </div>
+                                <div class="cadence-pill-card">
+                                    <span>Conversational (150 WPM)</span>
+                                    <strong id="paceNormalTime">0s</strong>
+                                </div>
+                                <div class="cadence-pill-card">
+                                    <span>Quick Skim (180 WPM)</span>
+                                    <strong id="paceFastTime">0s</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Subtitle & Caption Exporters -->
+                        <div style="border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 4px;">
+                            <span class="field-title" style="margin-bottom: 4px; display: block;">Export Narration Subtitles</span>
+                            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0 0 10px;">
+                                Export timestamped captions directly into Premiere Pro, DaVinci Resolve, CapCut, or YouTube.
+                            </p>
+                            <div class="export-btn-group">
+                                <button type="button" id="exportSrtBtn" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-closed-captioning"></i> Export Subtitles (.SRT)
+                                </button>
+                                <button type="button" id="exportVttBtn" class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-file-lines"></i> Export WebVTT (.VTT)
+                                </button>
+                            </div>
                         </div>
                     </article>
-                </section>
+                </div>
             </section>
         </main>
 
         <!-- Mobile Bottom Navigation Bar (Flutter style bottom app bar) -->
         <nav class="mobile-bottom-nav">
             <button type="button" class="mobile-nav-btn workspace-tab active" data-view="dashboardView">
-                <i class="fas fa-tower-broadcast"></i>
-                <span>Studio</span>
+                <i class="fas fa-table-columns"></i>
+                <span>Dashboard</span>
             </button>
             <button type="button" class="mobile-nav-btn workspace-tab" data-view="readerView">
                 <i class="fas fa-file-waveform"></i>
                 <span>Reader</span>
             </button>
-            <button type="button" class="mobile-nav-btn workspace-tab" data-view="inspectorView">
-                <i class="fas fa-sitemap"></i>
-                <span>Inspector</span>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="studioView">
+                <i class="fas fa-tower-broadcast"></i>
+                <span>Studio</span>
             </button>
             <button type="button" class="mobile-nav-btn" onclick="document.getElementById('openNotesBtn').click()">
                 <i class="fas fa-note-sticky"></i>
@@ -761,7 +891,7 @@
         <div class="side-panel-body manual-content">
             <div class="manual-block">
                 <h4>1. Choose a Workspace View</h4>
-                <p>Use Dashboard for reading statistics, Reader for synchronized playback, and Document Inspector for outline and structure review.</p>
+                <p>Use Dashboard for reading statistics and quick outline navigation, Reader for synchronized audio playback, and Studio &amp; Telemetry for teleprompter narration, custom pronunciation, and subtitle export.</p>
             </div>
             <div class="manual-block">
                 <h4>2. Import or Paste Content</h4>
@@ -805,11 +935,11 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <!-- Go WebAssembly Runtime & Loader -->
-    <script src="wasm/wasm_exec.js?v=2.3.0"></script>
+    <script src="wasm/wasm_exec.js?v=2.4.0"></script>
     <script>
         (function() {
             const go = new Go();
-            const wasmUrl = "wasm/app.wasm?v=2.3.0";
+            const wasmUrl = "wasm/app.wasm?v=2.4.0";
 
             if (WebAssembly.instantiateStreaming) {
                 WebAssembly.instantiateStreaming(fetch(wasmUrl), go.importObject)

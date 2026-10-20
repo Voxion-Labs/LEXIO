@@ -50,6 +50,15 @@ func initDocumentManager() {
 		}))
 	}
 
+	// Dashboard sample button
+	dashSampleBtn := doc.Call("getElementById", "dashLoadSampleBtn")
+	if !dashSampleBtn.IsNull() {
+		dashSampleBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			loadSampleDocument()
+			return nil
+		}))
+	}
+
 	// Clear button
 	clearBtn := doc.Call("getElementById", "clearBtn")
 	if !clearBtn.IsNull() {
@@ -99,6 +108,7 @@ func ClearDocument() {
 
 	renderEmptyDocumentSurface()
 	updateDocumentMetrics(0, 0, 0, 0, "en")
+	UpdateDocumentReadability("")
 	ShowToast("Workspace cleared", "info")
 }
 
@@ -131,6 +141,7 @@ func ProcessAndRenderDocument(text string, isClean bool) {
 	readTimeSeconds := int(readMinutes * 60)
 
 	updateDocumentMetrics(wordCount, charCount, sectionCount, readTimeSeconds, detectedLang)
+	UpdateDocumentReadability(cleaned)
 }
 
 func cleanText(raw string) string {

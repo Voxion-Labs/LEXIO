@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"html"
+	"math"
 	"regexp"
 	"strings"
 	"syscall/js"
@@ -18,9 +19,9 @@ type PronunciationRule struct {
 }
 
 var (
-	lexiconRules        []PronunciationRule
+	lexiconRules         []PronunciationRule
 	teleprompterFontSize = 28
-	teleprompterTheme    = "dark" // "dark", "light", "high-contrast"
+	teleprompterTheme    = "dark" // "dark", "light", "contrast"
 )
 
 func initDirectorStudio() {
@@ -101,7 +102,7 @@ func initDirectorStudio() {
 		}))
 	}
 
-	// Teleprompter Play/Pause/Stop triggers
+	// Teleprompter Play/Pause/Resume/Stop triggers
 	teleStartBtn := doc.Call("getElementById", "teleStartBtn")
 	if !teleStartBtn.IsNull() {
 		teleStartBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
@@ -134,6 +135,23 @@ func initDirectorStudio() {
 		}))
 	}
 
+	// Subtitle & Caption Exporters (SRT & WebVTT)
+	exportSrtBtn := doc.Call("getElementById", "exportSrtBtn")
+	if !exportSrtBtn.IsNull() {
+		exportSrtBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			ExportSubtitles("srt")
+			return nil
+		}))
+	}
+
+	exportVttBtn := doc.Call("getElementById", "exportVttBtn")
+	if !exportVttBtn.IsNull() {
+		exportVttBtn.Call("addEventListener", "click", js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+			ExportSubtitles("vtt")
+			return nil
+		}))
+	}
+
 	applyTeleprompterStyles()
 }
 
@@ -150,12 +168,12 @@ func UpdateTeleprompter(activeIdx int) {
 		return
 	}
 
-	// Find window around active word (e.g. 5 words before, 10 words after)
+	// Window of words around active word
 	windowStart := activeIdx - 6
 	if windowStart < 0 {
 		windowStart = 0
 	}
-	windowEnd := activeIdx + 10
+	windowEnd := activeIdx + 12
 	if windowEnd > len(words) {
 		windowEnd = len(words)
 	}
@@ -172,7 +190,6 @@ func UpdateTeleprompter(activeIdx int) {
 
 	stage.Set("innerHTML", sb.String())
 
-	// Also update teleprompter meta index
 	meta := doc.Call("getElementById", "teleprompterMeta")
 	if !meta.IsNull() {
 		meta.Set("textContent", fmt.Sprintf("Word %d of %d", activeIdx+1, len(words)))
@@ -215,7 +232,6 @@ func ApplyPronunciationLexicon(text string) string {
 }
 
 func AddPronunciationRule(term, spoken string) {
-	// Check existing
 	for i, r := range lexiconRules {
 		if strings.EqualFold(r.Term, term) {
 			lexiconRules[i].Spoken = spoken
@@ -312,7 +328,6 @@ func renderLexiconTable() {
 	}
 	tbody.Set("innerHTML", sb.String())
 
-	// Attach delete event listeners
 	delButtons := tbody.Call("querySelectorAll", ".delete-lex-btn")
 	for i := 0; i < delButtons.Get("length").Int(); i++ {
 		btn := delButtons.Index(i)
@@ -323,4 +338,244 @@ func renderLexiconTable() {
 			return nil
 		}))
 	}
+}
+
+// ============================================================================
+// LINGUISTIC READABILITY & CADENCE TELEMETRY
+// ============================================================================
+
+func countSyllablesInWord(word string) int {
+	w := strings.ToLower(strings.TrimSpace(word))
+	// Strip non-alpha
+	var clean []rune
+	for _, r := range w {
+		if (r >= 'a' && r <= 'z') || r == '\'' {
+			clean = append(clean, r)
+		}
+	}
+	w = string(clean)
+	if len(w) <= 3 {
+		return 1
+	}
+
+	// Remove trailing 'e', 'es', 'ed' unless preceded by 'le'
+	if strings.HasSuffix(w, "e") && !strings.HasSuffix(w, "le") {
+		w = w[:len(w)-1]
+	}
+
+	vowels := "aeiouy"
+	count := 0
+	inVowelGroup := false
+	for _, ch := range w {
+		isVowel := strings.ContainsRune(vowels, ch)
+		if isVowel && !inVowelGroup {
+			count++
+			inVowelGroup = true
+		} else if !isVowel {
+			inVowelGroup = false
+		}
+	}
+
+	if count == 0 {
+		return 1
+	}
+	return count
+}
+
+func UpdateDocumentReadability(text string) {
+	doc := js.Global().Get("document")
+	if strings.TrimSpace(text) == "" {
+		setElText(doc, "fleschScore", "--")
+		setElText(doc, "fleschBadge", "No Document")
+		setElText(doc, "gunningFogScore", "--")
+		setElText(doc, "syllableCount", "0 syllables")
+		setElText(doc, "complexWordCount", "0 complex")
+		setElText(doc, "pacePresTime", "0s")
+		setElText(doc, "paceNormalTime", "0s")
+		setElText(doc, "paceFastTime", "0s")
+		return
+	}
+
+	words := strings.Fields(text)
+	totalWords := len(words)
+	if totalWords == 0 {
+		return
+	}
+
+	// Count sentences
+	sentenceRe := regexp.MustCompile(`[.!?]+(?:\s+|\n+|$)`)
+	matches := sentenceRe.FindAllStringIndex(text, -1)
+	totalSentences := len(matches)
+	if totalSentences == 0 {
+		totalSentences = 1
+	}
+
+	totalSyllables := 0
+	complexWords := 0
+	for _, w := range words {
+		syl := countSyllablesInWord(w)
+		totalSyllables += syl
+		if syl >= 3 {
+			complexWords++
+		}
+	}
+
+	asl := float64(totalWords) / float64(totalSentences)
+	asw := float64(totalSyllables) / float64(totalWords)
+
+	// Flesch Reading Ease Formula
+	flesch := 206.835 - (1.015 * asl) - (84.6 * asw)
+	if flesch < 0 {
+		flesch = 0
+	} else if flesch > 100 {
+		flesch = 100
+	}
+
+	rating := "Standard"
+	if flesch >= 80 {
+		rating = "Easy / Conversational"
+	} else if flesch >= 60 {
+		rating = "Standard / Clear"
+	} else if flesch >= 45 {
+		rating = "Professional / Technical"
+	} else {
+		rating = "Dense / Academic"
+	}
+
+	// Gunning Fog Index
+	fog := 0.4 * (asl + 100.0*(float64(complexWords)/float64(totalWords)))
+	fogGrade := fmt.Sprintf("Grade %.1f", fog)
+	if fog >= 16 {
+		fogGrade = "College / Graduate"
+	}
+
+	// Cadence times
+	calcTime := func(wpm float64) string {
+		sec := int(math.Round((float64(totalWords) / wpm) * 60.0))
+		if sec < 60 {
+			return fmt.Sprintf("%ds", sec)
+		}
+		return fmt.Sprintf("%dm %ds", sec/60, sec%60)
+	}
+
+	setElText(doc, "fleschScore", fmt.Sprintf("%.1f / 100", flesch))
+	setElText(doc, "fleschBadge", rating)
+	setElText(doc, "gunningFogScore", fogGrade)
+	setElText(doc, "syllableCount", fmt.Sprintf("%d syllables", totalSyllables))
+	setElText(doc, "complexWordCount", fmt.Sprintf("%d complex (3+ syl)", complexWords))
+	setElText(doc, "pacePresTime", calcTime(125.0))
+	setElText(doc, "paceNormalTime", calcTime(150.0))
+	setElText(doc, "paceFastTime", calcTime(180.0))
+}
+
+// ============================================================================
+// SUBTITLE & CLOSED CAPTION EXPORTERS (.SRT & .VTT)
+// ============================================================================
+
+func ExportSubtitles(format string) {
+	if strings.TrimSpace(currentCleanedText) == "" {
+		ShowToast("Please load or paste a document first", "error")
+		return
+	}
+
+	// Split text into distinct sentences
+	splitRe := regexp.MustCompile(`(?m)([^.!?\n]+[.!?]+(?:\s+|\n+|$)|[^\n]+)`)
+	rawSentences := splitRe.FindAllString(currentCleanedText, -1)
+
+	var sentences []string
+	for _, s := range rawSentences {
+		trimmed := strings.TrimSpace(s)
+		if trimmed != "" {
+			sentences = append(sentences, trimmed)
+		}
+	}
+
+	if len(sentences) == 0 {
+		ShowToast("No sentences found to export", "error")
+		return
+	}
+
+	wpm := 150.0 // Base pace
+	wordsPerSec := wpm / 60.0
+
+	currentTimeSec := 0.0
+	var sb strings.Builder
+
+	if format == "vtt" {
+		sb.WriteString("WEBVTT - Generated by LEXIO Document Speech Studio\n\n")
+	}
+
+	for idx, s := range sentences {
+		sWords := len(strings.Fields(s))
+		dur := float64(sWords) / wordsPerSec
+		if dur < 1.4 {
+			dur = 1.4
+		}
+
+		startTime := currentTimeSec
+		endTime := currentTimeSec + dur
+
+		startFormatted := formatTimestamp(startTime, format)
+		endFormatted := formatTimestamp(endTime, format)
+
+		if format == "srt" {
+			sb.WriteString(fmt.Sprintf("%d\n", idx+1))
+			sb.WriteString(fmt.Sprintf("%s --> %s\n", startFormatted, endFormatted))
+			sb.WriteString(fmt.Sprintf("%s\n\n", s))
+		} else {
+			sb.WriteString(fmt.Sprintf("%d\n", idx+1))
+			sb.WriteString(fmt.Sprintf("%s --> %s\n", startFormatted, endFormatted))
+			sb.WriteString(fmt.Sprintf("%s\n\n", s))
+		}
+
+		currentTimeSec = endTime + 0.25 // slight natural pause between sentences
+	}
+
+	content := sb.String()
+	filename := "lexio-narration-subtitles.srt"
+	mime := "text/plain;charset=utf-8"
+	if format == "vtt" {
+		filename = "lexio-narration-captions.vtt"
+		mime = "text/vtt;charset=utf-8"
+	}
+
+	downloadFile(filename, content, mime)
+	ShowToast(fmt.Sprintf("Exported narration %s (%d cues)", strings.ToUpper(format), len(sentences)), "success")
+}
+
+func formatTimestamp(seconds float64, format string) string {
+	totalMs := int(math.Round(seconds * 1000.0))
+	hrs := totalMs / 3600000
+	totalMs %= 3600000
+	mins := totalMs / 60000
+	totalMs %= 60000
+	secs := totalMs / 1000
+	ms := totalMs % 1000
+
+	if format == "srt" {
+		return fmt.Sprintf("%02d:%02d:%02d,%03d", hrs, mins, secs, ms)
+	}
+	return fmt.Sprintf("%02d:%02d:%02d.%03d", hrs, mins, secs, ms)
+}
+
+func downloadFile(filename, content, mimeType string) {
+	doc := js.Global().Get("document")
+	window := js.Global().Get("window")
+
+	parts := js.Global().Get("Array").New()
+	parts.Call("push", content)
+
+	opts := js.Global().Get("Object").New()
+	opts.Set("type", mimeType)
+
+	blob := js.Global().Get("Blob").New(parts, opts)
+	url := window.Get("URL").Call("createObjectURL", blob)
+
+	a := doc.Call("createElement", "a")
+	a.Set("href", url)
+	a.Set("download", filename)
+	doc.Get("body").Call("appendChild", a)
+	a.Call("click")
+	doc.Get("body").Call("removeChild", a)
+	window.Get("URL").Call("revokeObjectURL", url)
 }

@@ -362,6 +362,8 @@ func launchWorkspace(user *UserAccount) {
 		mainApp.Get("style").Set("display", "flex")
 	}
 
+	SwitchView("dashboardView")
+
 	ShowToast("Welcome, "+user.Name+"!", "success")
 }
 

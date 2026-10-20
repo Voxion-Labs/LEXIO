@@ -2231,8 +2231,63 @@ body.focus-mode .document-surface {
     border-radius: 8px;
 }
 
+/* ==========================================================================
+   TELEMETRY & SUBTITLES STUDIO
+   ========================================================================== */
+.telemetry-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 26px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cadence-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.cadence-pill-card {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    text-align: center;
+}
+
+.cadence-pill-card span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.cadence-pill-card strong {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--flutter-blue-dark);
+    margin-top: 4px;
+}
+
+.export-btn-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
 @media (max-width: 768px) {
     .lexicon-form {
+        grid-template-columns: 1fr;
+    }
+    .cadence-comparison-grid {
         grid-template-columns: 1fr;
     }
 }

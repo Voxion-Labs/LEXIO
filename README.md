@@ -1,350 +1,180 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="LEXIO logo" width="220" />
+  <img src="assets/logo.svg" alt="LEXIO logo" width="180" style="border-radius: 12px; background: #000000;" />
 </p>
 <h1 align="center">LEXIO</h1>
 <p align="center">
-  A browser-native multilingual document narration engine featuring synchronized highlighting and AI-assisted execution controls.
+  <strong>Client-Side Document Speech Studio powered by Go WebAssembly</strong>
 </p>
 <p align="center">
-  <a href="https://voxion-labs.github.io/LEXIO">Live Environment</a>
-  |
-  <a href="https://github.com/liambrooks-lab/LEXIO">Repository</a>
+  <a href="https://voxion-labs.github.io/LEXIO/"><strong>Live Application</strong></a>
+  &nbsp;|&nbsp;
+  <a href="https://github.com/Voxion-Labs/LEXIO"><strong>GitHub Repository</strong></a>
 </p>
 
 ---
 
-## Overview
-LEXIO operates as a browser-native execution environment for document narration and text processing. It integrates multi-format document ingestion, real-time text synchronization, language/accent filtering, deterministic playback controls, and AI-generated structural metadata within a single isolated workspace.
+## Technical Overview
+
+**LEXIO** is a browser-native document speech synthesis and narration workstation built entirely in **Go WebAssembly** and standard Web APIs. It eliminates backend infrastructure and server roundtrips, executing all document ingestion, phrase segmentation, speech synthesis orchestration, and computational cadence telemetry directly on the client machine.
+
+Designed with Flutter and Material 3 design ergonomics, LEXIO operates seamlessly across desktops, tablets, and mobile devices without requiring Node.js runtimes, cloud backend endpoints, or user telemetry collection.
 
 ---
 
-## System Definition
-LEXIO functions as a frontend narration architecture for users requiring a centralized environment for document processing, auditory review, and content extraction.
+## Architectural Principles
 
-At the technical level, LEXIO acts as:
-- a multilingual document parsing engine
-- a browser-native AI-assisted text-to-speech (TTS) interface
-- a structured office-file narration environment
-- a document analysis tool integrating summaries, glossaries, and data extraction
+1. **Go WebAssembly Engine (`GOOS=js GOARCH=wasm`)**  
+   Core application state, document structure segmentation, phonetic pronunciation substitutions, and linguistic telemetry algorithms are compiled into a standalone WebAssembly binary (`wasm/app.wasm`), running client-side with native execution speed.
 
----
+2. **100% Client-Side Privacy (Zero Server Telemetry)**  
+   No text or binary documents are uploaded over the network. Documents imported from PDF, DOCX, XLSX, PPTX, or EPUB are parsed locally into browser memory. Profiles, pronunciation dictionaries, and workspace notes persist exclusively in the browser's private `localStorage`.
 
-## Architectural Objective
-Standard text-to-speech implementations exhibit severe deficits during actual document processing:
+3. **Regional Dialect & Gender Matching**  
+   Interfaces directly with the browser's native **Web Speech API** to filter and allocate synthesized voices across English, Spanish, Italian, Arabic, and Hindi with regional accent specificity (e.g. US, UK, India, Australia, Spain, Mexico, Saudi Arabia, Italy) and explicit gender filtering (Male / Female).
 
-- limited support beyond raw plaintext
-- structural degradation of imported files
-- non-deterministic and robotic playback latency
-- lack of visual synchronization with auditory output
-- absence of integrated metadata extraction
-
-LEXIO mitigates these deficits by providing a structured end-to-end processing pipeline:
-- ingest raw content or supported file formats
-- normalize data into sequentially readable blocks
-- apply voice filtering via language, accent, and persona parameters
-- execute playback with real-time active-word synchronization
-- generate AI-structured outputs for executive briefing and content review
+4. **Synchronized Phrase & Word Tracking**  
+   Audio synthesis triggers real-time boundary events mapped to interactive DOM nodes, automatically highlighting and centering the active phrase as it is spoken.
 
 ---
 
-## Links
-- **[View LEXIO Live](https://voxion-labs.github.io/LEXIO/)**
-- **[GitHub Repository](https://github.com/liambrooks-lab/LEXIO)**
-- **[Telemetry & Issues](https://github.com/voxion-labs/LEXIO/issues)**
+## Workspace Screenshot Gallery
 
----
-
-## Current Project State
-LEXIO currently ships with:
-
-- an authenticated workspace initialization sequence
-- distinct `Dashboard`, `Reader`, and `AI Studio` execution views
-- browser speech synthesis integrating multilingual voice parameters
-- live document rendering with interactive word-level playback mapping
-- AI execution modes including `Executive`, `Study`, `Presentation`, and `Accessibility`
-- algorithmic text normalization and natural chunking protocols
-- auxiliary panels for `User Manual`, `Notes`, and `AI Assistant`
-- document telemetry tracking words, sections, characters, and estimated completion time
-- parsing engines for office, text, markup, and ebook format types
-
----
-
-## Core Specifications
-- structured workspace initialization and isolated UI
-- real-time active-word synchronization during audio playback
-- dynamic voice allocation based on language and accent parameters
-- drag-and-drop ingestion for standard document formats
-- AI-generated executive briefs, structural outlines, and review matrices
-- isolated local data storage for user notes and assistant context
-- responsive UI rendering for variable display environments
-- modular JavaScript architecture separating auth, speech, AI, and parsing utilities
-
----
-
-## Execution Surfaces
-### Workspace Experience
-- initialization sequence featuring profile configuration
-- environment routing across `Dashboard`, `Reader`, and `AI Studio`
-- global telemetry chips displaying identity, voice state, and AI confidence
-- keyboard command bindings for rapid environment navigation
-
-### Reading Experience
-- source input buffer for manual text entry
-- document normalization engine that renders synchronized reading sections
-- playback state controls (start, pause, resume, stop)
-- focus execution modes with real-time progress telemetry
-
-### AI Assist Experience
-- executive brief extraction
-- structural study note generation
-- presentation flow mapping
-- automated glossary compilation
-- entity and topic extraction
-- review prompt and Q&A matrix generation
-
----
-
-## Telemetry & UI State Gallery
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/lexio-login.png" alt="LEXIO initialization experience" />
+      <img src="docs/readme/lexio-auth-workspace.png" alt="LEXIO workspace configuration & login" />
       <br />
-      <strong>1. Environment Initialization</strong>
+      <strong>1. Workspace Profile &amp; Authentication</strong>
       <br />
-      LEXIO initiates with a secure workspace configuration sequence, establishing user identity before loading the primary reading environment.
+      <em>Scrollable Flutter-inspired onboarding with local account creation, custom avatar upload, and immediate guest demo access.</em>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/readme/lexio-dashboard.png" alt="LEXIO dashboard view" />
+      <img src="docs/readme/lexio-dashboard.png" alt="LEXIO application dashboard" />
       <br />
-      <strong>2. Dashboard & System Overview</strong>
+      <strong>2. Document Speech Dashboard</strong>
       <br />
-      The dashboard aggregates AI-generated metadata, system commands, and live document telemetry to provide a centralized view of the current workspace state.
+      <em>Centralized hub displaying detected language, reading duration, section metrics, outline navigation, and native dialect distribution.</em>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/readme/lexio-reader.png" alt="LEXIO reader view" />
+      <img src="docs/readme/lexio-reader.png" alt="LEXIO document reader view" />
       <br />
-      <strong>3. Reader & Narration Engine</strong>
+      <strong>3. Reader &amp; Synchronized Narration</strong>
       <br />
-      The primary execution view isolates content ingestion, document rendering, voice parameter tuning, and synchronized playback within a strict layout.
+      <em>Dual-column workspace featuring editable source ingestion, synchronized reading surface, voice tuning lab, and focus mode.</em>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/readme/lexio-ai-studio.png" alt="LEXIO AI Studio view" />
+      <img src="docs/readme/lexio-teleprompter-studio.png" alt="LEXIO teleprompter studio view" />
       <br />
-      <strong>4. AI Studio & Metadata Inspection</strong>
+      <strong>4. Teleprompter &amp; Telemetry Studio</strong>
       <br />
-      An isolated environment for inspecting generated glossaries, structural outlines, and review prompts without obstructing the primary narration pipeline.
+      <em>Full-screen teleprompter stage with karaoke tracking, phonetic pronunciation lexicon, and computational cadence analysis.</em>
     </td>
   </tr>
 </table>
 
 ---
 
-## Operating Directives
-LEXIO is engineered to execute the following directives:
-- ingest complex document structures
-- normalize content for sequential processing
-- optimize auditory playback latency and natural pacing
-- extract and structure underlying metadata
+## Core Workspaces
 
-These directives govern the UI layout, the speech synchronization loop, the parsing engine, and the AI integration layer.
+### 1. Dashboard (`dashboardView`)
+- **Real-Time Document Telemetry**: Displays total character count, word count, structural sections, and estimated listening duration.
+- **Interactive Outline**: Automatically parses document headings and topics into jump-navigation links.
+- **Dialect Coverage**: Lists available system voices filtered across supported regional locales.
+- **Quick Actions**: One-click shortcuts to launch Reader, open Teleprompter Studio, or load structured test content.
 
----
+### 2. Multi-Format Reader (`readerView`)
+- **Universal Ingestion**: Drag-and-drop or file upload supporting **PDF, DOCX, DOC, PPTX, PPT, XLSX, EPUB, TXT, MD, CSV, JSON, RTF, HTML, XML, ODT, and ODP**.
+- **Interactive Word Mapping**: Spoken sentences and individual words are rendered as interactive nodes. Clicking any word immediately re-routes speech playback to begin at that exact position.
+- **Voice Lab**: Dropdown filtering by language, regional dialect, voice gender, playback rate ($0.5\times$ to $2.0\times$), and audio pitch.
+- **Visual Sync**: Smooth auto-centering that keeps the spoken line in the viewport during long document playback.
 
-## Linguistic & Format Specifications
-LEXIO enforces multilingual narration mapping and multi-format parsing for real-world document ingestion.
-
-### Narration Languages
-- English
-- Hindi
-- Arabic
-- Italian
-- Spanish
-
-### Supported Ingestion Formats
-- PDF
-- DOCX
-- DOC
-- PPTX
-- PPT
-- XLSX
-- EPUB
-- TXT
-- Markdown
-- CSV
-- JSON
-- RTF
-- HTML
-- HTM
-- XML
-- ODT
-- ODP
+### 3. Studio & Telemetry (`studioView`)
+- **Live Visual Teleprompter**: High-visibility stage designed for speech delivery, video recording, and rehearsal. Includes live word tracking, dynamic font scaling ($20\text{px}$ to $52\text{px}$), and theme options (Dark Studio, Paper Light, Neon High-Contrast).
+- **Custom Pronunciation Lexicon**: Phonetic dictionary allowing users to override TTS pronunciation for technical acronyms, abbreviations, and foreign terms (e.g. `WASM` &rarr; `Waz-um`, `SQL` &rarr; `Sequel`, `LaTeX` &rarr; `Lay-tek`) via live regex evaluation in Go.
+- **Computational Readability Metrics**:
+  - **Flesch Reading Ease**: Mathematically evaluates sentence length and syllable density on a 0–100 scale.
+  - **Gunning Fog Index**: Computes estimated US school grade reading level based on complex polysyllabic words.
+  - **Cadence Time Analysis**: Compares speaking duration across Presentation pace ($125\text{ WPM}$), Conversational pace ($150\text{ WPM}$), and Quick Skim ($180\text{ WPM}$).
+- **Subtitle & Caption Exporter**: Generates and downloads valid `.srt` (SubRip) and `.vtt` (WebVTT) subtitle files with calculated sentence durations for video editing in Premiere Pro, DaVinci Resolve, CapCut, or YouTube.
 
 ---
 
-## Tech Stack
-### Core Frontend
-- HTML5
-- CSS3
-- JavaScript (ES6+)
+## Repository Structure
 
-### Browser APIs
-- Web Speech API
-- DOM APIs
-- Local Storage
-
-### Parsing Engines
-- PDF.js
-- Mammoth.js
-- JSZip
-- SheetJS
-
-### UI Resources
-- Font Awesome
-- Google Fonts
-
----
-
-## Project Structure
 ```text
 LEXIO/
-|- assets/
-|- css/
-|  `- components.css
-|- docs/
-|  |- API.md
-|  |- CHANGELOG.md
-|  |- CONTRIBUTING.md
-|  `- readme/
-|       
-|     
-|- js/
-|  |- ai.js
-|  |- auth.js
-|  |- fileHandler.js
-|  |- speech.js
-|  `- utils.js
-|- index.html
-|- LICENSE
-|- package.json
-|- README.md
-|- script.js
-`- styles.css
+├── .nojekyll                 # Prevents GitHub Pages Jekyll build conflicts with WASM
+├── assets/
+│   ├── logo.svg              # Vector brand mark with black background
+│   └── logo.png              # Raster 512x512 app icon
+├── css/
+│   └── components.css        # Flutter / Material 3 styling tokens & components
+├── docs/
+│   ├── API.md
+│   ├── CHANGELOG.md
+│   └── readme/               # Documentation screenshots
+│       ├── lexio-auth-workspace.png
+│       ├── lexio-dashboard.png
+│       ├── lexio-reader.png
+│       └── lexio-teleprompter-studio.png
+├── src/                      # Go WebAssembly source code
+│   ├── main.go               # WASM initialization & runtime loop
+│   ├── auth.go               # Client-side user account & profile state
+│   ├── document.go           # File ingestion, text cleaner & section parser
+│   ├── speech.go             # Web Speech API bridge & voice filters
+│   ├── director.go           # Teleprompter, pronunciation lexicon, readability & subtitles
+│   └── ui.go                 # Tab router, drawer panels & toast manager
+├── wasm/
+│   ├── app.wasm              # Compiled WebAssembly binary
+│   └── wasm_exec.js          # Official Go WASM JavaScript bridge
+├── index.html                # Single-page application entrypoint
+├── styles.css                # Application stylesheets
+└── README.md
 ```
 
 ---
 
-## Architecture
-### System Responsibilities
-- workspace initialization and state management
-- document normalization and active telemetry
-- playback execution and active-word synchronization
-- auxiliary panel management (notes, manual, AI)
-- dashboard and AI studio state rendering
+## Building and Local Development
 
-### Ingestion and Execution Flow
-1. User supplies raw text or supported file binaries.
-2. LEXIO routes the file to the appropriate parsing engine.
-3. Content is normalized into a sequential array of readable blocks.
-4. The document viewer maps text elements to clickable DOM nodes.
-5. The speech engine executes playback while triggering real-time highlighting callbacks.
-6. The AI module processes the text payload to generate metadata, glossaries, and structural prompts.
-
-### Speech Subsystem
-- voice allocation is strictly filtered by designated language, accent, and persona variables
-- sequential text is algorithmically chunked to optimize pacing and prevent synthesis timeouts
-- playback state and active DOM nodes maintain strict synchronization
-- output relies on native browser and OS-level TTS synthesizer capabilities
-
----
-
-## Validation Snapshot
-The current repository state includes:
-- modular JavaScript architecture isolated by concern (`auth`, `speech`, `fileHandler`, `ai`, `utils`)
-- executable via local static server (`live-server`)
-- functional binary parsing across multiple document formats
-- initial testing infrastructure placeholder via npm scripts
-
----
-
-## Key Capabilities
-- structured execution workspace
-- multilingual document synthesis
-- active-word synchronized playback
-- multi-format binary ingestion (Office, EPUB, PDF)
-- AI-generated structural metadata and review modes
-- isolated local data storage for notes and contextual processing
-- keyboard-driven command navigation
-- deployable as a static client-side application
-
----
-
-## Current Deployment Scope
-LEXIO is currently deployed as a functional frontend architecture featuring:
-- multi-format document ingestion
-- multilingual TTS integration
-- distinct execution environments (Dashboard, Reader, AI Studio)
-- AI-driven structural metadata extraction
-- localized state management for identity and note-taking
-- static web deployment
-
----
-
-## Local Setup
 ### Prerequisites
-- Node.js `14+`
-- npm `6+`
-- A modern browser with Web Speech API support
+- [Go 1.22+](https://go.dev/dl/) installed.
+- Modern web browser with WebAssembly and Web Speech API support (Chrome, Edge, Firefox, Safari).
 
-### Install Dependencies
-```bash
-npm install
+### Compile Go WebAssembly
+To compile the Go source files from the `src/` directory into `wasm/app.wasm`:
+
+```powershell
+# Windows (PowerShell)
+$env:GOOS="js"; $env:GOARCH="wasm"; go build -o wasm/app.wasm ./src
 ```
 
-### Run Local Execution Server
 ```bash
-npm run dev
+# macOS / Linux
+GOOS=js GOARCH=wasm go build -o wasm/app.wasm ./src
 ```
 
-### Alternate Initialization
+### Run Locally
+Serve the repository root using any standard static file server:
+
 ```bash
-npm start
+# Python 3
+python -m http.server 8080
+
+# Node.js
+npx serve .
 ```
 
-### Local Endpoint
-- `http://localhost:3000`
+Open `http://localhost:8080` in your web browser.
 
 ---
 
-## Build Directives
-### Start Development Environment
-```bash
-npm run dev
-```
+## Deployment Profile
 
-### Start Local Preview
-```bash
-npm start
-```
-
-### Execute Test Suite
-```bash
-npm test
-```
-
----
-
-## Deployment
-### Live Deployment
-- Hosted as a static client-side application
-- Public deployment URL: [[https://voxion-labs.github.io/LEXIO/](https://voxion-labs.github.io/LEXIO/)]
-
-### Deployment Profile
-- lightweight browser-native frontend
-- operates completely client-side without backend dependencies
-- speech synthesis execution relies on local client capabilities
+- **Target**: GitHub Pages (Static hosting).
+- **Domain**: [https://voxion-labs.github.io/LEXIO/](https://voxion-labs.github.io/LEXIO/)
+- **Configuration**: Uses `.nojekyll` to bypass Jekyll compilation and serve `.wasm` binaries directly.
 
 ---
 
