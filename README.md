@@ -24,7 +24,7 @@
 
 ## Technical Overview
 
-**LEXIO** is a high-performance, browser-native document narration and speech engineering workstation built with **Go WebAssembly** and web standards. It operates without remote server roundtrips, executing all document ingestion, phrase segmentation, speech synthesis orchestration, and computational cadence telemetry directly on the client machine.
+**LEXIO** is a browser-native document narration and speech engineering workstation built with **Go WebAssembly** and web standards. It operates without remote server roundtrips, executing all document ingestion, phrase segmentation, speech synthesis orchestration, and computational cadence telemetry directly on the client machine.
 
 Designed with Flutter and Material 3 design ergonomics, LEXIO includes a minimalist MNC-grade **Dark Theme**, interactive document creation (`.txt` / `.md`), instant file exports, a visual teleprompter deck, and closed-caption subtitle generation (`.srt` / `.vtt`).
 
@@ -168,32 +168,17 @@ Designed with Flutter and Material 3 design ergonomics, LEXIO includes a minimal
 
 ```text
 LEXIO/
-├── .nojekyll                 # Prevents GitHub Pages Jekyll build conflicts with WASM
-├── assets/
-│   ├── logo.svg              # Vector brand mark with black background
-│   └── logo.png              # Raster 512x512 app icon
-├── css/
-│   └── components.css        # Flutter / Material 3 styling tokens & components
-├── docs/
-│   ├── API.md
-│   ├── CHANGELOG.md
-│   └── readme/               # Documentation screenshots
-│       ├── lexio-auth-workspace.png
-│       ├── lexio-dashboard.png
-│       ├── lexio-reader.png
-│       └── lexio-teleprompter-studio.png
-├── src/                      # Go WebAssembly source code
-│   ├── main.go               # WASM initialization & runtime loop
-│   ├── auth.go               # Client-side user account & profile state
-│   ├── document.go           # File ingestion, text cleaner, file creation & downloads
-│   ├── speech.go             # Web Speech API bridge & voice filters
-│   ├── director.go           # Teleprompter, pronunciation lexicon, readability & subtitles
-│   └── ui.go                 # Tab router, dark theme manager & toast alerts
-├── wasm/
-│   ├── app.wasm              # Compiled WebAssembly binary
-│   └── wasm_exec.js          # Official Go WASM JavaScript bridge
-├── index.html                # Single-page application entrypoint
-├── styles.css                # Global responsive typography & studio styling
+├── build.go                  # Go template compiler & WebAssembly build engine
+├── templates/                # Modular Go templates (.tmpl) for UI & stylesheets
+├── src/                      # Go WebAssembly core engine
+│   ├── main.go               # WASM runtime initialization & event loop
+│   ├── auth.go               # Local user profile & authentication state
+│   ├── document.go           # File ingestion, section parser & document creation
+│   ├── speech.go             # Web Speech API bridge & regional voice filters
+│   ├── director.go           # Teleprompter, pronunciation lexicon & telemetry
+│   └── ui.go                 # View router, dark theme manager & toast alerts
+├── assets/                   # Brand vector logo & app icons
+├── go.mod                    # Go module definition
 └── README.md
 ```
 
