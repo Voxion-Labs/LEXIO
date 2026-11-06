@@ -36,6 +36,7 @@ func main() {
 	portFlag := flag.String("port", "3000", "Port for local dev server")
 	wasmOnly := flag.Bool("wasm", false, "Only build the WebAssembly binary")
 	tmplOnly := flag.Bool("tmpl", false, "Only build the HTML from Go templates")
+	stylesOnly := flag.Bool("styles", false, "Only build CSS from Go templates")
 	flag.Parse()
 
 	if *serveFlag {
@@ -46,11 +47,17 @@ func main() {
 
 	if *wasmOnly {
 		buildWasm()
+		ensureWasmExec()
 		return
 	}
 
 	if *tmplOnly {
 		buildTemplates()
+		return
+	}
+
+	if *stylesOnly {
+		buildStyles()
 		return
 	}
 
@@ -63,18 +70,35 @@ func buildAll() {
 	fmt.Println("==================================================")
 
 	buildTemplates()
+	buildStyles()
 	buildWasm()
+	ensureWasmExec()
 
 	fmt.Println("Build complete. Ready for GitHub Pages deployment.")
 }
 
 func buildTemplates() {
-	fmt.Println("--> Compiling Go templates from templates/*.tmpl...")
+	fmt.Println("--> Compiling Go templates (templates/*.tmpl -> index.html)...")
 
-	tmplPattern := filepath.Join("templates", "*.tmpl")
-	t, err := template.ParseGlob(tmplPattern)
+	// Parse only HTML templates (exclude styles, components, and wasm_exec tmpls)
+	htmlTmpls := []string{
+		"templates/layout.tmpl",
+		"templates/head.tmpl",
+		"templates/loading.tmpl",
+		"templates/landing.tmpl",
+		"templates/modal.tmpl",
+		"templates/app_header.tmpl",
+		"templates/app_toolbar.tmpl",
+		"templates/dashboard.tmpl",
+		"templates/reader.tmpl",
+		"templates/studio.tmpl",
+		"templates/panels.tmpl",
+		"templates/scripts.tmpl",
+	}
+
+	t, err := template.ParseFiles(htmlTmpls...)
 	if err != nil {
-		log.Fatalf("Error parsing templates: %v", err)
+		log.Fatalf("Error parsing HTML templates: %v", err)
 	}
 
 	var buf bytes.Buffer
@@ -95,8 +119,36 @@ func buildTemplates() {
 	fmt.Printf("    Generated index.html (%d bytes)\n", len(cleanHTML))
 }
 
+func buildStyles() {
+	fmt.Println("--> Compiling CSS stylesheets from Go templates...")
+
+	// Render styles.css from templates/styles.tmpl
+	stylesContent, err := os.ReadFile("templates/styles.tmpl")
+	if err != nil {
+		log.Fatalf("Error reading templates/styles.tmpl: %v", err)
+	}
+	err = os.WriteFile("styles.css", stylesContent, 0644)
+	if err != nil {
+		log.Fatalf("Error writing styles.css: %v", err)
+	}
+	fmt.Printf("    Generated styles.css (%d bytes)\n", len(stylesContent))
+
+	// Render css/components.css from templates/components.tmpl
+	componentsContent, err := os.ReadFile("templates/components.tmpl")
+	if err != nil {
+		log.Fatalf("Error reading templates/components.tmpl: %v", err)
+	}
+	if err := os.MkdirAll("css", 0755); err != nil {
+		log.Fatalf("Error creating css directory: %v", err)
+	}
+	err = os.WriteFile(filepath.Join("css", "components.css"), componentsContent, 0644)
+	if err != nil {
+		log.Fatalf("Error writing css/components.css: %v", err)
+	}
+	fmt.Printf("    Generated css/components.css (%d bytes)\n", len(componentsContent))
+}
+
 func compressHTML(input string) string {
-	// Collapse multiple consecutive empty lines to a single newline
 	reBlankLines := regexp.MustCompile(`\n\s*\n\s*\n+`)
 	cleaned := reBlankLines.ReplaceAllString(input, "\n\n")
 	return strings.TrimSpace(cleaned) + "\n"
@@ -105,7 +157,6 @@ func compressHTML(input string) string {
 func buildWasm() {
 	fmt.Println("--> Compiling Go WebAssembly engine (src/ -> wasm/app.wasm)...")
 
-	// Ensure wasm output directory exists
 	if err := os.MkdirAll("wasm", 0755); err != nil {
 		log.Fatalf("Error creating wasm directory: %v", err)
 	}
@@ -130,6 +181,47 @@ func buildWasm() {
 	fmt.Printf("    Compiled wasm/app.wasm: %.2f MB in %v\n", float64(fi.Size())/(1024*1024), duration.Round(time.Millisecond))
 }
 
+func ensureWasmExec() {
+	if err := os.MkdirAll("wasm", 0755); err != nil {
+		log.Fatalf("Error creating wasm directory: %v", err)
+	}
+
+	target := filepath.Join("wasm", "wasm_exec.js")
+
+	// First try to copy from local template
+	if content, err := os.ReadFile("templates/wasm_exec.tmpl"); err == nil {
+		if err := os.WriteFile(target, content, 0644); err == nil {
+			fmt.Println("    Provisioned wasm/wasm_exec.js from templates/wasm_exec.tmpl")
+			return
+		}
+	}
+
+	// Fallback to Go installation GOROOT
+	cmd := exec.Command("go", "env", "GOROOT")
+	out, err := cmd.Output()
+	if err == nil {
+		goroot := strings.TrimSpace(string(out))
+		candidate1 := filepath.Join(goroot, "lib", "wasm", "wasm_exec.js")
+		candidate2 := filepath.Join(goroot, "misc", "wasm", "wasm_exec.js")
+
+		var srcPath string
+		if _, err := os.Stat(candidate1); err == nil {
+			srcPath = candidate1
+		} else if _, err := os.Stat(candidate2); err == nil {
+			srcPath = candidate2
+		}
+
+		if srcPath != "" {
+			if content, err := os.ReadFile(srcPath); err == nil {
+				if err := os.WriteFile(target, content, 0644); err == nil {
+					fmt.Printf("    Provisioned wasm/wasm_exec.js from %s\n", srcPath)
+					return
+				}
+			}
+		}
+	}
+}
+
 func startServer(port string) {
 	fmt.Printf("\nServing LEXIO at http://localhost:%s\n", port)
 	fmt.Println("MIME types configured for WebAssembly (application/wasm).")
@@ -138,7 +230,6 @@ func startServer(port string) {
 	fs := http.FileServer(http.Dir("."))
 
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// Set proper MIME types for WASM
 		if strings.HasSuffix(r.URL.Path, ".wasm") {
 			w.Header().Set("Content-Type", "application/wasm")
 		} else if strings.HasSuffix(r.URL.Path, ".js") {
@@ -147,7 +238,6 @@ func startServer(port string) {
 			w.Header().Set("Content-Type", "image/svg+xml")
 		}
 
-		// Disable aggressive caching during local development
 		w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
 		fs.ServeHTTP(w, r)
 	})
