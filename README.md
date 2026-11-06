@@ -205,8 +205,6 @@ Run LEXIO locally with instant MIME-type resolution for WebAssembly:
 # Starts local server at http://localhost:3000
 go run build.go -serve
 
-# Or with npm
-npm run dev
 ```
 
 Open `http://localhost:3000` in your web browser.

@@ -24,7 +24,7 @@ type PageConfig struct {
 }
 
 var defaultConfig = PageConfig{
-	Title:       "LEXIO - Document Speech Studio",
+	Title:       "Lexio",
 	Description: "LEXIO - Client-side multilingual document speech studio powered by Go WebAssembly with synchronized phrase tracking.",
 	Version:     "2.6.0",
 	Year:        time.Now().Year(),
