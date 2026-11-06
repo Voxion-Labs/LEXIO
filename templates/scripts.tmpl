@@ -1,0 +1,37 @@
+{{define "scripts"}}
+    <!-- Client-side Document Parsing Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+
+    <!-- Go WebAssembly Runtime & Loader -->
+    <script src="wasm/wasm_exec.js?v={{.Version}}"></script>
+    <script>
+        (function() {
+            const go = new Go();
+            const wasmUrl = "wasm/app.wasm?v={{.Version}}";
+
+            if (WebAssembly.instantiateStreaming) {
+                WebAssembly.instantiateStreaming(fetch(wasmUrl), go.importObject)
+                    .then((result) => go.run(result.instance))
+                    .catch((err) => fallbackLoad(wasmUrl, go));
+            } else {
+                fallbackLoad(wasmUrl, go);
+            }
+
+            function fallbackLoad(url, goInstance) {
+                fetch(url)
+                    .then(resp => resp.arrayBuffer())
+                    .then(bytes => WebAssembly.instantiate(bytes, goInstance.importObject))
+                    .then(result => goInstance.run(result.instance))
+                    .catch(err => {
+                        console.error("Failed to load Go WebAssembly:", err);
+                        const loading = document.getElementById("loadingScreen");
+                        if (loading) {
+                            loading.innerHTML = "<div class='loading-core'><p style='color:#DC2626;font-weight:700;'>Failed to load WebAssembly binary. Please refresh or check console.</p></div>";
+                        }
+                    });
+            }
+        })();
+    </script>
+{{end}}

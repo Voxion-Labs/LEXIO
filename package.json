@@ -1,11 +1,13 @@
 {
   "name": "lexio-tts",
-  "version": "1.0.0",
-  "description": "LEXIO - Enterprise Text to Speech Studio",
+  "version": "2.6.0",
+  "description": "LEXIO - Client-Side Document Speech Studio powered by Go WebAssembly",
   "main": "index.html",
   "scripts": {
-    "start": "npx live-server --port=3000 --watch=.",
-    "dev": "npx live-server --port=3000 --watch=. --open=index.html",
+    "build": "go run build.go",
+    "serve": "go run build.go -serve",
+    "start": "go run build.go -serve",
+    "dev": "go run build.go -serve",
     "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [
@@ -13,30 +15,19 @@
     "tts",
     "speech-synthesis",
     "pdf-reader",
-    "enterprise",
-    "voice",
+    "golang",
+    "webassembly",
+    "wasm",
     "accessibility"
   ],
-  "author": "liambrooks-lab",
+  "author": "Voxion Labs",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liambrooks-lab/LEXIO.git"
+    "url": "git+https://github.com/Voxion-Labs/LEXIO.git"
   },
   "bugs": {
-    "url": "https://github.com/liambrooks-lab/LEXIO/issues"
+    "url": "https://github.com/Voxion-Labs/LEXIO/issues"
   },
-  "homepage": "https://github.com/liambrooks-lab/LEXIO#readme",
-  "devDependencies": {
-    "live-server": "^1.2.2"
-  },
-  "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ]
+  "homepage": "https://voxion-labs.github.io/LEXIO/#readme"
 }

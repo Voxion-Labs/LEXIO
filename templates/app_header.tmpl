@@ -1,0 +1,28 @@
+{{define "app_header"}}
+        <!-- Top App Bar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo brand-logo-nav">
+                <div>
+                    <h1 class="brand-text">LEXIO <span class="badge badge-primary">WASM</span></h1>
+                </div>
+            </div>
+            
+            <div class="nav-actions">
+                <select id="appThemeSelect" class="theme-select" title="Toggle Theme" aria-label="Theme Selection">
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
+                </select>
+                <button id="openManualBtn" class="utility-btn" type="button"><i class="fas fa-book-open"></i> User Manual</button>
+                <button id="openNotesBtn" class="utility-btn" type="button"><i class="fas fa-note-sticky"></i> Notes</button>
+                <div class="nav-user">
+                    <div class="user-info">
+                        <span class="user-greeting"><span id="userName">User</span></span>
+                        <span class="user-role">Studio Director</span>
+                    </div>
+                    <div id="userAvatar" class="user-avatar"><span id="userInitials">U</span></div>
+                    <button id="logoutBtn" class="logout-btn" title="Logout"><i class="fas fa-arrow-right-from-bracket"></i></button>
+                </div>
+            </div>
+        </nav>
+{{end}}

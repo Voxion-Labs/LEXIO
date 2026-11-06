@@ -1,0 +1,171 @@
+{{define "reader"}}
+            <!-- 2. READER VIEW -->
+            <section id="readerView" class="workspace-view">
+                <section class="reader-layout">
+                    <!-- Source Studio Column -->
+                    <div class="studio-column">
+                        <article class="card studio-card">
+                            <div class="section-header section-header-spread">
+                                <div>
+                                    <span class="badge badge-primary">Source Studio</span>
+                                    <h3 style="margin: 4px 0 0;">Document Content &amp; Synchronized View</h3>
+                                </div>
+                                <div class="file-actions" style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                                    <span id="fileBadge" class="badge badge-info">No file loaded</span>
+                                    <button id="newFileBtn" class="btn-icon" title="New Document (Markdown)"><i class="fas fa-file-circle-plus"></i></button>
+                                    <button id="uploadBtn" class="btn-icon" title="Import document"><i class="fas fa-upload"></i></button>
+                                    <button id="demoBtn" class="btn-icon" title="Load sample document"><i class="fas fa-wand-magic-sparkles"></i></button>
+                                    <button id="downloadTxtBtn" class="btn-icon" title="Download as .TXT"><i class="fas fa-file-arrow-down"></i></button>
+                                    <button id="downloadMdBtn" class="btn-icon" title="Download as .MD"><i class="fas fa-file-code"></i></button>
+                                    <button id="clearBtn" class="btn-icon" title="Clear content"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="editor-grid">
+                                <div class="editor-pane">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                                        <label for="inputText" class="field-title" style="margin:0;">Editable source</label>
+                                        <div style="display:flex; gap:6px;">
+                                            <button type="button" id="newTxtBtn" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;" title="Create empty .txt file">+ .TXT</button>
+                                            <button type="button" id="newMdBtn" class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:0.75rem;" title="Create starter .md file">+ .MD</button>
+                                        </div>
+                                    </div>
+                                    <textarea id="inputText" class="source-input" placeholder="Paste text here or import PDF, DOCX, PPTX, XLSX, EPUB, TXT, MD, CSV, JSON, HTML files..."></textarea>
+                                    <div class="editor-hints">
+                                        <span id="charCounter" class="badge badge-primary">0 chars</span>
+                                        <span id="wordCountChip" class="badge badge-success">0 words</span>
+                                        <span class="hint-text">Drag and drop files onto this card.</span>
+                                    </div>
+                                </div>
+
+                                <div class="viewer-pane">
+                                    <div class="viewer-header">
+                                        <div>
+                                            <span class="field-title">Document viewer (Live Preview)</span>
+                                            <p id="documentSummary" class="viewer-subtitle">Synchronized highlights appear here as LEXIO reads.</p>
+                                        </div>
+                                        <div class="viewer-actions">
+                                            <button id="toggleFocusModeBtn" class="btn btn-secondary btn-sm" type="button"><i class="fas fa-expand"></i> Focus mode</button>
+                                        </div>
+                                    </div>
+                                    <div id="documentSurface" class="document-surface" aria-live="polite">
+                                        <div class="empty-state">
+                                            <i class="fas fa-file-lines"></i>
+                                            <h4>Live preview surface</h4>
+                                            <p>Type, paste, or import markdown/text to see formatted sections &amp; synchronized audio highlights.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Playback Controls (Positioned directly below Source Studio) -->
+                        <article class="card control-card playback-card">
+                            <div class="section-header section-header-spread">
+                                <div>
+                                    <span class="badge badge-primary"><i class="fas fa-circle-play"></i> Playback</span>
+                                    <h3 style="margin: 4px 0 0;">Audio Player Controls</h3>
+                                </div>
+                            </div>
+                            <div class="button-grid">
+                                <button id="startBtn" class="btn btn-primary" type="button"><i class="fas fa-play"></i> Start</button>
+                                <button id="pauseBtn" class="btn btn-secondary" type="button" disabled><i class="fas fa-pause"></i> Pause</button>
+                                <button id="resumeBtn" class="btn btn-secondary" type="button" disabled><i class="fas fa-play-circle"></i> Resume</button>
+                                <button id="stopBtn" class="btn btn-danger" type="button" disabled><i class="fas fa-stop"></i> Stop</button>
+                            </div>
+                            <div class="playback-strip">
+                                <div class="playback-meta">
+                                    <span id="playbackLabel">Idle</span>
+                                    <span id="progressLabel">0%</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div id="progressBar" class="progress-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Controls Column -->
+                    <aside class="controls-column">
+                        <!-- Voice Lab -->
+                        <article class="card control-card">
+                            <div class="section-header">
+                                <div>
+                                    <span class="badge badge-primary">Voice Lab</span>
+                                    <h3 style="margin: 4px 0 0;">Language, Regional Accent &amp; Voice</h3>
+                                </div>
+                            </div>
+                            <div class="control-stack">
+                                <div class="setting-item">
+                                    <label for="languageSelect">Narration Language</label>
+                                    <select id="languageSelect" class="form-input">
+                                        <option value="auto">Auto-detect from document</option>
+                                        <option value="en">English</option>
+                                        <option value="hi">Hindi</option>
+                                        <option value="ar">Arabic</option>
+                                        <option value="it">Italian</option>
+                                        <option value="es">Spanish</option>
+                                    </select>
+                                </div>
+                                <div class="setting-grid">
+                                    <div class="setting-item">
+                                        <label for="accentSelect">Regional Accent</label>
+                                        <select id="accentSelect" class="form-input">
+                                            <option value="all">All Regional Accents</option>
+                                        </select>
+                                    </div>
+                                    <div class="setting-item">
+                                        <label for="voicePersonaSelect">Voice Gender</label>
+                                        <select id="voicePersonaSelect" class="form-input">
+                                            <option value="any">All Genders</option>
+                                            <option value="female">Female</option>
+                                            <option value="male">Male</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="setting-item">
+                                    <label for="voiceSelect">Voice Engine</label>
+                                    <select id="voiceSelect" class="form-input">
+                                        <option value="">Loading system voices...</option>
+                                    </select>
+                                    <p id="voiceMeta" class="form-help">Filtered by language, regional accent, and gender.</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Narration Behavior -->
+                        <article class="card control-card">
+                            <div class="section-header">
+                                <div>
+                                    <span class="badge badge-primary">Reading Behavior</span>
+                                    <h3 style="margin: 4px 0 0;">Cadence &amp; Visual Sync</h3>
+                                </div>
+                            </div>
+                            <div class="control-stack">
+                                <label class="toggle-row">
+                                    <span>
+                                        <strong>Follow document focus</strong>
+                                        <small>Keep the highlighted sentence centered.</small>
+                                    </span>
+                                    <input id="autoScrollHighlight" type="checkbox" checked>
+                                </label>
+                                <div class="slider-group">
+                                    <div class="slider-label">
+                                        <span>Speed</span>
+                                        <span id="speedValue" class="val-badge">1.00x</span>
+                                    </div>
+                                    <input type="range" id="speedRange" min="0.75" max="1.5" step="0.05" value="1">
+                                </div>
+                                <div class="slider-group">
+                                    <div class="slider-label">
+                                        <span>Pitch</span>
+                                        <span id="pitchValue" class="val-badge">1.0</span>
+                                    </div>
+                                    <input type="range" id="pitchRange" min="0.7" max="1.3" step="0.05" value="1">
+                                </div>
+                            </div>
+                        </article>
+                    </aside>
+                </section>
+            </section>
+{{end}}

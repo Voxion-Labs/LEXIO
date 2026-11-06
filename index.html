@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <meta name="description" content="LEXIO - Client-side multilingual document speech studio powered by Go WebAssembly with synchronized phrase tracking.">
     <title>LEXIO - Document Speech Studio</title>
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-    
-    <!-- Google Fonts: Plus Jakarta Sans & Inter (Modern Flutter/Material 3 typography) -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Flutter Material 3 Component & Layout Stylesheets -->
+
     <link rel="stylesheet" href="css/components.css?v=2.6.0">
     <link rel="stylesheet" href="styles.css?v=2.6.0">
 </head>
+
 <body>
-    <!-- Loading Screen (Flutter style ring loader) -->
+
     <div id="loadingScreen" class="loading-screen">
         <div class="loading-core">
             <div class="loading-spinner"></div>
@@ -32,16 +31,14 @@
         </div>
     </div>
 
-    <!-- Scrollable Landing & Authentication Page -->
     <div id="loginPage" class="login-page">
-        <!-- Top Announcement Banner (Flutter 3 style gradient banner) -->
+        
         <aside class="flutter-announcement-bar">
             <span class="banner-badge">GO WEBASSEMBLY</span>
-            <span>LEXIO 2.2 is live! High-performance client-side speech engine in Go • Zero server telemetry</span>
+            <span>LEXIO 2.6.0 is live! High-performance client-side speech engine in Go • Zero server telemetry</span>
             <a href="#features">Learn more <i class="fas fa-arrow-right"></i></a>
         </aside>
 
-        <!-- Sticky Header / Navbar -->
         <header class="landing-navbar">
             <div class="landing-nav-container">
                 <a href="#" class="brand-lockup">
@@ -68,11 +65,10 @@
             </div>
         </header>
 
-        <!-- Hero Section with Copy & Authentication Card -->
         <main>
             <section class="landing-hero-section">
                 <div class="landing-hero-grid">
-                    <!-- Left: Hero Headline & Capabilities -->
+                    
                     <div class="hero-copy-column">
                         <div class="eyebrow-pill">
                             <i class="fas fa-microchip"></i> Powered by Go WebAssembly
@@ -92,7 +88,6 @@
                         </div>
                     </div>
 
-                    <!-- Right: Authentication Card (Create Account / Sign In) -->
                     <div class="auth-panel-column">
                         <div class="auth-card">
                             <div class="auth-card-header">
@@ -130,7 +125,7 @@
                                         <label for="password">Password</label>
                                         <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
                                     </div>
-                                    <!-- Hidden phone for backward compatibility -->
+                                    
                                     <input type="tel" id="phone" value="+1 415 555 0188" style="display: none;">
                                 </div>
 
@@ -152,7 +147,6 @@
                 </div>
             </section>
 
-            <!-- Scrollable Section: Core Capabilities (Truthful, high-utility, no hype) -->
             <section id="features" class="landing-section landing-section-alt">
                 <div class="landing-section-inner">
                     <div class="section-header-center">
@@ -189,7 +183,6 @@
                 </div>
             </section>
 
-            <!-- Scrollable Section: Multi-Device Reach -->
             <section id="devices" class="landing-section">
                 <div class="section-header-center">
                     <div class="eyebrow-pill"><i class="fas fa-mobile-screen-button"></i> Multi-Screen Design</div>
@@ -218,7 +211,6 @@
                 </div>
             </section>
 
-            <!-- Scrollable Section: Supported Formats -->
             <section id="formats" class="landing-section landing-section-alt">
                 <div class="landing-section-inner">
                     <div class="section-header-center">
@@ -246,7 +238,6 @@
                 </div>
             </section>
 
-            <!-- Scrollable Section: How It Works -->
             <section id="how-it-works" class="landing-section">
                 <div class="section-header-center">
                     <div class="eyebrow-pill"><i class="fas fa-route"></i> Simple Workflow</div>
@@ -275,7 +266,6 @@
                 </div>
             </section>
 
-            <!-- Scrollable Section: Privacy & Local Architecture -->
             <section id="privacy" class="landing-section">
                 <div class="privacy-banner-card">
                     <div class="privacy-banner-icon">
@@ -289,7 +279,6 @@
             </section>
         </main>
 
-        <!-- Landing Page Footer -->
         <footer class="landing-footer">
             <div class="landing-footer-container" style="text-align: center; justify-content: center;">
                 <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">&copy; 2026 Voxion Labs. All rights reserved.</p>
@@ -297,7 +286,6 @@
         </footer>
     </div>
 
-    <!-- Workspace Options Modal (Flutter Material 3 Dialog) -->
     <div id="optionsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-dialog">
             <div class="modal-header">
@@ -355,9 +343,8 @@
         </div>
     </div>
 
-    <!-- Main Workspace Application (After Login) -->
     <div id="mainApp" class="main-app" style="display: none;">
-        <!-- Top App Bar -->
+
         <nav class="navbar">
             <div class="nav-brand">
                 <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo brand-logo-nav">
@@ -384,7 +371,6 @@
             </div>
         </nav>
 
-        <!-- Sub-Toolbar with Segmented View Switcher -->
         <section class="workspace-toolbar">
             <div class="workspace-tabs" role="tablist" aria-label="Workspace Views">
                 <button class="workspace-tab active" type="button" data-view="dashboardView"><i class="fas fa-table-columns"></i> Dashboard</button>
@@ -398,11 +384,10 @@
             </div>
         </section>
 
-        <!-- Main Workspace Shell -->
         <main class="workspace-shell">
-            <!-- 1. DASHBOARD VIEW (Default post-login view) -->
+
             <section id="dashboardView" class="workspace-view active">
-                <!-- Hero Banner -->
+                
                 <article class="hero-panel">
                     <div style="flex: 1; min-width: 300px;">
                         <span class="badge badge-primary"><i class="fas fa-headphones"></i> Document Speech &amp; Narration</span>
@@ -431,7 +416,6 @@
                     </div>
                 </article>
 
-                <!-- Reading Analytics Card -->
                 <article class="card dashboard-card">
                     <div class="section-header">
                         <div>
@@ -466,9 +450,8 @@
                     </div>
                 </article>
 
-                <!-- 3-Column Highlights -->
                 <div class="dashboard-grid-plus" style="grid-template-columns: repeat(3, 1fr); margin-top: 24px;">
-                    <!-- Quick Section Navigation -->
+                    
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
@@ -484,7 +467,6 @@
                         </div>
                     </article>
 
-                    <!-- Native Dialects -->
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
@@ -515,7 +497,6 @@
                         </div>
                     </article>
 
-                    <!-- Zero Telemetry Privacy -->
                     <article class="card dashboard-card">
                         <div class="section-header">
                             <div>
@@ -541,10 +522,9 @@
                 </div>
             </section>
 
-            <!-- 2. READER VIEW -->
             <section id="readerView" class="workspace-view">
                 <section class="reader-layout">
-                    <!-- Source Studio Column -->
+                    
                     <div class="studio-column">
                         <article class="card studio-card">
                             <div class="section-header section-header-spread">
@@ -601,7 +581,6 @@
                             </div>
                         </article>
 
-                        <!-- Playback Controls (Positioned directly below Source Studio) -->
                         <article class="card control-card playback-card">
                             <div class="section-header section-header-spread">
                                 <div>
@@ -627,9 +606,8 @@
                         </article>
                     </div>
 
-                    <!-- Controls Column -->
                     <aside class="controls-column">
-                        <!-- Voice Lab -->
+                        
                         <article class="card control-card">
                             <div class="section-header">
                                 <div>
@@ -675,7 +653,6 @@
                             </div>
                         </article>
 
-                        <!-- Narration Behavior -->
                         <article class="card control-card">
                             <div class="section-header">
                                 <div>
@@ -711,9 +688,8 @@
                 </section>
             </section>
 
-            <!-- 3. STUDIO & TELEMETRY VIEW -->
             <section id="studioView" class="workspace-view">
-                <!-- Live Teleprompter Deck -->
+                
                 <article class="teleprompter-card">
                     <div class="teleprompter-toolbar">
                         <div>
@@ -734,14 +710,12 @@
                         </div>
                     </div>
 
-                    <!-- Live Teleprompter Stage Screen -->
                     <div id="teleprompterStage" class="teleprompter-stage theme-dark">
                         <div id="teleprompterContent" class="teleprompter-content">
                             <p class="teleprompter-empty">Load a document and press Start to run the Teleprompter Deck.</p>
                         </div>
                     </div>
 
-                    <!-- Teleprompter Direct Audio Controls -->
                     <div class="teleprompter-actions">
                         <button id="teleStartBtn" class="btn btn-primary btn-lg" type="button"><i class="fas fa-play"></i> Start Teleprompter</button>
                         <button id="telePauseBtn" class="btn btn-secondary btn-lg" type="button"><i class="fas fa-pause"></i> Pause</button>
@@ -751,7 +725,7 @@
                 </article>
 
                 <div class="dashboard-grid-plus" style="grid-template-columns: 1.15fr 0.85fr; margin-top: 24px;">
-                    <!-- Custom Pronunciation Lexicon -->
+                    
                     <article class="card lexicon-card">
                         <div class="section-header">
                             <div>
@@ -763,7 +737,6 @@
                             </div>
                         </div>
 
-                        <!-- Add Rule Form -->
                         <div class="lexicon-form">
                             <div class="form-group" style="margin: 0;">
                                 <label for="lexiconTerm">Original Term</label>
@@ -777,7 +750,6 @@
                             <button type="button" id="loadLexiconPresetsBtn" class="btn btn-secondary" title="Load standard tech presets"><i class="fas fa-bolt"></i> Presets</button>
                         </div>
 
-                        <!-- Rules Table -->
                         <div style="max-height: 240px; overflow-y: auto;">
                             <table class="lexicon-table">
                                 <thead>
@@ -794,7 +766,6 @@
                         </div>
                     </article>
 
-                    <!-- Heavy Feature: Linguistic Readability & Subtitle Studio -->
                     <article class="card telemetry-card">
                         <div class="section-header">
                             <div>
@@ -806,7 +777,6 @@
                             </div>
                         </div>
 
-                        <!-- Readability Metrics -->
                         <div class="insight-grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
                             <div class="insight-tile">
                                 <span class="insight-label">Flesch Reading Ease</span>
@@ -828,7 +798,6 @@
                             </div>
                         </div>
 
-                        <!-- Cadence Comparison -->
                         <div>
                             <span class="field-title" style="margin-bottom: 8px; display: block;">Speaking Duration by Cadence</span>
                             <div class="cadence-comparison-grid">
@@ -847,7 +816,6 @@
                             </div>
                         </div>
 
-                        <!-- Subtitle & Caption Exporters -->
                         <div style="border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 4px;">
                             <span class="field-title" style="margin-bottom: 4px; display: block;">Export Narration Subtitles</span>
                             <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0 0 10px;">
@@ -865,9 +833,9 @@
                     </article>
                 </div>
             </section>
+
         </main>
 
-        <!-- Mobile Bottom Navigation Bar (Flutter style bottom app bar) -->
         <nav class="mobile-bottom-nav">
             <button type="button" class="mobile-nav-btn workspace-tab active" data-view="dashboardView">
                 <i class="fas fa-table-columns"></i>
@@ -892,10 +860,8 @@
         </footer>
     </div>
 
-    <!-- Side Panel Backdrop -->
     <div id="panelBackdrop" class="panel-backdrop"></div>
 
-    <!-- 1. User Manual Side Drawer -->
     <aside id="manualPanel" class="side-panel">
         <div class="side-panel-header">
             <div>
@@ -924,7 +890,6 @@
         </div>
     </aside>
 
-    <!-- 2. Notes Side Drawer -->
     <aside id="notesPanel" class="side-panel">
         <div class="side-panel-header">
             <div>
@@ -943,14 +908,10 @@
         </div>
     </aside>
 
-    <!-- Client-side Document Parsing Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
-    <!-- Go WebAssembly Runtime & Loader -->
     <script src="wasm/wasm_exec.js?v=2.6.0"></script>
     <script>
         (function() {
@@ -980,5 +941,6 @@
             }
         })();
     </script>
+
 </body>
 </html>

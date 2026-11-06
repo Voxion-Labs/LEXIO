@@ -1,0 +1,59 @@
+{{define "modal"}}
+    <!-- Workspace Options Modal (Flutter Material 3 Dialog) -->
+    <div id="optionsModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fas fa-sliders" style="color: var(--flutter-blue-light); margin-right: 8px;"></i> Workspace Options</h3>
+                <button type="button" id="closeOptionsBtn" class="modal-close-btn" title="Close options"><i class="fas fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="optDefaultLang">Default Narration Language</label>
+                    <select id="optDefaultLang" class="form-input">
+                        <option value="auto">Auto-detect from document</option>
+                        <option value="en">English (Default)</option>
+                        <option value="hi">Hindi</option>
+                        <option value="es">Spanish</option>
+                        <option value="it">Italian</option>
+                        <option value="ar">Arabic</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="optDefaultAccent">Default Regional Accent</label>
+                    <select id="optDefaultAccent" class="form-input">
+                        <option value="all">All Regional Accents</option>
+                        <option value="US">United States (en-US)</option>
+                        <option value="GB">United Kingdom (en-GB)</option>
+                        <option value="IN">India (en-IN / hi-IN)</option>
+                        <option value="AU">Australia (en-AU)</option>
+                        <option value="CA">Canada (en-CA)</option>
+                        <option value="ES">Spain (es-ES)</option>
+                        <option value="MX">Mexico (es-MX)</option>
+                        <option value="SA">Saudi Arabia (ar-SA)</option>
+                        <option value="IT">Italy (it-IT)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="optDefaultPace">Default Reading Cadence</label>
+                    <select id="optDefaultPace" class="form-input">
+                        <option value="1.0">Standard Pace (1.0x)</option>
+                        <option value="1.05">Steady Reading (1.05x)</option>
+                        <option value="0.92">Study Focus (0.92x)</option>
+                        <option value="1.15">Quick Skim (1.15x)</option>
+                        <option value="0.85">Deliberate &amp; Clear (0.85x)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quick Access</label>
+                    <button type="button" id="modalQuickDemoBtn" class="btn btn-secondary btn-block">
+                        <i class="fas fa-wand-magic-sparkles"></i> Launch Instant Demo Workspace
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('closeOptionsBtn').click()">Cancel</button>
+                <button type="button" id="saveOptionsBtn" class="btn btn-primary">Save Preferences</button>
+            </div>
+        </div>
+    </div>
+{{end}}

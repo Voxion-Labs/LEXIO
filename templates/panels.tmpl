@@ -1,0 +1,77 @@
+{{define "panels"}}
+        <!-- Mobile Bottom Navigation Bar (Flutter style bottom app bar) -->
+        <nav class="mobile-bottom-nav">
+            <button type="button" class="mobile-nav-btn workspace-tab active" data-view="dashboardView">
+                <i class="fas fa-table-columns"></i>
+                <span>Dashboard</span>
+            </button>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="readerView">
+                <i class="fas fa-file-waveform"></i>
+                <span>Reader</span>
+            </button>
+            <button type="button" class="mobile-nav-btn workspace-tab" data-view="studioView">
+                <i class="fas fa-tower-broadcast"></i>
+                <span>Studio</span>
+            </button>
+            <button type="button" class="mobile-nav-btn" onclick="document.getElementById('openNotesBtn').click()">
+                <i class="fas fa-note-sticky"></i>
+                <span>Notes</span>
+            </button>
+        </nav>
+
+        <footer class="app-footer">
+            <div id="status" class="status-indicator" style="display: none;">Ready</div>
+        </footer>
+    </div>
+
+    <!-- Side Panel Backdrop -->
+    <div id="panelBackdrop" class="panel-backdrop"></div>
+
+    <!-- 1. User Manual Side Drawer -->
+    <aside id="manualPanel" class="side-panel">
+        <div class="side-panel-header">
+            <div>
+                <span class="badge badge-primary">Support</span>
+                <h3>User Manual</h3>
+            </div>
+            <button class="panel-close" type="button" data-close-panel="manualPanel"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="side-panel-body manual-content">
+            <div class="manual-block">
+                <h4>1. Choose a Workspace View</h4>
+                <p>Use Dashboard for reading statistics and quick outline navigation, Reader for synchronized audio playback, and Studio &amp; Telemetry for teleprompter narration, custom pronunciation, and subtitle export.</p>
+            </div>
+            <div class="manual-block">
+                <h4>2. Import or Paste Content</h4>
+                <p>Open Reader, upload a supported document or paste raw text. LEXIO will parse it into a clean, phrase-tracked reading surface.</p>
+            </div>
+            <div class="manual-block">
+                <h4>3. Tune Your Voice &amp; Regional Accent</h4>
+                <p>Select your language, regional accent (US, UK, India, Australia, Spain, Mexico, Saudi Arabia, Italy, etc.), and gender (Male or Female). Adjust speed and pitch using the smooth range sliders.</p>
+            </div>
+            <div class="manual-block">
+                <h4>4. Synchronized Audio Playback</h4>
+                <p>Click Start. Visual highlights follow the spoken sentence and automatically center the reading surface. You can also click any individual word to start reading from there.</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 2. Notes Side Drawer -->
+    <aside id="notesPanel" class="side-panel">
+        <div class="side-panel-header">
+            <div>
+                <span class="badge badge-primary">Workspace Notes</span>
+                <h3>Private Notes</h3>
+            </div>
+            <button class="panel-close" type="button" data-close-panel="notesPanel"><i class="fas fa-xmark"></i></button>
+        </div>
+        <div class="side-panel-body">
+            <label for="notesInput" class="field-title">Local Working Notes</label>
+            <textarea id="notesInput" class="notes-input" placeholder="Capture key takeaways, reminders, or talking points..."></textarea>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 14px;">
+                <button id="saveNotesBtn" class="btn btn-primary" type="button"><i class="fas fa-floppy-disk"></i> Save Notes</button>
+                <span id="notesStatus" style="font-size: 0.8rem; color: var(--text-muted);">Saved locally</span>
+            </div>
+        </div>
+    </aside>
+{{end}}

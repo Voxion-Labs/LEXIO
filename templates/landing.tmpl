@@ -1,0 +1,266 @@
+{{define "landing"}}
+    <!-- Scrollable Landing & Authentication Page -->
+    <div id="loginPage" class="login-page">
+        <!-- Top Announcement Banner (Flutter 3 style gradient banner) -->
+        <aside class="flutter-announcement-bar">
+            <span class="banner-badge">GO WEBASSEMBLY</span>
+            <span>LEXIO {{.Version}} is live! High-performance client-side speech engine in Go • Zero server telemetry</span>
+            <a href="#features">Learn more <i class="fas fa-arrow-right"></i></a>
+        </aside>
+
+        <!-- Sticky Header / Navbar -->
+        <header class="landing-navbar">
+            <div class="landing-nav-container">
+                <a href="#" class="brand-lockup">
+                    <img src="assets/logo.svg" alt="LEXIO logo" class="brand-logo">
+                    <span class="brand-title">LEXIO<span class="brand-title-accent">.</span></span>
+                </a>
+                <nav>
+                    <ul class="landing-nav-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#devices">Device Reach</a></li>
+                        <li><a href="#formats">Supported Formats</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                    </ul>
+                </nav>
+                <div class="landing-nav-actions">
+                    <select id="landingThemeSelect" class="theme-select" title="Toggle Theme" aria-label="Theme Selection">
+                        <option value="light">☀️ Light</option>
+                        <option value="dark">🌙 Dark</option>
+                    </select>
+                    <button type="button" id="openOptionsBtn" class="btn btn-secondary btn-sm"><i class="fas fa-sliders"></i> Options Page</button>
+                    <button type="button" id="navGetStartedBtn" class="btn btn-primary btn-sm">Get Started</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section with Copy & Authentication Card -->
+        <main>
+            <section class="landing-hero-section">
+                <div class="landing-hero-grid">
+                    <!-- Left: Hero Headline & Capabilities -->
+                    <div class="hero-copy-column">
+                        <div class="eyebrow-pill">
+                            <i class="fas fa-microchip"></i> Powered by Go WebAssembly
+                        </div>
+                        <h1>Reach users and documents on <span class="gradient-text">every screen</span>.</h1>
+                        <p class="hero-lead">
+                            Import PDF, Word, PowerPoint, Excel, and eBooks directly into your browser. Listen with hardware-accelerated speech synthesis and phrase-synchronized visual tracking across English, Hindi, Spanish, Italian, and Arabic with true regional accents.
+                        </p>
+                        <div class="hero-trust-chips">
+                            <div class="trust-chip"><i class="fas fa-shield-halved"></i> 100% Client-Side Go WASM</div>
+                            <div class="trust-chip"><i class="fas fa-file-waveform"></i> 17+ Document Formats</div>
+                            <div class="trust-chip"><i class="fas fa-bolt"></i> Zero Server Telemetry</div>
+                        </div>
+                        <div class="hero-actions-row">
+                            <button type="button" id="quickDemoBtn" class="btn btn-primary btn-lg"><i class="fas fa-wand-magic-sparkles"></i> Try Demo Workspace</button>
+                            <a href="#features" class="btn btn-secondary btn-lg">Explore Features <i class="fas fa-arrow-down"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Authentication Card (Create Account / Sign In) -->
+                    <div class="auth-panel-column">
+                        <div class="auth-card">
+                            <div class="auth-card-header">
+                                <div class="auth-mode-toggle" role="tablist">
+                                    <button type="button" id="tabCreateAcc" class="auth-tab-btn active" role="tab" aria-selected="true">Create Account</button>
+                                    <button type="button" id="tabSignIn" class="auth-tab-btn" role="tab" aria-selected="false">Sign In</button>
+                                </div>
+                            </div>
+                            
+                            <form id="loginForm" class="auth-form" novalidate>
+                                <div id="avatarRow" class="avatar-upload-row">
+                                    <div id="loginAvatarPreview" class="login-avatar-preview">LB</div>
+                                    <div class="avatar-upload-copy">
+                                        <label>Workspace Profile Photo</label>
+                                        <p>Personalize your local reading profile.</p>
+                                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                        <button id="avatarPickerBtn" class="avatar-picker-btn" type="button"><i class="fas fa-camera"></i> Choose photo</button>
+                                    </div>
+                                </div>
+
+                                <div class="auth-form-fields">
+                                    <div class="input-container" id="nameContainer">
+                                        <label for="name">Full Name</label>
+                                        <input type="text" id="name" placeholder="Liam Brooks" autocomplete="name">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="username">Username</label>
+                                        <input type="text" id="username" required placeholder="liam_brooks" autocomplete="username">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="email">Work / Personal Email</label>
+                                        <input type="email" id="email" required placeholder="liam@example.com" autocomplete="email">
+                                    </div>
+                                    <div class="input-container">
+                                        <label for="password">Password</label>
+                                        <input type="password" id="password" required placeholder="••••••••" autocomplete="current-password">
+                                    </div>
+                                    <!-- Hidden phone for backward compatibility -->
+                                    <input type="tel" id="phone" value="+1 415 555 0188" style="display: none;">
+                                </div>
+
+                                <button type="submit" id="authSubmitBtn" class="auth-submit-btn">
+                                    <span>Create Account &amp; Enter</span> <i class="fas fa-arrow-right"></i>
+                                </button>
+
+                                <div class="auth-secondary-actions">
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('openOptionsBtn').click()"><i class="fas fa-sliders"></i> Options Page</button>
+                                    <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('quickDemoBtn').click()"><i class="fas fa-wand-magic-sparkles"></i> Instant Guest</button>
+                                </div>
+
+                                <div class="auth-privacy-guarantee">
+                                    <i class="fas fa-lock"></i> Client-side Go WASM storage only. No cloud tracking.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Core Capabilities (Truthful, high-utility, no hype) -->
+            <section id="features" class="landing-section landing-section-alt">
+                <div class="landing-section-inner">
+                    <div class="section-header-center">
+                        <div class="eyebrow-pill"><i class="fas fa-microchip"></i> Pure Go WebAssembly Engine</div>
+                        <h2>Engineered for reliable, high-fidelity document speech</h2>
+                        <p>No backend servers, no cloud fees, and no third-party telemetry. LEXIO executes all file parsing, speech coordination, and text formatting inside your device's browser using Go compiled to WebAssembly.</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-headphones"></i></div>
+                            <h3>Native Web Speech Synthesis</h3>
+                            <p>Utilizes your operating system's built-in voice synthesizer (macOS, Windows, iOS, Android, Linux) with zero API costs, zero network lag, and full offline capability.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-highlighter"></i></div>
+                            <h3>Synchronized Visual Tracking</h3>
+                            <p>Reads by sentence and clause rather than robotic single-word steps. The document viewer tracks active phrases in real-time with adjustable automatic centering.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-earth-americas"></i></div>
+                            <h3>Region-Wise Accent Selection</h3>
+                            <p>Select exact regional accents for each language: US, UK, India, Australia, Canada for English; Spain, Mexico, Argentina for Spanish; Saudi Arabia, UAE, Egypt for Arabic; Italy, Switzerland for Italian.</p>
+                        </article>
+
+                        <article class="feature-card">
+                            <div class="feature-icon-bubble"><i class="fas fa-file-shield"></i></div>
+                            <h3>In-Browser Document Extraction</h3>
+                            <p>Extracts text from complex PDFs, Word documents, PowerPoint presentations, Excel spreadsheets, and EPUB books locally without sending a byte over the internet.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Multi-Device Reach -->
+            <section id="devices" class="landing-section">
+                <div class="section-header-center">
+                    <div class="eyebrow-pill"><i class="fas fa-mobile-screen-button"></i> Multi-Screen Design</div>
+                    <h2>Works seamlessly on every type of device</h2>
+                    <p>Designed with Flutter-inspired responsive ergonomics: responsive sidebars on desktop, split panes on tablet, and thumb-friendly controls on smartphones.</p>
+                </div>
+
+                <div class="devices-showcase-grid">
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-desktop"></i></div>
+                        <h4>Desktop &amp; Ultra-Wide</h4>
+                        <p>Dual-column workspace with editable source text on the left and synchronized document viewer on the right with side-by-side voice tuning.</p>
+                    </div>
+
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-tablet-screen-button"></i></div>
+                        <h4>Tablets &amp; Foldables</h4>
+                        <p>Adaptive layout with collapsible controls drawer, gesture-friendly sliders, and high-readability typography for comfortable tablet reading.</p>
+                    </div>
+
+                    <div class="device-showcase-card">
+                        <div class="device-badge-icon"><i class="fas fa-mobile-screen"></i></div>
+                        <h4>Mobile Phones</h4>
+                        <p>Thumb-accessible bottom navigation bar, floating audio playback dock, and clean vertical stacking so you can listen anywhere on the go.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Supported Formats -->
+            <section id="formats" class="landing-section landing-section-alt">
+                <div class="landing-section-inner">
+                    <div class="section-header-center">
+                        <div class="eyebrow-pill"><i class="fas fa-folder-open"></i> Universal Formats</div>
+                        <h2>17+ Supported Document Formats</h2>
+                        <p>Drag, drop, or import virtually any reading material. LEXIO parses and structures content instantly on the client side.</p>
+                    </div>
+
+                    <div class="formats-chip-grid">
+                        <div class="format-chip-card"><span class="format-ext">PDF</span><span class="format-desc">Adobe Acrobat</span></div>
+                        <div class="format-chip-card"><span class="format-ext">DOCX</span><span class="format-desc">Microsoft Word</span></div>
+                        <div class="format-chip-card"><span class="format-ext">PPTX</span><span class="format-desc">PowerPoint</span></div>
+                        <div class="format-chip-card"><span class="format-ext">XLSX</span><span class="format-desc">Excel Sheet</span></div>
+                        <div class="format-chip-card"><span class="format-ext">EPUB</span><span class="format-desc">eBook Format</span></div>
+                        <div class="format-chip-card"><span class="format-ext">TXT</span><span class="format-desc">Plain Text</span></div>
+                        <div class="format-chip-card"><span class="format-ext">MD</span><span class="format-desc">Markdown</span></div>
+                        <div class="format-chip-card"><span class="format-ext">CSV</span><span class="format-desc">Data Tables</span></div>
+                        <div class="format-chip-card"><span class="format-ext">JSON</span><span class="format-desc">Structured Data</span></div>
+                        <div class="format-chip-card"><span class="format-ext">RTF</span><span class="format-desc">Rich Text</span></div>
+                        <div class="format-chip-card"><span class="format-ext">ODT</span><span class="format-desc">OpenDocument</span></div>
+                        <div class="format-chip-card"><span class="format-ext">ODP</span><span class="format-desc">Open Presentation</span></div>
+                        <div class="format-chip-card"><span class="format-ext">HTML</span><span class="format-desc">Web Pages</span></div>
+                        <div class="format-chip-card"><span class="format-ext">XML</span><span class="format-desc">Markup Data</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: How It Works -->
+            <section id="how-it-works" class="landing-section">
+                <div class="section-header-center">
+                    <div class="eyebrow-pill"><i class="fas fa-route"></i> Simple Workflow</div>
+                    <h2>How LEXIO Works in 3 Clear Steps</h2>
+                    <p>No account verification emails, no complex configuration. Get to reading in seconds.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number-pill">1</div>
+                        <h3>Import or Paste Content</h3>
+                        <p>Drop any supported document onto the workspace or paste text directly into the editable source panel.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-pill">2</div>
+                        <h3>Select Voice &amp; Regional Accent</h3>
+                        <p>Choose your preferred language, region-specific accent, and gender (Male or Female). Adjust reading speed and pitch to match your natural listening cadence.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number-pill">3</div>
+                        <h3>Listen with Synchronized Focus</h3>
+                        <p>Press start. The reader highlights sentences and clauses in sync with audio and automatically keeps the document centered.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scrollable Section: Privacy & Local Architecture -->
+            <section id="privacy" class="landing-section">
+                <div class="privacy-banner-card">
+                    <div class="privacy-banner-icon">
+                        <i class="fas fa-shield-cat"></i>
+                    </div>
+                    <div class="privacy-banner-content">
+                        <h3>Private by Design: Zero Server Drama</h3>
+                        <p>LEXIO is a 100% pure client web application executed via Go WebAssembly. It requires no Node.js runtime, connects to no backend analytics, and transmits no document contents to remote servers. All your notes, accounts, and audio settings reside entirely in your browser's private local storage.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Landing Page Footer -->
+        <footer class="landing-footer">
+            <div class="landing-footer-container" style="text-align: center; justify-content: center;">
+                <p style="margin: 0; color: var(--text-muted); font-size: 0.9rem;">&copy; {{.Year}} {{.Author}}. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+{{end}}

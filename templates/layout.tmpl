@@ -1,0 +1,25 @@
+{{define "layout"}}<!DOCTYPE html>
+<html lang="en">
+{{template "head" .}}
+<body>
+{{template "loading" .}}
+{{template "landing" .}}
+{{template "modal" .}}
+
+    <!-- Main Workspace Application (After Login) -->
+    <div id="mainApp" class="main-app" style="display: none;">
+{{template "app_header" .}}
+{{template "app_toolbar" .}}
+
+        <!-- Main Workspace Shell -->
+        <main class="workspace-shell">
+{{template "dashboard" .}}
+{{template "reader" .}}
+{{template "studio" .}}
+        </main>
+{{template "panels" .}}
+
+{{template "scripts" .}}
+</body>
+</html>
+{{end}}

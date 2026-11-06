@@ -205,31 +205,26 @@ LEXIO/
 - [Go 1.22+](https://go.dev/dl/) installed.
 - Modern web browser with WebAssembly and Web Speech API support (Chrome, Edge, Firefox, Safari).
 
-### Compile Go WebAssembly
-To compile the Go source files from the `src/` directory into `wasm/app.wasm`:
-
-```powershell
-# Windows (PowerShell)
-$env:GOOS="js"; $env:GOARCH="wasm"; go build -o wasm/app.wasm ./src
-```
+### Go Template & WebAssembly Pipeline
+LEXIO features a unified Go-driven build pipeline. All UI layouts are authored in modular Go templates (`templates/*.tmpl`), compiled into `index.html`, and bundled with the optimized Go WebAssembly engine:
 
 ```bash
-# macOS / Linux
-GOOS=js GOARCH=wasm go build -o wasm/app.wasm ./src
+# Compile Go templates and WebAssembly binary in one command
+go run build.go
 ```
 
-### Run Locally
-Serve the repository root using any standard static file server:
+### Run Locally (Built-in Go Dev Server)
+Run LEXIO locally with instant MIME-type resolution for WebAssembly:
 
 ```bash
-# Python 3
-python -m http.server 8080
+# Starts local server at http://localhost:3000
+go run build.go -serve
 
-# Node.js
-npx serve .
+# Or with npm
+npm run dev
 ```
 
-Open `http://localhost:8080` in your web browser.
+Open `http://localhost:3000` in your web browser.
 
 ---
 
