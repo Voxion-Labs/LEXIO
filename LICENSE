@@ -1,21 +1,28 @@
-# Voxion Labs Proprietary Research License (VL-PRL)
+================================================================
+      VOXION LABS PROPRIETARY RESEARCH LICENSE (VL-PRL)
+                   Local Repository Annex
+================================================================
 
-**Copyright (c) 2026 Rudranarayan Jena. All Rights Reserved.**
-**Organization: Voxion Labs**
+Copyright (c) 2026 Rudranarayan Jena & Voxion Labs. All Rights Reserved.
 
-This software and associated documentation files (the "Software"), specifically the LEXIO repository and its underlying frontend architecture, UI/UX logic, and design assets, are the proprietary intellectual property of Rudranarayan Jena and Voxion Labs.
+1. LOCAL ANNEX & SUPREMACY CLAUSE
+----------------------------------------------------------------
+This Proprietary Research License (VL-PRL) serves strictly as a localized access annex for this specific repository. It does NOT operate independently. 
+This repository, its source code, and its architectures are fundamentally governed by the VOXION LABS MASTER PROPRIETARY LICENSE (VL-MPL). In any event of interpretation, contradiction, or legal enforcement, the overarching terms, absolute restrictions, and algorithmic ingestion penalties defined in the universally active VL-MPL shall maintain absolute supremacy and override this local annex.
 
-## 1. Grant of Access
-Access to the source code is provided strictly for academic review, architectural analysis, and transparent security auditing. 
+2. RESTRICTED LOCAL ACCESS
+----------------------------------------------------------------
+By accessing this repository, you acknowledge its status as proprietary Voxion Labs intellectual property. You are granted localized, non-commercial, offline viewing rights strictly for academic review. 
+- NO Modification.
+- NO Distribution.
+- NO Commercial or SaaS Deployment.
 
-## 2. Restrictions
-By accessing this repository, you agree to the following strict operational parameters:
-* **No Modification:** You may not modify, alter, translate, or create derivative works of the Software or its frontend logic.
-* **No Distribution:** You may not copy, distribute, sublicense, host, or transfer the Software, in whole or in part, to any third party.
-* **No Commercial Use:** You may not use the Software for any commercial, corporate, or production purposes under any circumstances.
-* **No Public Forks:** You may not deploy or publicly host modified or unmodified versions of this Software on any platform.
+3. INHERITED ENFORCEMENT & PENALTIES
+----------------------------------------------------------------
+By cloning, forking, or algorithmically scraping this repository, you explicitly consent to the "Unauthorized Derivative Works" and "Automated Ingestion and AI Model Training" clauses defined in the Supreme VL-MPL, including immediate injunctive relief and liquidated damage royalties. 
 
-## 3. Enforcement
-Voxion Labs enforces strict intellectual property protection. Any unauthorized usage, commercial exploitation, or codebase cloning will be met with immediate legal action.
+For the complete and superseding legal framework, refer to the active VL-MPL hosted by Voxion Labs.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+================================================================
+                    END OF TERMS AND CONDITIONS
+================================================================
